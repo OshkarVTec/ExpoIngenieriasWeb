@@ -14,48 +14,48 @@
       </div>
       <a href="#" class="btn"><button>Log In</button></a>
     </header>
-   <form>
-      <table>  
-         <tr>
-            <td>Nombre(s)</td>
-            <td><input type="text"></td>
-         </tr>
-         <tr>
-            <td>Primer apellido</td>
-            <td><input type="text"></td>
-         </tr>
-         <tr>
-            <td>Segundo apellido</td>
-            <td><input type="text"></td>
-         </tr>
-         <tr>
-            <td>Correo electrónico</td>
-            <td><input type="text"></td>
-         </tr>
-         <tr>
-            <td>Contraseña</td>
-            <td><input type="password"></td>
-         </tr>
-         <tr>
-            <td>Confirmar contraseña</td>
-            <td><input type="password"></td>
-         </tr>
-         <tr>
-            <td>
-               <label for="tipo_usuario">Tipo de usuario</label>
-               <select name="tipo_usuario" id="tipo_usuario">
-                  <option value="Alumno">Alumno</option>
-                  <option value="Juez">Juez</option>
-                  <option value="Maestro">Maestro</option>
-                  <option value="Juez y maestro">Juez y maestro</option>
-                  <option value="Administrador">Administrador</option>
-               </select> 
-            </td>
-         </tr>
-         <tr> 
-            <td><input value="Registrarse" type="submit"></button></td>
-         </tr>
-      </table>
-   </form>
+   <div class="container">
+      <form  class="login">
+         <table>  
+            <tr>
+               <td>Nombre(s)</td>
+               <td><input type="text"></td>
+            </tr>
+            <tr>
+               <td>Primer apellido</td>
+               <td><input type="text"></td>
+            </tr>
+            <tr>
+               <td>Segundo apellido</td>
+               <td><input type="text"></td>
+            </tr>
+            <tr>
+               <td>Correo electrónico</td>
+               <td><input type="text"></td>
+            </tr>
+            <tr>
+               <td>Contraseña</td>
+               <td><input type="password"></td>
+            </tr>
+            <tr>
+               <td>Confirmar contraseña</td>
+               <td><input type="password"></td>
+            </tr>
+            <tr>
+               <td>
+                  <label for="tipo_usuario">Tipo de usuario</label>
+                  <select name="tipo_usuario" id="tipo_usuario">
+                     <option value="Alumno">Estudiante</option>
+                     <option value="Juez">Docente</option>
+                     <option value="Maestro">Externo</option>
+                  </select> 
+               </td>
+            </tr>
+            <tr> 
+               <td><input value="Registrarse" type="submit"></button></td>
+            </tr>
+         </table>
+      </form>
+   </div>
 </body>
 </html>
