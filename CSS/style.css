@@ -6,10 +6,11 @@
     padding: 0;
     font-family: 'Nunito', sans-serif;
     font-size: 20px;
+
 }
 
 body {
-    background-color: #F9F7F7;
+    background-color: #F5F5F5;
   }
 
   #textInput {
@@ -85,4 +86,49 @@ body {
     background-color: #3F72AF;
     color: #DBE2EF;
     transform: scale(1.1);
+  }
+
+  .maincontainer{
+    display: grid;
+    background: #FFFFFF;
+    margin-top: 20px;
+    margin-left: 75px;
+    margin-right: 75px;
+  } 
+
+  .firstrow{
+    justify-items: center;
+    display: grid;
+    grid-template-columns: 50% 20% 30%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .firstrow .title{
+    font-size: 30px;
+  }
+  .firstrow .status{
+    color: #D3E0EA;
+  }
+  .firstrow .btn button{
+    color: #DBE2EF;
+    padding: 6px 10px;
+    background: #1687A7;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+  }
+
+  .firstrow .btn button:hover{
+    background-color: #DBE2EF;
+    color: #1687A7;
+    transform: scale(1.1);
+  }
+
+  .secondrow{
+    justify-items: center;
+    display: grid;
+    grid-template-columns: 70% 30%;
+    margin-top: 10px;
+    margin-bottom: 10px;
   }
