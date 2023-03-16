@@ -1,6 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
+:root{
+  --background: #F5F5F5;
+  --main: #112D4E;
+  --wordaccent1: #3F72AF;
+  --wordaccentbg1: #DBE2EF;
+  --wordaccent2: #1687A7;
 
+  --backgroundR: #DDDDDD;
+  --mainR: #000035;
+  --wordaccent1R: #00BDFF;
+  --wordaccentbg1R: white;
+  --wordaccent2R: #00a2dd;
+}
 
 *{
     box-sizing: border-box;
@@ -12,16 +24,11 @@
 }
 
 body {
-    background-color: #F5F5F5;
+    background-color: var(--backgroundR);
   }
 
-#textInput {
-  background-color: #DBE2EF;
-  color: rgb(0, 0, 0);
-}
-
 .header{
-  background-color: #112D4E;
+  background-color: var(--mainR);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,39 +52,11 @@ body {
   transform: scale(1.2);
 }
 
-.header .bar{
-  list-style: none;
-}
-
-.header .bar li{
-  display: inline-block;
-  padding: 0 20px;
-}
-
-.header .bar a{
-  font-size: 700;
-  color:#DBE2EF;
-  text-decoration: none;
-}
-
-.header .bar li:hover{
-  transform: scale(1.1);
-}
-
-.header .bar p{
-  font-size: 600;
-  color: #3F72AF;
-}
-
-.header .bar li a:hover{
-  color: #3F72AF
-}
-
 .header .btn button{
   font-weight: 700;
-  color: #3F72AF;
+  color: var(--wordaccentbg1R);
   padding: 9px 25px;
-  background: #DBE2EF;
+  background: var(--wordaccent1R);
   border: none;
   border-radius: 50px;
   cursor: pointer;
@@ -85,8 +64,8 @@ body {
 }
 
 .header .btn button:hover{
-  background-color: #3F72AF;
-  color: #DBE2EF;
+  /*background-color: var(--wordaccent2R);
+  color: var(--wordaccentbg1R); */
   transform: scale(1.1);
 }
 
@@ -114,9 +93,9 @@ body {
   color: #D3E0EA;
 }
 .btn button{
-  color: #DBE2EF;
+  color: var(--wordaccentbg1R);
   padding: 6px 10px;
-  background: #1687A7;
+  background: var(--wordaccent1R);
   border: none;
   border-radius: 30px;
   cursor: pointer;
@@ -124,8 +103,8 @@ body {
 }
 
 .btn button:hover{
-  background-color: #DBE2EF;
-  color: #1687A7;
+  /*background-color: var(--wordaccent2R);
+  color: var(--wordaccentbg1R); */
   transform: scale(1.1);
 }
 
@@ -160,7 +139,7 @@ body {
   }
 
   .thirdrow .calbox{
-    background-color: #1687A7;
+    background-color: var(--wordaccent1R);
     color: #FFFFFF;
     border-radius: 30px;
     display: grid;
