@@ -31,6 +31,7 @@ tr {
   display: flex;
   justify-content: space-between;
   border: solid;
+  border-color: var(--backgroundR);
   border-width: 1px 0;
 }
 
