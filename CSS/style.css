@@ -88,12 +88,13 @@ body {
     transform: scale(1.1);
   }
 
-  .maincontainer{
+  .container{
     display: grid;
     background: #FFFFFF;
     margin-top: 20px;
     margin-left: 75px;
     margin-right: 75px;
+    border-radius: 25px;
   } 
 
   .firstrow{
@@ -109,7 +110,7 @@ body {
   .firstrow .status{
     color: #D3E0EA;
   }
-  .firstrow .btn button{
+  .btn button{
     color: #DBE2EF;
     padding: 6px 10px;
     background: #1687A7;
@@ -119,16 +120,24 @@ body {
     transition: all 0.3s ease 0s;
   }
 
-  .firstrow .btn button:hover{
+  .btn button:hover{
     background-color: #DBE2EF;
     color: #1687A7;
     transform: scale(1.1);
   }
 
   .secondrow{
+    text-align: justify;
     justify-items: center;
     display: grid;
     grid-template-columns: 70% 30%;
     margin-top: 10px;
     margin-bottom: 10px;
+    padding: 20px;
+
+  }
+
+  .topline{
+    display: grid;
+    grid-template-columns: 70%;
   }
