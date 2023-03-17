@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+@import url('https://fonts.cdnfonts.com/css/gellix');
 
 :root{
   --background: #F5F5F5;
@@ -18,7 +18,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Gellix', sans-serif;
   font-size: 20px;
 
 }
@@ -126,7 +126,8 @@ h1 {
   font-size: 30px;
 }
 .firstrow .status{
-  color: #D3E0EA;
+  color: var(--wordaccent1R);
+  font-weight: bold;
 }
 .btnP button{
   color: var(--wordaccentbg1R);
