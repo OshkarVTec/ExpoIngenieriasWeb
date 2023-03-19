@@ -46,6 +46,12 @@ td{
   padding: 5px;
 }
 
+.two_objects_column {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
 body {
   background-color: var(--backgroundR);
 }
