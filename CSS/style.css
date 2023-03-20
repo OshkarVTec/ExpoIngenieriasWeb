@@ -218,3 +218,10 @@ h1 {
   padding-block: 5px;
 }
 
+.login{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+

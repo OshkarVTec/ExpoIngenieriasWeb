@@ -18,32 +18,34 @@
       <form  class="login">
          <table>  
             <tr>
-               <td>Nombre(s)</td>
+               <td><label for="nombre">Nombre (s)</label></td>
                <td><input type="text"></td>
             </tr>
             <tr>
-               <td>Primer apellido</td>
+               <td><label for="primer_apellido">Primer apellido</label></td>
                <td><input type="text"></td>
             </tr>
             <tr>
-               <td>Segundo apellido</td>
+               <td><label for="segundo_apellido">Segundo apellido</label></td>
                <td><input type="text"></td>
             </tr>
             <tr>
-               <td>Correo electrónico</td>
+               <td><label for="correo">Correo electrónico</label></td>
                <td><input type="text"></td>
             </tr>
             <tr>
-               <td>Contraseña</td>
+               <td><label for="constrasenia">Contraseña</label></td>
                <td><input type="password"></td>
             </tr>
             <tr>
-               <td>Confirmar contraseña</td>
+               <td><label for="confirmar_contrasenia">Confirmar contraseña</label></td>
                <td><input type="password"></td>
             </tr>
             <tr>
                <td>
                   <label for="tipo_usuario">Tipo de usuario</label>
+               </td>
+               <td>
                   <select name="tipo_usuario" id="tipo_usuario">
                      <option value="Alumno">Estudiante</option>
                      <option value="Juez">Docente</option>
@@ -51,10 +53,10 @@
                   </select> 
                </td>
             </tr>
-            <tr> 
-               <td><input value="Registrarse" type="submit"></button></td>
-            </tr>
          </table>
+         <div> 
+            <td><input value="Registrarse" type="submit" class = "btn"></td>
+         </div>
       </form>
    </div>
 </body>
