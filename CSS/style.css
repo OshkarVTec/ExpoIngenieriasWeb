@@ -154,7 +154,7 @@ h1 {
   transform: scale(1.1);
 }
 
-.btn button{
+.btn {
   color: var(--wordaccentbg1R);
   padding: 6px 10px;
   background: var(--mainR);
@@ -164,7 +164,7 @@ h1 {
   transition: all 0.3s ease 0s;
 }
 
-.btn button:hover{
+.btn:hover{
   /*background-color: var(--wordaccent2R);
   color: var(--wordaccentbg1R); */
   transform: scale(1.1);
