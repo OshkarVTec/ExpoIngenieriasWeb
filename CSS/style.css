@@ -246,3 +246,6 @@ select:focus{
   border-color: var(--mainR);
 }
 
+.small_window{
+  margin-inline: 30%;
+}
