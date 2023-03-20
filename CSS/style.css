@@ -236,3 +236,13 @@ input:focus{
   border-color: var(--mainR);
 }
 
+select{
+  border-radius: 50px;
+  border-style: solid;
+  padding-left: 10px;
+}
+
+select:focus{
+  border-color: var(--mainR);
+}
+
