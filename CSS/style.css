@@ -224,6 +224,15 @@ h1 {
   align-items: center;
   flex-direction: column;
   gap: 20px;
-  
+}
+
+input{
+  border-radius: 50px;
+  border-style: solid;
+  padding-left: 10px;
+}
+
+input:focus{
+  border-color: var(--mainR);
 }
 
