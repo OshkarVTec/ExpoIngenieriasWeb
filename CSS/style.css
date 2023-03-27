@@ -23,11 +23,37 @@
 
 }
 
-table{
+.rubrica {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.rubrica thead tr {
+  background-color: var(--mainR);
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+.rubrica th,
+.rubrica td {
+  padding: 12px 15px;
+}
+
+.rubrica tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.general table{
   border-collapse: collapse ;
 }
 
-tr { 
+.general tr { 
   display: flex;
   justify-content: space-between;
   border: solid;
@@ -35,14 +61,14 @@ tr {
   border-width: 1px 0;
 }
 
-tr:first-child {
+.general tr:first-child {
   border-top: none;
 }
-tr:last-child {
+.general tr:last-child {
   border-bottom: none;
 }
 
-td{
+.general td{
   padding: 5px;
 }
 
@@ -558,3 +584,4 @@ footer {
 /* Slideshow container fin */
 
 /* Estilos para la pagina informativa fin*/
+
