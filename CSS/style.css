@@ -148,6 +148,29 @@ h1 {
 
 }
 
+.cuentacontent{
+  justify-content: space-between;
+  display: flex;
+  grid-template-columns: 40% 60%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding-inline: 20px;
+}
+
+.cuentabig p{
+  font-size: 40px;
+  padding: 0 20px;
+}
+
+.cuentabig .cuentalast li{
+  list-style-type: none;
+  display: inline-block;
+}
+
+.cuentabiglast p{
+  font-size: 40px;
+}
+
 .firstrow{
   justify-content: space-between;
   display: flex;
@@ -156,10 +179,12 @@ h1 {
   margin-bottom: 10px;
   padding-inline: 20px;
 }
+
 .firstrow .title{
   font-size: 30px;
-  
+
 }
+
 .firstrow .status{
   color: var(--wordaccent1R);
   font-weight: bold;
