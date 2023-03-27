@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edición de expo editar</title>
+    <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">
+          <img src="IMG/logo-expo.png" alt="Logo de la pagina">
+        </div>
+        <a href="#" class="btn"><button>Log In</button></a>
+  
+      </header>
+
+      <!-- <p>aaaaaa</p> -->
+      <!-- <p><br><br><br><br></p> -->
+
+    <div id="forms-editar-edicion-expo" class = "container">
+        <form action="definir-estatus">
+            <div id="nombre">
+                <label for="input-nombre">Nombre</label>
+                <input type="text" id="input-nombre" name="input-nombre" placeholder="Escribe tu nombre...">
+            </div>
+            
+            <div id="fecha-inicio">
+                <label for="ini_inscripciones">Fecha de inicio de inscripciones</label>
+                <input type="date" id="ini_inscripciones" name="ini_inscripciones">
+            </div>
+            
+            <div id="fecha-fin">
+                <label for="fin_inscripciones">Fecha fin de inscripciones</label>
+                <input type="date" id="fin_inscripciones" name="fin_inscripciones">
+            </div>
+
+            <div id="estatus-div">
+                <label for="estatus">Activa</label>
+                <input type="checkbox" id="estatus" name="estatus">
+            </div>
+
+            <div id="opciones">
+                <div id="guardar">
+                    <button class = "btn">Guardar</button>
+                </div>
+                <div id="cancelar">
+                    <button id="btn-cancelar" class = "btn" type="reset">Cancelar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

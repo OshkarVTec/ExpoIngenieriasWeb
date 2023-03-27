@@ -249,3 +249,312 @@ select:focus{
 .small_window{
   margin-inline: 30%;
 }
+
+/* CSS para edicion_de_expo_vista inicio */
+#nueva-edicion-btn{
+  margin-left: 1000px;
+}
+/* CSS para edicion_de_expo_vista fin */
+
+
+/* CSS para editar usuarios inicio */
+#instrucciones-editar-usuario{
+  display: flex;
+  text-align: center;
+
+}
+
+#texto-instruciones{
+  font-size: 15px;
+  padding-top: 23.4px;
+}
+/* CSS para editar usuarios fin */
+
+/* CSS para edicion de expo editar inicio*/
+
+#forms-editar-edicion-expo {
+  /* border-top: 200px !important; */
+  /* margin: 1000px; */
+  width: 50%;
+  margin: 0 auto;
+}
+
+
+
+#nombre{
+  display: grid;
+  padding: 10px;
+}
+
+#fecha-inicio{
+  display: grid;
+  padding: 10px;
+}
+
+#fecha-fin{
+  display: grid;
+  padding: 10px;
+}
+
+#estatus-div{
+  padding: 10px;
+}
+
+#opciones{
+  display: flex;
+  padding-top: 200px;
+  width: 100%;
+}
+
+#opciones button{
+  padding: 15px 10px;
+}
+
+#btn-cancelar{
+  background-color: white;
+  color: black;
+  border: solid black;
+  /* justify-content: right; */
+
+}
+
+#guardar{
+  /* background-color: darkred; */
+  width: 50%;
+  padding-left: 3em;
+}
+
+#cancelar{
+  /* background-color: darkcyan; */
+  width: 50%;
+  text-align: right;
+  padding-right: 3em;
+}
+/* CSS para edicion de expo editar fin*/
+
+
+/* Estilos para el footer inicio*/
+
+footer {
+  background-color: #276678;
+  color: #ffffff;
+}
+
+#footer-seccion-superior {
+  display: flex;
+}
+
+.seccion-superior {
+  padding: 20px;
+  line-height: 30px;
+}
+
+.seccion-superior h3 {
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.seccion-superior h4 {
+  font-weight: 400;
+  font-size: 12px;
+}
+
+#seccion-iconos {
+  display: grid;
+  padding-top: 12px;
+  margin-left: 50px;
+}
+
+#seccion-iconos img {
+  width: 50px;
+}
+
+#seccion-iconos #telefono {
+  width: 35px;
+  height: 40px;
+  margin-left: 7px;
+}
+
+#info-contacto {
+  line-height: 47px;
+}
+
+#footer-seccion-inferior {
+  display: flex;
+  text-align: center;
+  justify-items: center;
+}
+
+#logo-footer {
+  justify-content: right;
+}
+
+#redes-sociales {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#redes-sociales img {
+  width: 60px;
+}
+
+#redes-sociales #insta-icon {
+  width: 81px;
+  padding-bottom: 5px;
+}
+
+#facebook_icon {
+  cursor: pointer;
+}
+
+#insta-icon {
+  cursor: pointer;
+}
+
+#logo-footer {
+  width: 75%;
+  text-align: right;
+  padding-top: 15px;
+}
+
+#logo-footer img {
+  width: 175px;
+  height: 60px;
+  cursor: pointer;
+}
+
+/* Estilos para el footer fin*/
+
+/* Estilos para la pagina informativa inicio*/
+#container-informativa {
+  margin-top: 100px;
+  margin-bottom: 75px;
+  width: 100%;
+  display: flex;
+  color: #f6f5f5;
+  background-color: #1687a7;
+}
+#container-seccion-izquierda {
+  width: 45%;
+}
+
+#container-seccion-izquierda h1 {
+  padding-top: 5rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+#container-seccion-izquierda p {
+  /* text-align: center; */
+  padding-top: 3.5rem;
+  padding-left: 1%;
+  font-size: 0.75rem;
+}
+
+#container-seccion-derecha {
+  text-align: center;
+  width: 55%;
+}
+#container-seccion-derecha img {
+  opacity: 0.4;
+  width: 100%;
+  height: 500px;
+  /* position: fixed; */
+  position: static;
+}
+
+#container-seccion-derecha-img {
+  height: 10%;
+  /* width: 80%; */
+}
+
+/* Slideshow container inicio */
+/* Slideshow container */
+
+/* .slideshow-container img {
+  width: 200px;
+  height: 200px;
+} */
+
+.slideshow-container {
+  /* max-width: 100%; */
+  position: relative;
+  margin: auto;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Next & previous buttons */
+.prev,
+.next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+  background-color: #717171;
+}
+
+/* Slideshow container fin */
+
+/* Estilos para la pagina informativa fin*/
