@@ -500,8 +500,9 @@ footer {
 #container-seccion-izquierda p {
   /* text-align: center; */
   padding-top: 3.5rem;
-  padding-left: 1%;
+  padding: 5%;
   font-size: 0.75rem;
+  text-align: justify;
 }
 
 #container-seccion-derecha {
