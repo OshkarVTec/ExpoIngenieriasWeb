@@ -5,15 +5,26 @@ CREATE TABLE r_ediciones(
 	fecha_final DATE
 );
 
+CREATE TABLE r_usuarios(
+   id_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   correo VARCHAR(30),
+   contrasenia VARCHAR(30)
+);
+
 CREATE TABLE r_estudiantes(
 	matricula INT NOT NULL PRIMARY KEY,
 	nombre VARCHAR(30),
 	apellidoP VARCHAR(30),
    apellidoM VARCHAR(30),
 	id_edicion INT,
+   id_usuario INT,
 	FOREIGN KEY (id_edicion)
 	REFERENCES r_ediciones(id_edicion)
 	ON DELETE RESTRICT
+   ON UPDATE CASCADE,
+   FOREIGN KEY (id_usuario)
+	REFERENCES r_usuarios(id_usuario)
+	ON DELETE CASCADE
    ON UPDATE CASCADE
 );
 
@@ -23,9 +34,14 @@ CREATE TABLE r_docentes(
 	apellidoP VARCHAR(30),
    apellidoM VARCHAR(30),
    id_edicion INT,
+   id_usuario INT,
 	FOREIGN KEY (id_edicion)
 	REFERENCES r_ediciones(id_edicion)
 	ON DELETE RESTRICT
+   ON UPDATE CASCADE,
+   FOREIGN KEY (id_usuario)
+	REFERENCES r_usuarios(id_usuario)
+	ON DELETE CASCADE
    ON UPDATE CASCADE
 );
 
@@ -35,9 +51,14 @@ CREATE TABLE r_jueces(
 	apellidoP VARCHAR(30),
    apellidoM VARCHAR(30),
 	id_edicion INT,
+   id_usuario INT,
 	FOREIGN KEY (id_edicion)
 	REFERENCES r_ediciones(id_edicion)
 	ON DELETE RESTRICT
+   ON UPDATE CASCADE,
+   FOREIGN KEY (id_usuario)
+	REFERENCES r_usuarios(id_usuario)
+	ON DELETE CASCADE
    ON UPDATE CASCADE
 );
 
@@ -52,7 +73,12 @@ CREATE TABLE r_administradores(
 	id_administrador INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
    nombre VARCHAR(30),
    apellidoP VARCHAR(30),
-   apellidoM VARCHAR(30)
+   apellidoM VARCHAR(30),
+   id_usuario INT,
+   FOREIGN KEY (id_usuario)
+	REFERENCES r_usuarios(id_usuario)
+	ON DELETE CASCADE
+   ON UPDATE CASCADE
 );
 
 CREATE TABLE r_usuarios_sin_asignar(
