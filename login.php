@@ -5,7 +5,7 @@
 		$Error = null;
 	if ( !empty($_POST)) {
 		$correo = strtolower($_POST['correo']);
-		$contrasenia = md5($_POST['contrasenia']);
+		$contrasenia = $_POST['contrasenia'];
 		// validate input
 		$valid = true;
       
@@ -62,8 +62,8 @@
                   <td><input type="text" name="correo"></td>
                </tr>
                <tr>
-                  <td><label for="constrasenia">Contraseña</label></td>
-                  <td><input type="password" name="constrasenia"></td>
+                  <td><label for="contrasenia">Contraseña</label></td>
+                  <td><input type="password" name="contrasenia"></td>
                </tr>
             </table>
             <div> 
