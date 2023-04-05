@@ -125,7 +125,7 @@ CREATE TABLE r_proyectos(
    poster VARCHAR(100),
    description TEXT,
    estatus BOOL,
-   nombre VARCHAR(50),
+   nombre VARCHAR(100),
    video VARCHAR(100),
    fecha_registro DATETIME,
    id_uf VARCHAR(10),
