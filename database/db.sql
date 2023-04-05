@@ -12,7 +12,7 @@ CREATE TABLE r_usuarios(
 );
 
 CREATE TABLE r_estudiantes(
-	matricula INT NOT NULL PRIMARY KEY,
+	matricula VARCHAR(10) NOT NULL PRIMARY KEY,
 	nombre VARCHAR(30),
 	apellidoP VARCHAR(30),
    apellidoM VARCHAR(30),
