@@ -8,7 +8,7 @@ CREATE TABLE r_ediciones(
 CREATE TABLE r_usuarios(
    id_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
    correo VARCHAR(30),
-   contrasenia VARCHAR(30)
+   contrasenia VARCHAR(100)
 );
 
 CREATE TABLE r_estudiantes(
