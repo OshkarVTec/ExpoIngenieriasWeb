@@ -85,7 +85,12 @@ CREATE TABLE r_usuarios_sin_asignar(
 	id_usuario_sin_asignar INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
    nombre VARCHAR(30),
    apellidoP VARCHAR(30),
-   apellidoM VARCHAR(30)
+   apellidoM VARCHAR(30),
+   id_usuario INT,
+   FOREIGN KEY (id_usuario)
+	REFERENCES r_usuarios(id_usuario)
+	ON DELETE CASCADE
+   ON UPDATE CASCADE
 );
 
 CREATE TABLE r_rubrica(
