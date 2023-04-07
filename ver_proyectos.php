@@ -6,14 +6,15 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Ver proyectos</title>
    <link rel="stylesheet" href="CSS/style.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+   <script> 
+    $(function(){
+      $("#header").load("header.html"); 
+    });
+    </script> 
 </head>
 <body>
-   <header class="header">
-      <div class="logo">
-        <img src="IMG/logo-expo.png" alt="Logo de la pagina">
-      </div>
-      <a href="#" class="btn"><button>Log In</button></a>
-   </header>
+   <div id="header"></div>
    <?php
       include 'database.php';
       $pdo = Database::connect();
