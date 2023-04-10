@@ -106,23 +106,23 @@
                </tr>
                <tr>
                   <td><label for="primer_apellido">Primer apellido</label></td>
-                  <td><input type="text" name="primer_apellido"></td>
+                  <td><input type="text" name="primer_apellido" value="<?php echo !empty($primer_apellido)?$primer_apellido:'';?>"></td>
                </tr>
                <tr>
                   <td><label for="segundo_apellido">Segundo apellido</label></td>
-                  <td><input type="text" name="segundo_apellido"></td>
+                  <td><input type="text" name="segundo_apellido" value="<?php echo !empty($segundo_apellido)?$segundo_apellido:'';?>"></td>
                </tr>
                <tr>
                   <td><label for="correo">Correo electrónico</label></td>
-                  <td><input type="text" name="correo"></td>
+                  <td><input type="text" name="correo" value="<?php echo !empty($correo)?$correo:'';?>"></td>
                </tr>
                <tr>
                   <td><label for="contrasenia">Contraseña</label></td>
-                  <td><input type="password" name="contrasenia"></td>
+                  <td><input type="password" name="contrasenia" value="<?php echo !empty($contrasenia)?$contrasenia:'';?>"></td>
                </tr>
                <tr>
                   <td><label for="confirmar_contrasenia">Confirmar contraseña</label></td>
-                  <td><input type="password" name="confirmar_contrasenia"></td>
+                  <td><input type="password" name="confirmar_contrasenia" value="<?php echo !empty($confirmar_contrasenia)?$confirmar_contrasenia:'';?>"></td>
                </tr>
                <tr>
                   <td>
