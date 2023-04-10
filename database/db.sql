@@ -155,6 +155,20 @@ CREATE TABLE r_proyectos(
    ON UPDATE CASCADE
 );
 
+CREATE TABLE r_proyecto_estudiantes(
+   id_registro INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   matricula VARCHAR(30),
+   id_proyecto INT,
+   FOREIGN KEY (matricula)
+	REFERENCES r_estudiantes(matricula)
+   ON DELETE CASCADE
+   ON UPDATE CASCADE,
+   FOREIGN KEY (id_proyecto)
+	REFERENCES r_proyectos(id_proyecto)
+   ON DELETE CASCADE
+   ON UPDATE CASCADE
+);
+
 CREATE TABLE r_asignacion_jueces(
 	id_asignacion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	id_juez INT,
