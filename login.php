@@ -59,11 +59,11 @@
             <table class="general">  
                <tr>
                   <td><label for="correo">Correo electrónico</label></td>
-                  <td><input type="text" name="correo"></td>
+                  <td><input type="text" name="correo" value="<?php echo !empty($correo)?$correo:'';?>"></td>
                </tr>
                <tr>
                   <td><label for="contrasenia">Contraseña</label></td>
-                  <td><input type="password" name="contrasenia"></td>
+                  <td><input type="password" name="contrasenia" value="<?php echo !empty($contrasenia)?$contrasenia:'';?>"></td>
                </tr>
             </table>
             <div> 
