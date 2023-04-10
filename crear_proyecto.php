@@ -12,7 +12,7 @@
 		$uf = $_POST['uf'];
 		$docente = $_POST['docente'];
 		$categoria = $_POST['categoria'];
-		$descripcion = $_POST['tipo_usuario'];
+		$descripcion = $_POST['descripcion'];
 		
 
 		// validate input
@@ -42,7 +42,7 @@
 			$Error = 'Por favor seleccione una categoria';
 			$valid = false;
 		}
-        if (empty($descripcion)) {
+      if (empty($descripcion)) {
 			$Error = 'Por favor proporcione una descripcion';
 			$valid = false;
 		}
@@ -82,23 +82,22 @@
       <div class = "ventana">
          <h1 class="label"></h1>
          <div class="container">
-      <form>
-
+      <form class = "login" action="crear_proyecto.php" method=POST>
       <table>
          
          <tr>
             <td><label for="name">Nombre del Proyecto:</label></td>
-            <td><input type="text" id="title" name="name"></td>
+            <td><input type="text" id="title" name="name" value="<?php echo !empty($name)?$name:'';?>"></td>
             <td><input value="Agregar compañeros" type="submit" class = "btn" ></td> 
          </tr>
 
          <tr>
             <td><label for="poster">Link al poster:</label></td>
-            <td><input type="text" id="link" name="poster"></td>
+            <td><input type="text" id="link" name="poster" value="<?php echo !empty($poster)?$poster:'';?>"></td>
          </tr>
          <tr>
             <td><label for="video">Link al video:</label></td>
-            <td><input type="text" id="link" name="video"></td>
+            <td><input type="text" id="link" name="video" value="<?php echo !empty($video)?$video:'';?>"></td>
             </tr>
 
          <tr>
@@ -125,7 +124,7 @@
                   $pdo = Database::connect();
                   $query = 'SELECT * FROM r_docentes';
                   foreach ($pdo->query($query) as $row) {
-                     echo "<option value='" . $row['id_docente'] . "'>" . $row['nombre'] . " " . $row['apellidoP'] "</option>";
+                     echo "<option value='" . $row['id_docente'] . "'>" . $row['nombre'] . " " . $row['apellidoP'] . "</option>";
                   }
                   Database::disconnect();
                ?>
@@ -151,7 +150,7 @@
 
             <tr>
             <td><label for="descripcion">Descripcion:</label></td>
-            <td><textarea id="comment" name="descripcion"></textarea></td>
+            <td><textarea id="comment" name="descripcion" value="<?php echo !empty($descripcion)?$descripcion:'';?>"></textarea></td>
             </tr>
 
          </table>
