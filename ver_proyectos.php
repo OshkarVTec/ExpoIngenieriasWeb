@@ -27,7 +27,7 @@
          foreach ($pdo->query($sql) as $row) {
             echo '<tr>';
             echo '<td>';
-            echo '<button class="btn" href="read.php?id='.$row['idauto'].'">'. $row['nombre'] .'</a>';
+            echo '<button class="btn" href="proyecto.php?id='.$row['id_proyecto'].'">'. $row['nombre'] .'</a>';
             echo '</td>';
             echo '</tr>';
          }
