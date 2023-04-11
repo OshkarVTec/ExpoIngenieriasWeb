@@ -150,7 +150,7 @@
 
             <tr>
             <td><label for="descripcion">Descripcion:</label></td>
-            <td><textarea id="comment" name="descripcion" value="<?php echo !empty($descripcion)?$descripcion:'';?>"></textarea></td>
+            <td><textarea id="comment" name="descripcion"><?php echo !empty($descripcion)?$descripcion:'';?></textarea></td>
             </tr>
 
          </table>

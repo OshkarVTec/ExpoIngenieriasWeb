@@ -57,13 +57,11 @@
 			$sql = "UPDATE r_proyectos 
                   SET poster = ?,  description = ?, nombre = ?, video = ?, 
                   fecha_registro = current_timestamp(), id_uf = ?,  id_docente = ?, id_categoria = ?
-                  WHERE id_proyecto = id_proyecto";
-
-                                
+                  WHERE id_proyecto = ?";
 			$q = $pdo->prepare($sql);
-			$q->execute(array($poster,$descripcion, $name, $video, $uf, $docente, $categoria, ));
+			$q->execute(array($poster,$descripcion, $name, $video, $uf, $docente, $categoria, $id_proyecto));
 			Database::disconnect();
-			header("Location: informativa.html");
+			header("Location: ver_proyectos_crud.php");
 		}
    }
    else{
@@ -103,9 +101,8 @@
       <div class = "ventana">
          <h1 class="label"></h1>
          <div class="container">
-      <form class = "login" action="crear_proyecto.php" method=POST>
+      <form class = "login" action="actualizar_proyecto.php?id_proyecto=<?php echo $id_proyecto?>" method=POST>
       <table>
-         
          <tr>
             <td><label for="name">Nombre del Proyecto:</label></td>
             <td><input type="text" id="title" name="name" value="<?php echo !empty($name)?$name:'';?>"></td>
@@ -129,7 +126,10 @@
                   $pdo = Database::connect();
                   $query = 'SELECT * FROM r_ufs';
                   foreach ($pdo->query($query) as $row) {
-                     echo "<option value='" . $row['id_uf'] . "'>" . $row['nombre'] . "</option>";
+                     if ($row['id_uf']==$uf)
+                        echo "<option selected value='" . $row['id_uf'] . "'>" . $row['nombre'] . "</option>";
+                     else
+                        echo "<option value='" . $row['id_uf'] . "'>" . $row['nombre'] . "</option>";
                   }
                   Database::disconnect();
                ?>
@@ -145,7 +145,10 @@
                   $pdo = Database::connect();
                   $query = 'SELECT * FROM r_docentes';
                   foreach ($pdo->query($query) as $row) {
-                     echo "<option value='" . $row['id_docente'] . "'>" . $row['nombre'] . " " . $row['apellidoP'] . "</option>";
+                     if ($row['id_docente']==$docente)
+                        echo "<option selected value='" . $row['id_docente'] . "'>" . $row['nombre'] . " " . $row['apellidoP'] . "</option>";
+                     else
+                        echo "<option value='" . $row['id_docente'] . "'>" . $row['nombre'] . " " . $row['apellidoP'] . "</option>";
                   }
                   Database::disconnect();
                ?>
@@ -161,7 +164,10 @@
                   $pdo = Database::connect();
                   $query = 'SELECT * FROM r_categorias';
                   foreach ($pdo->query($query) as $row) {
-                     echo "<option value='" . $row['id_categoria'] . "'>" . $row['nombre'] . "</option>";
+                     if ($row['id_categoria']==$categoria)
+                        echo "<option selected value='" . $row['id_categoria'] . "'>" . $row['nombre'] . "</option>";
+                     else
+                        echo "<option value='" . $row['id_categoria'] . "'>" . $row['nombre'] . "</option>";
                   }
                   Database::disconnect();
                ?>
@@ -171,7 +177,7 @@
 
             <tr>
             <td><label for="descripcion">Descripcion:</label></td>
-            <td><textarea id="comment" name="descripcion" value="<?php echo !empty($descripcion)?$descripcion:'';?>"></textarea></td>
+            <td><textarea id="comment" name="descripcion"><?php echo !empty($descripcion)?$descripcion:'';?></textarea></td>
             </tr>
 
          </table>
