@@ -67,9 +67,9 @@
    else{
       $pdo = Database::connect();
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = '.$id_proyecto;
+      $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
       $q = $pdo->prepare($sql);
-      $q->execute();
+      $q->execute(array($id_proyecto));
       $row = $q->fetch(PDO::FETCH_ASSOC);
       $name = $row['nombre'];
       $poster = $row['poster'];
