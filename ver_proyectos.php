@@ -31,7 +31,6 @@
             echo '<td>';
             echo '<a class="btn" href="proyecto.php?v=<?php echo time(); ?>?id_proyecto='.$row['id_proyecto'].'">Detalles</a>';
             echo '</td>';
-            echo '</td>';
             echo '</tr>';
          }
          echo '</table>';
