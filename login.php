@@ -73,7 +73,7 @@
                <p>¿No tienes cuenta aún?</p>
             </div>
             <div>
-               <a href="registro.php">Registrarse</a>
+               <a class = "link" href="registro.php">Registrarse</a>
             </div>
             <?php if (($Error != null)) ?>
 			   <div class="Error"><?php echo $Error;?></div>
