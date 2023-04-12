@@ -205,6 +205,18 @@ h1 {
   transform: scale(1.1);
 }
 
+/* styles for a and button start */
+
+.link{
+  color: var(--wordaccent1);
+  text-decoration: none;
+}
+
+.link:hover{
+  color: var(--mainR);
+  text-decoration: underline;
+}
+
 .btn {
   color: var(--wordaccentbg1R);
   padding: 6px 10px;
@@ -215,6 +227,8 @@ h1 {
   transition: all 0.3s ease 0s;
   text-decoration: none;
 }
+
+/* styles for a and button end*/
 
 .btn:hover{
   /*background-color: var(--wordaccent2R);
@@ -302,14 +316,14 @@ select:focus{
   margin-inline: 30%;
 }
 
-/* CSS para edicion_de_expo_vista inicio */
+/* CSS para edicion_de_expo_vista start */
 #nueva-edicion-btn{
   margin-left: 1000px;
 }
-/* CSS para edicion_de_expo_vista fin */
+/* CSS para edicion_de_expo_vista end */
 
 
-/* CSS para editar usuarios inicio */
+/* CSS para editar usuarios start */
 #instrucciones-editar-usuario{
   display: flex;
   text-align: center;
@@ -320,9 +334,9 @@ select:focus{
   font-size: 15px;
   padding-top: 23.4px;
 }
-/* CSS para editar usuarios fin */
+/* CSS para editar usuarios end */
 
-/* CSS para edicion de expo editar inicio*/
+/* CSS para edicion de expo editar start*/
 
 #forms-editar-edicion-expo {
   /* border-top: 200px !important; */
@@ -382,10 +396,10 @@ select:focus{
   text-align: right;
   padding-right: 3em;
 }
-/* CSS para edicion de expo editar fin*/
+/* CSS para edicion de expo editar end*/
 
 
-/* Estilos para el footer inicio*/
+/* Estilos para el footer start*/
 
 footer {
   background-color: #276678;
@@ -477,9 +491,9 @@ footer {
   cursor: pointer;
 }
 
-/* Estilos para el footer fin*/
+/* Estilos para el footer end*/
 
-/* Estilos para la pagina informativa inicio*/
+/* Estilos para la pagina informativa start*/
 #container-informativa {
   margin-top: 100px;
   margin-bottom: 75px;
@@ -523,7 +537,7 @@ footer {
   /* width: 80%; */
 }
 
-/* Slideshow container inicio */
+/* Slideshow container start */
 /* Slideshow container */
 
 /* .slideshow-container img {
@@ -608,7 +622,7 @@ footer {
   background-color: #717171;
 }
 
-/* Slideshow container fin */
+/* Slideshow container end */
 
-/* Estilos para la pagina informativa fin*/
+/* Estilos para la pagina informativa end*/
 

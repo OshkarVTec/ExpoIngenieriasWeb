@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,9 +28,7 @@
          foreach ($pdo->query($sql) as $row) {
             echo '<tr>';
             echo '<td>';
-            echo '<div>'. $row['nombre'] .'</div>';
-            echo '<td>';
-            echo '<a class="btn" href="proyecto.php?v=<?php echo time(); ?>?id_proyecto='.$row['id_proyecto'].'">Detalles</a>';
+            echo '<a class="link" href="proyecto.php?id_proyecto='.$row['id_proyecto'].'">'. $row['nombre'] .'</a>';
             echo '</td>';
             echo '</tr>';
          }
