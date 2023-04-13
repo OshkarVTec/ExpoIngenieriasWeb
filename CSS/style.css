@@ -1,26 +1,25 @@
-@import url('https://fonts.cdnfonts.com/css/gellix');
+@import url("https://fonts.cdnfonts.com/css/gellix");
 
-:root{
-  --background: #F5F5F5;
-  --main: #112D4E;
-  --wordaccent1: #3F72AF;
-  --wordaccentbg1: #DBE2EF;
-  --wordaccent2: #1687A7;
+:root {
+  --background: #f5f5f5;
+  --main: #112d4e;
+  --wordaccent1: #3f72af;
+  --wordaccentbg1: #dbe2ef;
+  --wordaccent2: #1687a7;
 
-  --backgroundR: #DDDDDD;
+  --backgroundR: #dddddd;
   --mainR: #000035;
-  --wordaccent1R: #00BDFF;
+  --wordaccent1R: #00bdff;
   --wordaccentbg1R: white;
   --wordaccent2R: #00a2dd;
 }
 
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Gellix', sans-serif;
+  font-family: "Gellix", sans-serif;
   font-size: 20px;
-
 }
 
 .rubrica {
@@ -49,11 +48,11 @@
   border-bottom: 1px solid #dddddd;
 }
 
-.general table{
-  border-collapse: collapse ;
+.general table {
+  border-collapse: collapse;
 }
 
-.general tr { 
+.general tr {
   display: flex;
   justify-content: space-between;
   border: solid;
@@ -68,7 +67,7 @@
   border-bottom: none;
 }
 
-.general td{
+.general td {
   padding: 10px;
 }
 
@@ -86,32 +85,32 @@ h1 {
   color: var(--mainR);
 }
 
-.header{
+.header {
   background-color: var(--mainR);
   display: flex;
   justify-content: space-between;
   align-items: center;
   height: 80px;
   padding: 5px 5%;
-  font-family: 'Oswald', sans-serif;
+  font-family: "Oswald", sans-serif;
   font-size: 40px;
 }
 
-.header .logo{
+.header .logo {
   cursor: pointer;
 }
 
-.header .logo img{
+.header .logo img {
   height: 50px;
   width: auto;
   transition: all 0.3s;
 }
 
-.header .logo img:hover{
+.header .logo img:hover {
   transform: scale(1.2);
 }
 
-.header .btn button{
+.header .btn button {
   font-weight: 700;
   color: var(--wordaccentbg1R);
   padding: 9px 25px;
@@ -122,15 +121,15 @@ h1 {
   transition: all 0.3s ease 0s;
 }
 
-.header .btn button:hover{
+.header .btn button:hover {
   /*background-color: var(--wordaccent2R);
   color: var(--wordaccentbg1R); */
   transform: scale(1.1);
 }
 
-.container{
+.container {
   display: grid;
-  background: #FFFFFF;
+  background: #ffffff;
   margin-top: 20px;
   margin-left: 5%;
   margin-right: 5%;
@@ -138,17 +137,15 @@ h1 {
   border-radius: 25px;
   padding: 20px;
   box-shadow: 0px 10px 10px #b8b8b8;
-} 
+}
 
-
-.label{
+.label {
   margin-top: 20px;
   margin-left: 5%;
   margin-right: 5%;
-
 }
 
-.cuentacontent{
+.cuentacontent {
   justify-content: space-between;
   display: flex;
   grid-template-columns: 40% 60%;
@@ -157,21 +154,21 @@ h1 {
   padding-inline: 20px;
 }
 
-.cuentabig p{
+.cuentabig p {
   font-size: 40px;
   padding: 0 20px;
 }
 
-.cuentabig .cuentalast li{
+.cuentabig .cuentalast li {
   list-style-type: none;
   display: inline-block;
 }
 
-.cuentabiglast p{
+.cuentabiglast p {
   font-size: 40px;
 }
 
-.firstrow{
+.firstrow {
   justify-content: space-between;
   display: flex;
   grid-template-columns: 50% 20% 30%;
@@ -180,16 +177,15 @@ h1 {
   padding-inline: 20px;
 }
 
-.firstrow .title{
+.firstrow .title {
   font-size: 30px;
-
 }
 
-.firstrow .status{
+.firstrow .status {
   color: var(--wordaccent1R);
   font-weight: bold;
 }
-.btnP button{
+.btnP button {
   color: var(--wordaccentbg1R);
   padding: 6px 10px;
   background: var(--wordaccent1R);
@@ -199,13 +195,13 @@ h1 {
   transition: all 0.3s ease 0s;
 }
 
-.btnP button:hover{
+.btnP button:hover {
   /*background-color: var(--wordaccent2R);
   color: var(--wordaccentbg1R); */
   transform: scale(1.1);
 }
 
-/* nav bar start */ 
+/* nav bar start */
 /* reference: https://www.w3schools.com/howto/howto_css_dropdown_navbar.asp /*
 
 /* Links inside the navbar */
@@ -238,7 +234,8 @@ h1 {
 }
 
 /* Add a red background color to navbar links on hover */
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navbar a:hover,
+.dropdown:hover .dropbtn {
   background-color: var(--wordaccent1R);
 }
 
@@ -248,7 +245,7 @@ h1 {
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -270,13 +267,13 @@ h1 {
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
-} 
+}
 .menu ul {
   list-style-type: none;
   margin: 0;
   padding: 0;
 }
-.menu li{
+.menu li {
   display: inline;
 }
 
@@ -284,12 +281,12 @@ h1 {
 
 /* styles for a and button start */
 
-.link{
+.link {
   color: var(--wordaccent1);
   text-decoration: none;
 }
 
-.link:hover{
+.link:hover {
   color: var(--mainR);
   text-decoration: underline;
 }
@@ -307,13 +304,13 @@ h1 {
 
 /* styles for a and button end*/
 
-.btn:hover{
+.btn:hover {
   /*background-color: var(--wordaccent2R);
   color: var(--wordaccentbg1R); */
   transform: scale(1.1);
 }
 
-.secondrow{
+.secondrow {
   text-align: justify;
   justify-items: center;
   display: grid;
@@ -325,13 +322,13 @@ h1 {
   margin-bottom: 10px;
 }
 
-.secondrow .img{
-  width:300px;
-  height:auto;
+.secondrow .img {
+  width: 300px;
+  height: auto;
   border-radius: 15px;
 }
 
-.thirdrow{
+.thirdrow {
   justify-items: center;
   display: grid;
   grid-template-columns: 33% 33% 33%;
@@ -339,9 +336,9 @@ h1 {
   margin-bottom: 10px;
 }
 
-.thirdrow .calbox{
+.thirdrow .calbox {
   background-color: var(--wordaccent1R);
-  color: #FFFFFF;
+  color: #ffffff;
   border-radius: 30px;
   display: grid;
   justify-content: center;
@@ -350,18 +347,18 @@ h1 {
   margin-top: 5px;
 }
 
-.thirdrow .cal{
+.thirdrow .cal {
   display: grid;
   justify-content: center;
   align-items: center;
   font-size: 50px;
 }
 
-.thirdrow .caltext{
+.thirdrow .caltext {
   padding-block: 5px;
 }
 
-.login{
+.login {
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -369,45 +366,43 @@ h1 {
   gap: 20px;
 }
 
-input{
+input {
   border-radius: 50px;
   border-style: solid;
   padding-left: 10px;
 }
 
-input:focus{
+input:focus {
   border-color: var(--mainR);
 }
 
-select{
+select {
   border-radius: 50px;
   border-style: solid;
   padding-left: 10px;
 }
 
-select:focus{
+select:focus {
   border-color: var(--mainR);
 }
 
-.small_window{
+.small_window {
   margin-inline: 30%;
 }
 
 /* CSS para edicion_de_expo_vista start */
-#nueva-edicion-btn{
+#nueva-edicion-btn {
   margin-left: 1000px;
 }
 /* CSS para edicion_de_expo_vista end */
 
-
 /* CSS para editar usuarios start */
-#instrucciones-editar-usuario{
+#instrucciones-editar-usuario {
   display: flex;
   text-align: center;
-
 }
 
-#texto-instruciones{
+#texto-instruciones {
   font-size: 15px;
   padding-top: 23.4px;
 }
@@ -420,61 +415,59 @@ select:focus{
   /* margin: 1000px; */
   width: 50%;
   margin: 0 auto;
+  margin-top: 80px;
+  margin-bottom: 50px;
 }
 
-
-
-#nombre{
+#nombre {
   display: grid;
   padding: 10px;
 }
 
-#fecha-inicio{
+#fecha-inicio {
   display: grid;
   padding: 10px;
 }
 
-#fecha-fin{
+#fecha-fin {
   display: grid;
   padding: 10px;
 }
 
-#estatus-div{
+#estatus-div {
   padding: 10px;
 }
 
-#opciones{
+#opciones {
   display: flex;
   padding-top: 200px;
   width: 100%;
 }
 
-#opciones button{
+#opciones button {
   padding: 15px 10px;
 }
 
-#btn-cancelar{
+#btn-cancelar {
   background-color: white;
   color: black;
   border: solid black;
   /* justify-content: right; */
-
 }
 
-#guardar{
+#guardar {
   /* background-color: darkred; */
   width: 50%;
   padding-left: 3em;
 }
 
-#cancelar{
+#cancelar {
   /* background-color: darkcyan; */
   width: 50%;
   text-align: right;
   padding-right: 3em;
 }
 /* CSS para edicion de expo editar end*/
-
 
 /* Estilos para el footer start*/
 
@@ -702,4 +695,3 @@ footer {
 /* Slideshow container end */
 
 /* Estilos para la pagina informativa end*/
-
