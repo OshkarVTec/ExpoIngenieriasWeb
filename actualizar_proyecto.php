@@ -94,7 +94,7 @@
    <body>
       <header class="header">
       <div class="logo">
-         <img src="IMG/logo-expo.png" alt="Logo de la pagina">
+         <a href="informativa_presentacion.html"><img src="IMG/logo-expo.png" alt="Logo de la pagina"></a>
       </div>
       <h1>Announcement Form</h1>
       </header>
@@ -182,7 +182,7 @@
 
          </table>
          <td><input value="Actualizar Proyecto" type="submit" class = "btn" ></td> 
-         <button type="button" id="cancel">Cancelar</button>
+         <a href="cuenta.html"><button type="button" id="cancel">Cancelar</button>
          <?php if (($Error != null)) ?>
 				<div class="Error"><?php echo $Error;?></div>
       </form>

@@ -75,7 +75,7 @@
    <body>
       <header class="header">
       <div class="logo">
-         <img src="IMG/logo-expo.png" alt="Logo de la pagina">
+      <a href="informativa_presentacion.html"><img src="IMG/logo-expo.png" alt="Logo de la pagina"></a>
       </div>
       <h1>Announcement Form</h1>
       </header>

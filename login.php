@@ -28,7 +28,7 @@
 			$row = $query->rowCount();
 			$fetch = $query->fetch();
 			if($row > 0) {
-				header("location: home.php");
+				header("location: informativa_presentacion.html");
 			} else{
 				$Error = 'Contraseña o correo incorrecto';
 			}
