@@ -102,7 +102,7 @@
             <table>  
                <tr>
                   <td><label for="nombre">Nombre (s)</label></td>
-                  <td><input type="text" name="nombre"></td>
+                  <td><input type="text" name="nombre" value="<?php echo !empty($nombre)?$nombre:'';?>"></td>
                </tr>
                <tr>
                   <td><label for="primer_apellido">Primer apellido</label></td>
