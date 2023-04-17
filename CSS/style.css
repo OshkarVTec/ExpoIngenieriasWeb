@@ -397,7 +397,9 @@ select:focus {
 
 /* CSS para edicion_de_expo_vista start */
 #nueva-edicion-btn {
-  margin-left: 1000px;
+  /* margin-left: 1000px; */
+  float: right;
+  margin-right: 5%;
 }
 /* CSS para edicion_de_expo_vista end */
 
