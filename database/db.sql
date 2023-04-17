@@ -3,7 +3,7 @@ CREATE TABLE r_ediciones(
 	nombre VARCHAR(30),
 	fecha_inicio DATE,
 	fecha_final DATE, 
-   activa TINYINT(1),
+   activa TINYINT(1)
 );
 
 CREATE TABLE r_usuarios(
