@@ -2,7 +2,8 @@ CREATE TABLE r_ediciones(
 	id_edicion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	nombre VARCHAR(30),
 	fecha_inicio DATE,
-	fecha_final DATE
+	fecha_final DATE, 
+   activa TINYINT(1),
 );
 
 CREATE TABLE r_usuarios(
@@ -162,19 +163,6 @@ CREATE TABLE r_proyecto_estudiantes(
    ON UPDATE CASCADE
 );
 
-CREATE TABLE r_asignacion_jueces(
-	id_asignacion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	id_juez INT,
-	id_proyecto INT,
-	FOREIGN KEY (id_juez)
-	REFERENCES r_jueces(id_juez)
-   ON DELETE CASCADE
-   ON UPDATE CASCADE,
-	FOREIGN KEY (id_proyecto)
-	REFERENCES r_proyectos(id_proyecto)
-	ON DELETE CASCADE
-   ON UPDATE CASCADE
-);
 
 CREATE TABLE r_calificaciones(
 	id_calificacion INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -184,9 +172,14 @@ CREATE TABLE r_calificaciones(
    puntos_rubro4 INT,
    comentarios TEXT,
    fecha DATETIME,
-   id_asignacion INT,
-   FOREIGN KEY (id_asignacion)
-   REFERENCES r_asignacion_jueces(id_asignacion)
+   id_proyecto INT,
+   id_juez INT,
+   FOREIGN KEY (id_proyecto)
+   REFERENCES r_proyectos(id_proyecto)
+   ON DELETE RESTRICT
+   ON UPDATE CASCADE,
+   FOREIGN KEY (id_juez)
+   REFERENCES r_jueces(id_juez)
    ON DELETE RESTRICT
    ON UPDATE CASCADE
 );
