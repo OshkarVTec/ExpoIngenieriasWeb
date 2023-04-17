@@ -94,22 +94,15 @@ CREATE TABLE r_usuarios_sin_asignar(
 );
 
 CREATE TABLE r_rubrica(
-	id_rubro INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   nombre VARCHAR(30),
+	id_rubrica INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   nombre1 VARCHAR(30),
+   nombre2 VARCHAR(30),
+   nombre3 VARCHAR(30),
+   nombre4 VARCHAR(30),
    descripcion1 TEXT,
    descripcion2 TEXT,
    descripcion3 TEXT,
    descripcion4 TEXT
-);
-
-CREATE TABLE r_puntos_rubro(
-	id_puntos_rubro INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-   id_rubro INT,
-   puntos INT,
-   FOREIGN KEY (id_rubro)
-   REFERENCES r_rubrica(id_rubro)
-   ON DELETE RESTRICT
-   ON UPDATE CASCADE
 );
 
 
@@ -194,22 +187,6 @@ CREATE TABLE r_calificaciones(
    id_asignacion INT,
    FOREIGN KEY (id_asignacion)
    REFERENCES r_asignacion_jueces(id_asignacion)
-   ON DELETE RESTRICT
-   ON UPDATE CASCADE,
-   FOREIGN KEY (puntos_rubro1)
-   REFERENCES r_puntos_rubro(id_puntos_rubro)
-   ON DELETE RESTRICT
-   ON UPDATE CASCADE,
-   FOREIGN KEY (puntos_rubro2)
-   REFERENCES r_puntos_rubro(id_puntos_rubro)
-   ON DELETE RESTRICT
-   ON UPDATE CASCADE,
-   FOREIGN KEY (puntos_rubro3)
-   REFERENCES r_puntos_rubro(id_puntos_rubro)
-   ON DELETE RESTRICT
-   ON UPDATE CASCADE,
-   FOREIGN KEY (puntos_rubro4)
-   REFERENCES r_puntos_rubro(id_puntos_rubro)
    ON DELETE RESTRICT
    ON UPDATE CASCADE
 );
