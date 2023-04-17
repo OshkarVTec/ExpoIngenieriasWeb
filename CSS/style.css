@@ -171,7 +171,7 @@ h1 {
 .firstrow {
   justify-content: space-between;
   display: flex;
-  grid-template-columns: 50% 20% 30%;
+  grid-template-columns: 50% 10% 10% 30%;
   margin-top: 10px;
   margin-bottom: 10px;
   padding-inline: 20px;
@@ -358,6 +358,11 @@ h1 {
   padding-block: 5px;
 }
 
+.videorow{ 
+  margin-left: 15px;
+  margin-bottom: 10px;
+}
+
 .login {
   display: flex;
   justify-content: space-around;
@@ -392,7 +397,9 @@ select:focus {
 
 /* CSS para edicion_de_expo_vista start */
 #nueva-edicion-btn {
-  margin-left: 1000px;
+  /* margin-left: 1000px; */
+  float: right;
+  margin-right: 5%;
 }
 /* CSS para edicion_de_expo_vista end */
 
