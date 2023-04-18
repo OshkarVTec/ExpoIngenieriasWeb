@@ -702,3 +702,28 @@ footer {
 /* Slideshow container end */
 
 /* Estilos para la pagina informativa end*/
+
+#wrapper{
+  display:flex;
+  margin-top: 20px;
+  margin-left: 4%;
+  margin-right: 4%;
+  margin-bottom: 20px;
+  border-radius: 25px;
+  padding: 20px;
+  
+}
+#w30{
+  width:10%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+#w70{
+  background: #ffffff;
+  width:90%;
+  border-radius: 25px;
+  padding: 20px;
+  box-shadow: 0px 10px 10px #b8b8b8;
+}
