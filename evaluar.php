@@ -34,7 +34,7 @@
          echo '</td>';
          echo '<td class = "two_objects_column">';
          echo ($row['puntos_rubro1'] + $row['puntos_rubro2'] + $row['puntos_rubro3'] + $row['puntos_rubro4']) / 4;
-         echo '<a class="btn" href="evaluacion.php?id='.$row['id_calificacion'].'">Editar</a>';
+         echo '<a class="btn" href="actualizar_evaluacion.php?id='.$row['id_calificacion'].'">Editar</a>';
          echo '</td>';
          echo '</tr>';
       }
@@ -59,7 +59,7 @@
          echo '<a class="link" href="informativa.html?id_proyecto='.$proyecto['id_proyecto'].'">'. $proyecto['nombre'] .'</a>';
          echo '</td>';
          echo '<td>';
-         echo '<a class="btn" href="evaluacion.php?id_proyecto='.$row['id_califiacion'].'">Evaluar</a>';
+         echo '<a class="btn" href="evaluacion.php?id='.$row['id_calificacion'].'">Evaluar</a>';
          echo '</td>';
          echo '</tr>';
       }
