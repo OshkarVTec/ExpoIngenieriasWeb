@@ -74,6 +74,7 @@
 					$q->execute(array($nombre,$primer_apellido,$segundo_apellido,$id_usuario));
 					break;
 			}
+			echo "hola";
 			Database::disconnect();
 			header("Location: login.php");
 		}
