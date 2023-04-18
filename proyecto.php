@@ -1,3 +1,28 @@
+<?php
+   $id_proyecto = null;
+	if ( !empty($_GET['id_proyecto'])) {
+		$id_proyecto = $_REQUEST['id_proyecto'];
+	}
+	require 'database.php';
+
+		$Error = null;
+
+      $pdo = Database::connect();
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
+      $q = $pdo->prepare($sql);
+      $q->execute(array($id_proyecto));
+      $row = $q->fetch(PDO::FETCH_ASSOC);
+      $name = $row['nombre'];
+      $poster = $row['poster'];
+      $video   = $row['video'];
+      $uf = $row['id_uf'];
+      $docente = $row['id_docente'];
+      $categoria = $row['id_categoria'];
+      $descripcion = $row['description'];
+      Database::disconnect();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,54 +31,67 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Proyecto</title>
    <link rel="stylesheet" href="CSS/style.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+   <script> 
+    $(function(){
+      $("#header").load("header.html"); 
+    });
+    </script> 
 </head>
 <body>
-   <header class="header">
-      <div class="logo">
-        <a href="informativa_presentacion.html">
-        <img src="IMG/logo-expo.png" alt="Logo de la pagina">
-        </a>
-      </div>
-      <a href="login.php" class="btn"><button>Log In</button></a>
-    </header>
-   
+    <div id="header"></div>
+
     <div class="container">
         <div class="firstrow">
-            <h1 class="title">Nombre del Proyecto</h1>
-            <p class ="status">Aprobado/Rechazado</p>
-            <p class ="status">UF10034</p>
-            <a href="#" class="btnP"><button>Editar</button></a>
+            <h1 class="title"><?php echo !empty($name)?$name:'';?></h1>
+            <p class ="status"><?php echo !empty($status)?$status:'';?></p>
+            <?php 
+                    $pdo = Database::connect();
+                    $sql = 'SELECT * FROM r_ufs WHERE id_uf = 1';
+                    $q = $pdo->prepare($sql);
+                    $q->execute($ufs);
+                    $ufs = $q->fetch(PDO::FETCH_ASSOC);
+                    echo '<p class ="status">'; 
+                    echo $ufs['nombre'];
+                    echo '</p>';
+                    Database::disconnect();
+                    ?>
+            <a href="actualizar_proyecto.php" class="btnP"><button>Editar</button></a>
         </div>
         <hr color="#1687A7">
         <div class="secondrow">
             <div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis interdum felis. Vivamus porta nibh a eros lobortis suscipit. Sed in sollicitudin ex. Proin mattis aliquet tempor. Vivamus aliquet magna vel enim tincidunt, vitae iaculis nisi bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis interdum felis. Vivamus porta nibh a eros lobortis suscipit. Sed in sollicitudin ex. Proin mattis aliquet tempor. Vivamus aliquet magna vel enim tincidunt, vitae iaculis nisi bibendum.
-
-                s aliquet magna vel enim tincidunt, vitae iaculis nisi bibendum.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed quis interdum felis. Vivamus porta nibh a eros lobortis suscipit. Sed in sollicitudin ex. Proin mattis aliquet tempor. Vivamus aliquet magna vel enim tincidunt, vitae iaculis nisi bibendum.
-            </p>
+            <p><?php echo !empty($descripcion)?$descripcion:'';?></p>
             <br>
             <h1>Video del Proyecto</h1>
-            <iframe src="https://drive.google.com/file/d/0BwXl-_bCkYu-Ym5zakZhaGZCRlU/preview" width="560" height="315"></iframe>
+            <iframe src=<?php echo !empty($video)?$video:'';?> width="560" height="315"></iframe>
             </div>  
-            <img src="https://drive.google.com/uc?export=view&id=1j38GdZ6kT5A71vulyNBWiST9jN_bXpzH" alt="testimage" class="img">
-        </div>
-        <div class="videorow">
+            <img src=<?php echo !empty($poster)?$poster:'';?> alt="testimage" class="img">
         </div>
         <hr color="#1687A7">
         <div class="thirdrow">
             <div>
                 <h1>Integrantes del Equipo</h1>
                 <ul>
-                    <li>Hasbulla</li>
+                    <li>!not done</li>
                     <li>Medio Metro</li>
                     <li>Natanael Cano</li>
                 </ul>
             </div>
             <div>
-                <h1>Staff Asignado</h1>
+                <h1>Docente Asignado</h1>
                 <ul>
-                    <li>Ronnie Coleman</li>
-                    <li>Checo Perez</li>
+                    <?php 
+                    $pdo = Database::connect();
+                    $sql = 'SELECT * FROM r_docentes WHERE id_docente = 1';
+                    $q = $pdo->prepare($sql);
+                    $q->execute($docentes);
+                    $docentes = $q->fetch(PDO::FETCH_ASSOC);
+                    echo '<li>'; 
+                    echo $docentes['nombre'] . ' ' . $docentes['apellidoP'] . ' ' . $docentes['apellidoM'];
+                    echo '</li>';
+                    Database::disconnect();
+                    ?>
                 </ul>
             </div>
             <div>
@@ -66,6 +104,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>
