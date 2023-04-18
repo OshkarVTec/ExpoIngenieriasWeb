@@ -1,3 +1,18 @@
+<?php
+  echo 'Hola mundoo';
+  include 'database.php';
+  $pdo = Database::connect();
+
+  if($pdo){
+    echo 'Conexion exitosaaa';
+  }
+  $sql = 'SELECT * FROM r_ediciones ORDER BY id_edicion';
+  foreach ($pdo->query($sql) as $row) {
+    
+  }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
