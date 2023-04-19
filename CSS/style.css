@@ -731,9 +731,10 @@ footer {
 }
 #w30{
   width:10%;
-  align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 #w70{
