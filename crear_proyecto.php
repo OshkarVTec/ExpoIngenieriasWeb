@@ -154,8 +154,10 @@
             </tr>
 
          </table>
-         <td><input value="Registrar Proyecto" type="submit" class = "btn" ></td> 
-         <button type="button" id="cancel">Cancelar</button>
+         <div>
+            <button class="cancel">Cancelar</button>
+            <input value="Registrar Proyecto" type="submit" class = "btn">
+         </div>
          <?php if (($Error != null)) ?>
 				<div class="Error"><?php echo $Error;?></div>
       </form>
