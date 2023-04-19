@@ -144,8 +144,8 @@
 	<div class="Error"><?php echo $Error;?></div>
   </div>
   <div id="w30">  
-   <input value="Guardar" type="submit" class = "btn" >
-   
+      <input value="Guardar" type="submit" class = "btn">
+      <button class="cancel">Cancelar</button>
   </div>
 </div>
 </form>
