@@ -61,7 +61,7 @@
 			$q = $pdo->prepare($sql);
 			$q->execute(array($poster,$descripcion, $name, $video, $uf, $docente, $categoria, $id_proyecto));
 			Database::disconnect();
-			header("Location: ver_proyectos_crud.php");
+			header("Location: informativa_estudiante.html");
 		}
    }
    else{
@@ -183,7 +183,7 @@
          </table>
          <div>
             <button class="cancel" onclick="history.go(-1);">Cancelar</button>
-            <input value="Actualizar Proyecto" type="submit" class = "btn" >
+            <input value="Actualizar " type="submit" class = "btn">
          </div>
          <?php if (($Error != null)) ?>
 				<div class="Error"><?php echo $Error;?></div>

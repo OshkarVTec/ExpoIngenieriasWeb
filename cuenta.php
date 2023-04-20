@@ -64,7 +64,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
    <script> 
     $(function(){
-      $("#header").load("header.html"); 
+      $("#header").load("header_estudiante.html"); 
     });
     </script> 
 </head>

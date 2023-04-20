@@ -34,7 +34,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
    <script> 
     $(function(){
-      $("#header").load("header.html"); 
+      $("#header").load("header_estudiante.html"); 
     });
     </script> 
 </head>
@@ -61,7 +61,9 @@
         <hr color="#1687A7">
         <div class="secondrow">
             <div>
+                <div class="descripcion">
             <p><?php echo !empty($descripcion)?$descripcion:'';?></p>
+            </div>
             <br>
             <h1>Video del Proyecto</h1>
             <iframe src=<?php echo !empty($video)?$video:'';?> width="560" height="315"></iframe>
