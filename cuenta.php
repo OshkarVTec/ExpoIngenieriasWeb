@@ -139,8 +139,9 @@
             echo    '<li>';
                     echo '<a href="proyecto.php?id_proyecto='.$proyecto.'" class="btnP"><button>Editar</button></a>';
                 }
+            echo '</li>';
                     ?>
-            </li>
+
             </ul>
             <br>
         </div>
