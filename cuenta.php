@@ -134,8 +134,11 @@
                     echo $proyectos;
                     Database::disconnect();
                 ?>
-            </p></li>
-            <li><a href="actualizar_proyecto.php" class="btnP"><button>Editar</button></a></li>
+            </a></li>
+            <li>
+                <?php 
+                    echo '<a href="proyecto.php?id_proyecto='.$proyecto.'" class="btnP"><button>Editar</button></a>'?>
+            </li>
             </ul>
             <br>
         </div>

@@ -73,9 +73,23 @@
             <div>
                 <h1>Integrantes del Equipo</h1>
                 <ul>
-                    <li>!not done</li>
-                    <li>Medio Metro</li>
-                    <li>Natanael Cano</li>
+                <?php   
+                    $pdo = Database::connect();
+                    $sql = 'SELECT * FROM r_proyecto_estudiantes WHERE id_proyecto = ?';
+                    $q = $pdo->prepare($sql);
+                    $q->execute(array($id_proyecto));
+                    $p_estudiantes = $q->fetch(PDO::FETCH_ASSOC);
+                    foreach ($q as $row){
+                        $sql = 'SELECT * FROM r_estudiantes WHERE matricula = ?';
+                        $w = $pdo->prepare($sql);
+                        $w->execute(array($row['matricula']));
+                        $u_name = $w->fetch(PDO::FETCH_ASSOC);
+                        echo '<li>';
+                        echo $u_name['nombre'] .' ' . $u_name['apellidoP'] . ' ' . $u_name['apellidoM'];
+                        echo '</li>';
+                        Database::disconnect();
+                    }
+                ?>
                 </ul>
             </div>
             <div>
