@@ -83,9 +83,9 @@
                 <ul>
                     <?php 
                     $pdo = Database::connect();
-                    $sql = 'SELECT * FROM r_docentes WHERE id_docente = 1';
+                    $sql = 'SELECT * FROM r_docentes WHERE id_docente = ?';
                     $q = $pdo->prepare($sql);
-                    $q->execute($docentes);
+                    $q->execute(array($id_proyecto));
                     $docentes = $q->fetch(PDO::FETCH_ASSOC);
                     echo '<li>'; 
                     echo $docentes['nombre'] . ' ' . $docentes['apellidoP'] . ' ' . $docentes['apellidoM'];
