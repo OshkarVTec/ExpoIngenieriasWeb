@@ -47,16 +47,16 @@
             <p class ="status"><?php echo !empty($status)?$status:'';?></p>
             <?php 
                     $pdo = Database::connect();
-                    $sql = 'SELECT * FROM r_ufs WHERE id_uf = 1';
+                    $sql = 'SELECT * FROM r_ufs WHERE id_uf = ?';
                     $q = $pdo->prepare($sql);
-                    $q->execute($ufs);
+                    $q->execute(array($uf));
                     $ufs = $q->fetch(PDO::FETCH_ASSOC);
                     echo '<p class ="status">'; 
                     echo $ufs['nombre'];
                     echo '</p>';
                     Database::disconnect();
                     ?>
-            <a href="actualizar_proyecto.php" class="btnP"><button>Editar</button></a>
+            <?php echo '<a href="actualizar_proyecto.php?id_proyecto='.$id_proyecto.'" class="btnP"><button>Editar</button></a>'?>
         </div>
         <hr color="#1687A7">
         <div class="secondrow">
