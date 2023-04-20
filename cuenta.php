@@ -113,12 +113,14 @@
         </div>
 
         <br>
-        <p> Mi Proyecto</p>
-        <hr color="#1687A7" width="50%">
-        <div class="cuentabig">
-            <ul class="cuentalast">
-            <li><p>
-            <?php   
+        <?php
+            if($rol == 'Estudiante'){ 
+            echo '<p> Mi Proyecto</p>';
+            echo '<hr color="#1687A7" width="50%">';
+            echo    '<div class="cuentabig">';
+            echo    '<ul class="cuentalast">';
+            echo    '<li><p>';
+
                     $pdo = Database::connect();
                     $sql = 'SELECT * FROM r_proyecto_estudiantes WHERE matricula = ?';
                     $q = $pdo->prepare($sql);
@@ -133,12 +135,13 @@
                     $proyectos = $p_name['nombre'];
                     echo $proyectos;
                     Database::disconnect();
-                ?>
-            </a></li>
-            <li>
-                <?php 
-                    echo '<a href="proyecto.php?id_proyecto='.$proyecto.'" class="btnP"><button>Editar</button></a>'?>
-            </li>
+            echo    '</a></li>';
+            echo    '<li>';
+                    echo '<a href="proyecto.php?id_proyecto='.$proyecto.'" class="btnP"><button>Editar</button></a>';
+                }
+            echo '</li>';
+                    ?>
+
             </ul>
             <br>
         </div>
