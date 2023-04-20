@@ -78,8 +78,8 @@
                     $sql = 'SELECT * FROM r_proyecto_estudiantes WHERE id_proyecto = ?';
                     $q = $pdo->prepare($sql);
                     $q->execute(array($id_proyecto));
-                    $p_estudiantes = $q->fetch(PDO::FETCH_ASSOC);
-                    foreach ($q as $row){
+                    $p_estudiantes = $q->fetchAll(PDO::FETCH_ASSOC);
+                    foreach ($p_estudiantes as $row){
                         $sql = 'SELECT * FROM r_estudiantes WHERE matricula = ?';
                         $w = $pdo->prepare($sql);
                         $w->execute(array($row['matricula']));
