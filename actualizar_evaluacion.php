@@ -37,8 +37,23 @@
 			header("Location: evaluar.php");
 		}
    }
+   else{
+      $pdo = Database::connect();
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $sql = 'SELECT *  FROM r_calificaciones WHERE id_calificacion = ?';
+      $q = $pdo->prepare($sql);
+      $q->execute(array($id_calificacion));
+      $calificacion = $q->fetch(PDO::FETCH_ASSOC);
+      $r1 = $calificacion['puntos_rubro1'];
+      $r2 = $calificacion['puntos_rubro2'];
+      $r3   = $calificacion['puntos_rubro3'];
+      $r4 = $calificacion['puntos_rubro4'];
+      $comentarios = $calificacion['comentarios'];
+      Database::disconnect();
+   }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

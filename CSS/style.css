@@ -302,6 +302,22 @@ h1 {
   text-decoration: none;
 }
 
+.cancel {
+  color: var(--wordaccentbg1R);
+  padding: 6px 10px;
+  background: rgb(204, 204, 204);
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+.cancel:hover {
+  /*background-color: var(--wordaccent2R);
+  color: var(--wordaccentbg1R); */
+  transform: scale(1.1);
+}
+
 /* styles for a and button end*/
 
 .btn:hover {
@@ -715,9 +731,10 @@ footer {
 }
 #w30{
   width:10%;
-  align-items: center;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 #w70{

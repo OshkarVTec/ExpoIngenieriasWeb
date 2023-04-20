@@ -181,8 +181,10 @@
             </tr>
 
          </table>
-         <td><input value="Actualizar Proyecto" type="submit" class = "btn" ></td> 
-         <a href="cuenta.html"><button type="button" id="cancel">Cancelar</button>
+         <div>
+            <button class="cancel" onclick="history.go(-1);">Cancelar</button>
+            <input value="Actualizar Proyecto" type="submit" class = "btn" >
+         </div>
          <?php if (($Error != null)) ?>
 				<div class="Error"><?php echo $Error;?></div>
       </form>

@@ -44,8 +44,10 @@ VALUES ('Rubric Item 1', 'Rubric Item 2', 'Rubric Item 3', 'Rubric Item 4', 'Des
 
 INSERT INTO r_proyectos (poster, description, estatus, nombre, video, fecha_registro, id_uf, id_docente, id_edicion, id_categoria)
 VALUES ('https://example.com/poster.png', 'This is a project about machine learning', true, 'Machine Learning Project', 'https://example.com/video.mp4', NOW(), 'UF001', 2, 1, 2),
-       ('https://example.com/another-poster.png', 'This is another project about machine learning', true, 'Another Machine Learning Project', 'https://example.com/another-video.mp4', NOW(), 'UF002', 1, 2, 3);
+       ('https://example.com/another-poster.png', 'This is another project about machine learning', true, 'Another Machine Learning Project', 'https://example.com/another-video.mp4', NOW(), 'UF002', 1, 2, 3),
+       ('https://example.com/project1.png', 'This is a third project about machine learning', true, 'Machine Learning Project', 'https://example.com/project1.mp4', NOW(), 'UF001', 2, 1, 3);
 
 INSERT INTO r_calificaciones (puntos_rubro1, puntos_rubro2, puntos_rubro3, puntos_rubro4, comentarios, fecha, id_proyecto, id_juez) 
 VALUES (8, 9, 7, 8, 'Buen trabajo, pero hay que mejorar en algunas áreas', '2022-05-01 10:30:00', 1, 1),
        (6, 7, 9, 8, 'Excelente trabajo, pero la presentación podría mejorar', '2022-05-02 11:45:00', 2, 2);
+       (null, null, null, null, '', '2022-05-02 11:45:00', 3, 2);
