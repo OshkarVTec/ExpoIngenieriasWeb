@@ -28,9 +28,17 @@
          $q = $pdo->prepare($sql);
          $q->execute(array($row['id_proyecto']));
          $proyecto = $q->fetch(PDO::FETCH_ASSOC);
+         $sql = 'SELECT * FROM r_niveles_desarrollo WHERE id_nivel = ?';
+         $q = $pdo->prepare($sql);
+         $q->execute(array($proyecto['id_nivel']));
+         $nivel = $q->fetch(PDO::FETCH_ASSOC);
          echo '<tr>';
          echo '<td>';
-         echo '<a class="link" href="proyecto.php?id_proyecto='.$proyecto['id_proyecto'].'">'. $proyecto['nombre'] .'</a>';
+         
+         
+         
+         
+         echo '<a class="link" href="proyecto.php?id='.$proyecto['id_proyecto'].'">'. $proyecto['nombre'] .'</a>';
          echo '</td>';
          echo '<td class = "two_objects_column">';
          echo ($row['puntos_rubro1'] + $row['puntos_rubro2'] + $row['puntos_rubro3'] + $row['puntos_rubro4']) / 4;
@@ -54,9 +62,14 @@
          $q = $pdo->prepare($sql);
          $q->execute(array($row['id_proyecto']));
          $proyecto = $q->fetch(PDO::FETCH_ASSOC);
+         $sql = 'SELECT * FROM r_niveles_desarrollo WHERE id_nivel = ?';
+         $q = $pdo->prepare($sql);
+         $q->execute(array($proyecto['id_nivel']));
+         $nivel = $q->fetch(PDO::FETCH_ASSOC);
          echo '<tr>';
          echo '<td>';
          echo '<a class="link" href="informativa.html?id_proyecto='.$proyecto['id_proyecto'].'">'. $proyecto['nombre'] .'</a>';
+         echo '<p>Nivel de desarrollo: '.$nivel['nombre'].'</p>';
          echo '</td>';
          echo '<td>';
          echo '<a class="btn" href="evaluacion.php?id='.$row['id_calificacion'].'">Evaluar</a>';
