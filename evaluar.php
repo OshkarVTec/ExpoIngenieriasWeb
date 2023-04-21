@@ -34,11 +34,8 @@
          $nivel = $q->fetch(PDO::FETCH_ASSOC);
          echo '<tr>';
          echo '<td>';
-         
-         
-         
-         
          echo '<a class="link" href="proyecto.php?id='.$proyecto['id_proyecto'].'">'. $proyecto['nombre'] .'</a>';
+         echo '<p>Nivel de desarrollo: '.$nivel['nombre'].'</p>';
          echo '</td>';
          echo '<td class = "two_objects_column">';
          echo ($row['puntos_rubro1'] + $row['puntos_rubro2'] + $row['puntos_rubro3'] + $row['puntos_rubro4']) / 4;
