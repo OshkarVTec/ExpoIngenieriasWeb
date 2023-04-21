@@ -13,6 +13,7 @@
       $q = $pdo->prepare($sql);
       $q->execute(array($id_proyecto));
       $row = $q->fetch(PDO::FETCH_ASSOC);
+      $status = $row['estatus'];
       $name = $row['nombre'];
       $poster = $row['poster'];
       $video   = $row['video'];
@@ -44,7 +45,14 @@
     <div class="container">
         <div class="firstrow">
             <h1 class="title"><?php echo !empty($name)?$name:'';?></h1>
-            <p class ="status"><?php echo !empty($status)?$status:'';?></p>
+            <p class ="status"><?php 
+                if($status == 0){
+                    echo 'No aprobado';
+                }
+                else{
+                    echo 'Aprobado';
+                }    
+                    ?><p>
             <?php 
                     $pdo = Database::connect();
                     $sql = 'SELECT * FROM r_ufs WHERE id_uf = ?';
@@ -56,7 +64,11 @@
                     echo '</p>';
                     Database::disconnect();
                     ?>
-            <?php echo '<a href="actualizar_proyecto.php?id_proyecto='.$id_proyecto.'" class="btnP"><button>Editar</button></a>'?>
+            <?php 
+            if($status == 0){
+                echo '<a href="actualizar_proyecto.php?id_proyecto='.$id_proyecto.'" class="btnP"><button>Editar</button></a>';
+            }
+            ?>
         </div>
         <hr color="#1687A7">
         <div class="secondrow">
@@ -101,7 +113,7 @@
                     $pdo = Database::connect();
                     $sql = 'SELECT * FROM r_docentes WHERE id_docente = ?';
                     $q = $pdo->prepare($sql);
-                    $q->execute(array($id_proyecto));
+                    $q->execute(array($docente));
                     $docentes = $q->fetch(PDO::FETCH_ASSOC);
                     echo '<li>'; 
                     echo $docentes['nombre'] . ' ' . $docentes['apellidoP'] . ' ' . $docentes['apellidoM'];
