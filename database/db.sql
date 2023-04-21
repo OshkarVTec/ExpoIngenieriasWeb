@@ -6,6 +6,12 @@ CREATE TABLE r_ediciones(
    activa TINYINT(1)
 );
 
+CREATE TABLE r_carreras(
+	id_carrera INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	nombre VARCHAR(30)
+);
+
+
 CREATE TABLE r_usuarios(
    id_usuario INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
    correo VARCHAR(30),
@@ -17,14 +23,14 @@ CREATE TABLE r_estudiantes(
 	nombre VARCHAR(30),
 	apellidoP VARCHAR(30),
    apellidoM VARCHAR(30),
-	id_edicion INT,
    id_usuario INT,
-	FOREIGN KEY (id_edicion)
-	REFERENCES r_ediciones(id_edicion)
-	ON DELETE RESTRICT
-   ON UPDATE CASCADE,
+   id_carrera INT,
    FOREIGN KEY (id_usuario)
 	REFERENCES r_usuarios(id_usuario)
+	ON DELETE CASCADE
+   ON UPDATE CASCADE,
+   FOREIGN KEY (id_carrera)
+	REFERENCES r_carreras(id_carrera)
 	ON DELETE CASCADE
    ON UPDATE CASCADE
 );
@@ -34,12 +40,7 @@ CREATE TABLE r_docentes(
 	nombre VARCHAR(30),
 	apellidoP VARCHAR(30),
    apellidoM VARCHAR(30),
-   id_edicion INT,
    id_usuario INT,
-	FOREIGN KEY (id_edicion)
-	REFERENCES r_ediciones(id_edicion)
-	ON DELETE RESTRICT
-   ON UPDATE CASCADE,
    FOREIGN KEY (id_usuario)
 	REFERENCES r_usuarios(id_usuario)
 	ON DELETE CASCADE
@@ -118,6 +119,10 @@ CREATE TABLE r_categorias(
    nombre VARCHAR(50)
 );
 
+CREATE TABLE r_niveles_desarrollo(
+	id_nivel INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+   nombre VARCHAR(50)
+);
 
 CREATE TABLE r_proyectos(
    id_proyecto INT NOT NULL AUTO_INCREMENT PRIMARY KEY,	
@@ -131,6 +136,8 @@ CREATE TABLE r_proyectos(
    id_docente INT,
    id_edicion INT,
    id_categoria INT,
+   id_nivel INT,
+   premio INT, #1-3 para ganadores, 0 para No ganador
    FOREIGN KEY (id_uf)
    REFERENCES r_ufs(id_uf)
    ON DELETE RESTRICT
@@ -145,6 +152,10 @@ CREATE TABLE r_proyectos(
    ON UPDATE CASCADE,
    FOREIGN KEY (id_categoria)
    REFERENCES r_categorias(id_categoria)
+   ON DELETE RESTRICT
+   ON UPDATE CASCADE,
+   FOREIGN KEY (id_nivel)
+   REFERENCES r_niveles_desarrollo(id_nivel)
    ON DELETE RESTRICT
    ON UPDATE CASCADE
 );
