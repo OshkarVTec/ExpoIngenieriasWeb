@@ -68,7 +68,7 @@
          $nivel = $q->fetch(PDO::FETCH_ASSOC);
          echo '<tr>';
          echo '<td>';
-         echo '<a class="link" href="informativa.html?id_proyecto='.$proyecto['id_proyecto'].'">'. $proyecto['nombre'] .'</a>';
+         echo '<a class="link" href="proyecto.php?id_proyecto='.$proyecto['id_proyecto'].'">'. $proyecto['nombre'] .'</a>';
          echo '<p>Nivel de desarrollo: '.$nivel['nombre'].'</p>';
          echo '</td>';
          echo '<td>';
