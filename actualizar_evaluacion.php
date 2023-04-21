@@ -145,7 +145,7 @@
   </div>
   <div id="w30">  
       <input value="Guardar" type="submit" class = "btn">
-      <button class="cancel">Cancelar</button>
+      <button class="cancel" onclick="history.go(-1);">Cancelar</button>
   </div>
 </div>
 </form>
