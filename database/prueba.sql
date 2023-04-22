@@ -51,7 +51,8 @@ INSERT INTO r_proyectos (poster, description, estatus, nombre, video, fecha_regi
 VALUES ('https://example.com/poster.png', 'This is a project about machine learning', true, 'Machine Learning Project', 'https://example.com/video.mp4', NOW(), 'UF001', 2, 1, 2,1,0),
        ('https://example.com/another-poster.png', 'This is another project about machine learning', true, 'Another Machine Learning Project', 'https://example.com/another-video.mp4', NOW(), 'UF002', 1, 2, 3,1,0),
        ('https://example.com/project1.png', 'This is a third project about machine learning', true, 'Third Learning Project', 'https://example.com/project1.mp4', NOW(), 'UF001', 2, 1, 3,2,0),
-       ('https://example.com/project2.png', 'This is a fourth project about machine learning', true, 'Fourth Learning Project', 'https://example.com/project1.mp4', NOW(), 'UF002', 2, 1, 3,3,0);
+       ('https://example.com/project2.png', 'This is a fourth project about machine learning', true, 'Fourth Learning Project', 'https://example.com/project1.mp4', NOW(), 'UF002', 2, 1, 3,3,0),
+       ('https://example.com/project2.png', 'This is a fifth project about machine learning', false, 'Fifth Learning Project', 'https://example.com/project1.mp4', NOW(), 'UF002', 2, 1, 3,3,0);
 
 INSERT INTO r_calificaciones (puntos_rubro1, puntos_rubro2, puntos_rubro3, puntos_rubro4, comentarios, fecha, id_proyecto, id_juez) 
 VALUES (8, 9, 7, 8, 'Buen trabajo, pero hay que mejorar en algunas áreas', '2022-05-01 10:30:00', 1, 1),
