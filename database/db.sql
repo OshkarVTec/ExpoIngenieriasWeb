@@ -187,7 +187,7 @@ CREATE TABLE r_calificaciones(
    id_juez INT,
    FOREIGN KEY (id_proyecto)
    REFERENCES r_proyectos(id_proyecto)
-   ON DELETE RESTRICT
+   ON DELETE CASCADE
    ON UPDATE CASCADE,
    FOREIGN KEY (id_juez)
    REFERENCES r_jueces(id_juez)
