@@ -1,5 +1,16 @@
 <?php
    session_start();
+   $_SESSION["id_usuario"];
+   include 'database.php';
+   $pdo = Database::connect();
+   $sql = 'SELECT *  FROM r_jueces WHERE id_usuario = ?';
+   $q = $pdo->prepare($sql);
+   $q->execute(array($_SESSION['id_usuario']));
+   if($q->rowCount() == 0){
+      header('Location:informativa_presentacion.html');
+   }
+   $id_juez = $q->fetch(PDO::FETCH_ASSOC)['id_juez'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,8 +33,6 @@
    <div class = "container">
       <table class="general">  
    <?php
-      include 'database.php';
-      $id_juez = 1;
       $pdo = Database::connect();
       $sql = 'SELECT *  FROM r_calificaciones WHERE puntos_rubro1 is not null AND puntos_rubro2 is not null AND puntos_rubro3 is not null AND puntos_rubro4 is not null AND id_juez = ?';
       $q = $pdo->prepare($sql);
