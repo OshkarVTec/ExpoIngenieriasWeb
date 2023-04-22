@@ -1,4 +1,6 @@
-
+<?php
+   session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,9 +23,13 @@
       <table class="general">  
    <?php
       include 'database.php';
+      $id_juez = 1;
       $pdo = Database::connect();
-      $sql = 'SELECT *  FROM r_calificaciones WHERE puntos_rubro1 is not null AND puntos_rubro2 is not null AND puntos_rubro3 is not null AND puntos_rubro4 is not null';
-      foreach ($pdo->query($sql) as $row) {
+      $sql = 'SELECT *  FROM r_calificaciones WHERE puntos_rubro1 is not null AND puntos_rubro2 is not null AND puntos_rubro3 is not null AND puntos_rubro4 is not null AND id_juez = ?';
+      $q = $pdo->prepare($sql);
+      $q->execute(array($id_juez));
+      $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);
+      foreach ($calificaciones as $row) {
          $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
          $q = $pdo->prepare($sql);
          $q->execute(array($row['id_proyecto']));
@@ -53,8 +59,11 @@
       <table class="general">  
       <?php
       $pdo = Database::connect();
-      $sql = 'SELECT *  FROM r_calificaciones WHERE puntos_rubro1 is null OR puntos_rubro2 is null OR puntos_rubro3 is null OR puntos_rubro4 is null';
-      foreach ($pdo->query($sql) as $row) {
+      $sql = 'SELECT *  FROM r_calificaciones WHERE (puntos_rubro1 is null OR puntos_rubro2 is null OR puntos_rubro3 is null OR puntos_rubro4 is null) AND id_juez = ?';
+      $q = $pdo->prepare($sql);
+      $q->execute(array($id_juez));
+      $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);
+      foreach ($calificaciones as $row) {
          $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
          $q = $pdo->prepare($sql);
          $q->execute(array($row['id_proyecto']));
