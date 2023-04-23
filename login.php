@@ -1,5 +1,5 @@
 <?php
-
+   session_start(); // Start the session
 	require 'database.php';
 
 		$Error = null;
@@ -22,16 +22,53 @@
 		if ($valid) {
 			$pdo = Database::connect();
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "SELECT * FROM r_usuarios WHERE correo=? AND contrasenia=?";
+
+         // $sql = "SELECT r_usuarios.*, r_administradores.id_administrador 
+         // FROM r_usuarios 
+         // LEFT JOIN r_administradores ON r_usuarios.id_usuario = r_administradores.id_usuario
+         // WHERE correo=? AND contrasenia=?";
+
+         $sql = "SELECT 
+         r_usuarios.*,
+         r_administradores.id_administrador,
+         r_jueces.id_juez,
+         r_docentes.id_docente,
+         r_estudiantes.matricula
+         FROM r_usuarios 
+         LEFT JOIN r_administradores ON r_usuarios.id_usuario = r_administradores.id_usuario
+         LEFT JOIN r_jueces ON r_usuarios.id_usuario = r_jueces.id_usuario
+         LEFT JOIN r_docentes ON r_usuarios.id_usuario = r_docentes.id_usuario
+         LEFT JOIN r_estudiantes ON r_usuarios.id_usuario = r_estudiantes.id_usuario
+         WHERE correo=? AND contrasenia=?";
+
 			$query = $pdo->prepare($sql);
 			$query->execute(array($correo,$contrasenia));
+
 			$row = $query->rowCount();
 			$fetch = $query->fetch();
-			if($row > 0) {
-				header("location: informativa_presentacion.html");
-			} else{
-				$Error = 'Contraseña o correo incorrecto';
-			}
+
+         if($row > 0) {
+            //checa si es admin
+            if ($fetch['id_administrador'] != null) {
+               $_SESSION['admin'] = 1;
+               header("location: informativa_presentacion.html");
+            //checa si es juez
+           } if ($fetch['id_juez'] != null) {
+               $_SESSION['juez'] = 1;
+               header("location: informativa_juez.html");
+            //checa si es profesor
+           } if ($fetch['id_docente'] != null) {
+               $_SESSION['docente'] = 1;
+               header("location: informativa_juez.html");
+            //checa si es estudiante
+           } if ($fetch['matricula'] != null) {
+               $_SESSION['estudiante'] = 1;
+               header("location: informativa_estudiante.html");
+           }
+           $_SESSION['id_usuario'] = $fetch['id_usuario'];
+        } else{
+            $Error = 'Contraseña o correo incorrecto';
+        }
          Database::disconnect();
 		}
 	}

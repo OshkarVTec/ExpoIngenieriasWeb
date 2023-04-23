@@ -28,7 +28,7 @@ function startSlideTimer() {
   slideTimer = setTimeout(function () {
     plusSlides(1);
     startSlideTimer();
-  }, 5000); // Change this value to set the time between automatic slide changes
+  }, 10000); // Change this value to set the time between automatic slide changes
 }
 
 function showSlides(n) {
