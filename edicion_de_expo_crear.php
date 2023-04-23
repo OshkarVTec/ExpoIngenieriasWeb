@@ -32,39 +32,6 @@
 		}
 
 
-  //   if($valid){
-  //     $pdo = Database::connect();
-	// 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-  //     $sql = "SELECT COUNT(*) as count FROM r_ediciones WHERE nombre = ?";
-  //     $q = $pdo->prepare($sql);
-  //     $q->execute(array($nombre));
-  //     $result = $q->fetch(PDO::FETCH_ASSOC);
-  //     if($result['count'] > 0) {
-  //         $ErrorNombre = 'El nombre ya existe. Introduce un nombre válido.';
-  //         $valid = false;
-  //     }
-  //   }
-
-	// 	// insert data
-	// 	if ($valid) {
-
-      
-
-  //     $sql = "INSERT INTO r_ediciones (id_edicion, nombre, fecha_inicio, fecha_final, activa)
-  //     values (NULL, ?, ?, ?, ?)";
-	// 		$q = $pdo->prepare($sql);
-	// 		$q->execute(array($nombre ,$fecha_inicio, $fecha_final, $activa));
-
-  //     if($activa == 1){
-  //       $sql = "UPDATE r_ediciones SET activa = 0 WHERE id_edicion != ?";
-  //       $q = $pdo->prepare($sql);
-  //       $q->execute(array($pdo->lastInsertId()));
-  //     }
-  //     $exito = '¡Nueva edición creada exitosamente!';
-	// 		Database::disconnect();
-	// 		// header("Location: edicion_de_expo_vista.php");
-	// 	}
-  //  }
 
   if($valid){
     $pdo = Database::connect();
