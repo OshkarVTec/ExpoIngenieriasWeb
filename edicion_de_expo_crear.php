@@ -17,34 +17,85 @@
 		$valid = true;
 
 		if (empty($nombre)) {
-			$Error = 'Introduce un nombre válido.';
+			$ErrorNombre = 'Introduce un nombre válido.';
 			$valid = false;
 		}
 
 		if (empty($fecha_inicio)) {
-			$Error = 'Introduce una fecha de inicio.';
+			$ErrorFechaInicio = 'Introduce una fecha de inicio.';
 			$valid = false;
 		}
 
     if (empty($fecha_final)) {
-			$Error = 'Introduce una fecha de cierre.';
+			$ErrorFechaFinal = 'Introduce una fecha de cierre.';
 			$valid = false;
 		}
 
-		// insert data
-		if ($valid) {
-			$pdo = Database::connect();
-			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-      $sql = "INSERT INTO r_ediciones (id_edicion, nombre, fecha_inicio, fecha_final, activa)
-      values (NULL, ?, ?, ?, ?)";
-			$q = $pdo->prepare($sql);
-			$q->execute(array($nombre ,$fecha_inicio, $fecha_final, $activa));
-      echo 'Nueva edición creada exitosamente!';
-			Database::disconnect();
-			// header("Location: edicion_de_expo_vista.php");
-		}
-   }
+  //   if($valid){
+  //     $pdo = Database::connect();
+	// 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+  //     $sql = "SELECT COUNT(*) as count FROM r_ediciones WHERE nombre = ?";
+  //     $q = $pdo->prepare($sql);
+  //     $q->execute(array($nombre));
+  //     $result = $q->fetch(PDO::FETCH_ASSOC);
+  //     if($result['count'] > 0) {
+  //         $ErrorNombre = 'El nombre ya existe. Introduce un nombre válido.';
+  //         $valid = false;
+  //     }
+  //   }
+
+	// 	// insert data
+	// 	if ($valid) {
+
+      
+
+  //     $sql = "INSERT INTO r_ediciones (id_edicion, nombre, fecha_inicio, fecha_final, activa)
+  //     values (NULL, ?, ?, ?, ?)";
+	// 		$q = $pdo->prepare($sql);
+	// 		$q->execute(array($nombre ,$fecha_inicio, $fecha_final, $activa));
+
+  //     if($activa == 1){
+  //       $sql = "UPDATE r_ediciones SET activa = 0 WHERE id_edicion != ?";
+  //       $q = $pdo->prepare($sql);
+  //       $q->execute(array($pdo->lastInsertId()));
+  //     }
+  //     $exito = '¡Nueva edición creada exitosamente!';
+	// 		Database::disconnect();
+	// 		// header("Location: edicion_de_expo_vista.php");
+	// 	}
+  //  }
+
+  if($valid){
+    $pdo = Database::connect();
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //Checa si el nombre ya esta repetido
+    $sql = "SELECT COUNT(*) as count FROM r_ediciones WHERE nombre = ?";
+    $q = $pdo->prepare($sql);
+    $q->execute(array($nombre));
+    $result = $q->fetch(PDO::FETCH_ASSOC);
+    if($result['count'] > 0) {
+        $ErrorNombre = 'El nombre ya existe. Introduce un nuevo nombre único.';
+        $valid = false;
+    } else {
+        // insert data
+        $sql = "INSERT INTO r_ediciones (id_edicion, nombre, fecha_inicio, fecha_final, activa)
+        values (NULL, ?, ?, ?, ?)";
+        $q = $pdo->prepare($sql);
+        $q->execute(array($nombre ,$fecha_inicio, $fecha_final, $activa));
+
+        //Si se inserta una fila nueva donde activa es '1', las demas se resetean a 0
+        if($activa == 1){
+          $sql = "UPDATE r_ediciones SET activa = 0 WHERE id_edicion != ?";
+          $q = $pdo->prepare($sql);
+          $q->execute(array($pdo->lastInsertId()));
+        }
+        $exito = '¡Nueva edición creada exitosamente!';
+    }
+    Database::disconnect();
+    // header("Location: edicion_de_expo_vista.php");
+  }
+}
  
 ?>
 
@@ -70,8 +121,18 @@
     <!-- <p>aaaaaa</p> -->
     <!-- <p><br><br><br><br></p> -->
 
+
+
     <div id="forms-editar-edicion-expo" class="container">
       <form action="edicion_de_expo_crear.php" method=POST>
+
+
+        <?php 
+          if(isset($valid) && isset($exito)){
+            echo '<div class="Sucess">' . $exito . '</div>';
+          }
+        ?>
+
         <div id="nombre">
           <label for="input-nombre">Nombre</label>
           <input
@@ -84,16 +145,35 @@
           />
         </div>
 
+        <?php 
+          if (isset($ErrorNombre)) {
+            echo '<div class="Error">' . $ErrorNombre . '</div>';
+          }
+        ?>
+
+
         <div id="fecha-inicio">
           <label for="fecha_inicio">Fecha de inicio de inscripciones</label>
           <input type="date" id="fecha_inicio" name="fecha_inicio" value="<?php echo !empty($fecha_inicio)?$fecha_inicio:'';?>"/>
           
         </div>
 
+        <?php 
+          if (isset($ErrorFechaInicio)) {
+            echo '<div class="Error">' . $ErrorFechaInicio . '</div>';
+          }
+        ?>
+
         <div id="fecha-fin">
           <label for="fecha_final">Fecha fin de inscripciones</label>
           <input type="date" id="fecha_final" name="fecha_final" value="<?php echo !empty($fecha_final)?$fecha_final:'';?>" />
         </div>
+
+        <?php 
+          if (isset($ErrorFechaFinal)) {
+            echo '<div class="Error">' . $ErrorFechaFinal . '</div>';
+          }
+        ?>
 
         <div id="estatus-div">
           <label for="activa">Activa</label>
@@ -110,9 +190,9 @@
 
             <a href="edicion_de_expo_vista.php">
             <button type="button" class="btn"  id="btn-cancelar">Cancelar</button>
-            <?php if (($Error != null)) ?>
-				    <div class="Error"><?php echo $Error;?></div>
+
           </div>
+
         </div>
       </form>
     </div>

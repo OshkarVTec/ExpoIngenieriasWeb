@@ -37,12 +37,13 @@
               $estado = 'Activo';
             }
               echo '<tr>';
-              echo '<td><a class="link" href="proyecto.html">'.$row['nombre'].'</a></td>';
+              echo '<td><a class="link-edicion" href="proyecto.html">'.$row['nombre'].'</a></td>';
               echo '<td class="two_objects_column">';
               echo '<div>'.$estado.'</div>';
               echo '<a class="btn" href="edicion_de_expo_editar.php?id_edicion='.$row['id_edicion'].'">Editar</a>';
               echo '</td>';
               echo '</tr>';
+
           }
 
         ?>
