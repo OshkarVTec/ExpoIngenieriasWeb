@@ -35,7 +35,7 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
    <script> 
     $(function(){
-      $("#header").load("header_estudiante.html"); 
+      $("#header").load("header_estudiante.php"); 
     });
     </script> 
 </head>
@@ -71,18 +71,6 @@
             ?>
         </div>
         <hr color="#1687A7">
-        <div class="secondrow">
-            <div>
-                <div class="descripcion">
-            <p><?php echo !empty($descripcion)?$descripcion:'';?></p>
-            </div>
-            <br>
-            <h1>Video del Proyecto</h1>
-            <iframe src=<?php echo !empty($video)?$video:'';?> width="560" height="315"></iframe>
-            </div>  
-            <img src=<?php echo !empty($poster)?$poster:'';?> alt="testimage" class="img">
-        </div>
-        <hr color="#1687A7">
         <div class="thirdrow">
             <div>
                 <h1>Integrantes del Equipo</h1>
@@ -98,8 +86,13 @@
                         $w = $pdo->prepare($sql);
                         $w->execute(array($row['matricula']));
                         $u_name = $w->fetch(PDO::FETCH_ASSOC);
+
+                        $sql = 'SELECT * FROM r_carreras WHERE id_carrera = ?';
+                        $w = $pdo->prepare($sql);
+                        $w->execute(array($u_name['id_carrera']));
+                        $c_name = $w->fetch(PDO::FETCH_ASSOC);
                         echo '<li>';
-                        echo $u_name['nombre'] .' ' . $u_name['apellidoP'] . ' ' . $u_name['apellidoM'];
+                        echo $u_name['nombre'] . ' ' . $u_name['apellidoP'] . ' ' . $u_name['apellidoM'] . ' - ' . $c_name['nombre'];
                         echo '</li>';
                         Database::disconnect();
                     }
@@ -130,6 +123,18 @@
                     <a href="#" class="caltext">Ver mas +</a>
                 </div>
             </div>
+        </div>
+        <hr color="#1687A7">
+        <div class="secondrow">
+            <div>
+                <div class="descripcion">
+            <p><?php echo !empty($descripcion)?$descripcion:'';?></p>
+            </div>
+            <br>
+            <h1>Video del Proyecto</h1>
+            <iframe src=<?php echo !empty($video)?$video:'';?> width="560" height="315"></iframe>
+            </div>  
+            <img src=<?php echo !empty($poster)?$poster:'';?> alt="testimage" class="img">
         </div>
     </div>
 </body>

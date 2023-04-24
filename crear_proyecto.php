@@ -71,14 +71,15 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Nuevos Anuncios</title>
       <link rel="stylesheet" href="CSS/style.css">
-   </head>
-   <body>
-      <header class="header">
-      <div class="logo">
-      <a href="informativa_presentacion.html"><img src="IMG/logo-expo.png" alt="Logo de la pagina"></a>
-      </div>
-      <h1>Announcement Form</h1>
-      </header>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script>
+      $(function () {
+        $("#header").load("header_estudiante.php");
+      });
+    </script>
+  </head>
+  <body>
+    <div id="header"></div>
       <div class = "ventana">
          <h1 class="label"></h1>
          <div class="container">

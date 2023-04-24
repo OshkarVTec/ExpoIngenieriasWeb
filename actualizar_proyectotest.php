@@ -183,7 +183,29 @@
          </table>
          <div>
             <button class="cancel" onclick="history.go(-1);">Cancelar</button>
-            <input value="Actualizar Proyecto" type="submit" class = "btn" >
+            <?php
+            session_start();
+            require 'database.php';
+            $pdo = Database::connect();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = 'SELECT * FROM r_proyecto_estudiantes WHERE matricula = ?';
+            $q = $pdo->prepare($sql);
+            $q->execute(array($_SESSION['estudiante']));
+            $p_estudiantes = $q->fetch(PDO::FETCH_ASSOC);
+            $proyecto = $p_estudiantes['id_proyecto'];
+
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
+            $q = $pdo->prepare($sql);
+            $q->execute(array($proyecto));
+            $row = $q->fetch(PDO::FETCH_ASSOC);
+            $status = $row['estatus'];
+            if($status != 0){
+               echo 'papapa';
+               //echo '<input value="Actualizar Proyecto" type="submit" class = "btn" >';
+            }
+            
+            ?>
          </div>
          <?php if (($Error != null)) ?>
 				<div class="Error"><?php echo $Error;?></div>
