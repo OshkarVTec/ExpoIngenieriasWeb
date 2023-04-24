@@ -65,7 +65,7 @@
                $_SESSION['estudiante'] = $fetch['matricula'];
                header("location: informativa_estudiante.html");
            }
-         //   $_SESSION['id_usuario'] = $fetch['id_usuario'];
+           $_SESSION['id_usuario'] = $fetch['id_usuario'];
         } else{
             $Error = 'Contraseña o correo incorrecto';
         }
