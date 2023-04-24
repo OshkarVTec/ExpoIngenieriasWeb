@@ -67,7 +67,7 @@ CREATE TABLE r_jueces(
 CREATE TABLE r_anuncios(
 	id_anuncio INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
    contenido TEXT,
-   multimedia VARCHAR(50),
+   multimedia VARCHAR(100),
    vigente BOOL
 );
 
