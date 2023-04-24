@@ -1,15 +1,9 @@
 <?php
    session_start();
-   $_SESSION["id_usuario"];
    include 'database.php';
-   $pdo = Database::connect();
-   $sql = 'SELECT *  FROM r_docentes WHERE id_usuario = ?';
-   $q = $pdo->prepare($sql);
-   $q->execute(array($_SESSION['id_usuario']));
-   if($q->rowCount() == 0){
-      header('Location:informativa_presentacion.html');
-   }
-   $id_docente = $q->fetch(PDO::FETCH_ASSOC)['id_docente'];
+   session_start();
+   if($_SESSION['id_docente'] != null) $id_docente = $_SESSION['id_docente'];
+   else header("Location:informativa.php");
    if ( !empty($_POST)) {
       $id_proyecto = $_POST['id'];
 		if (isset($_POST['aprobar'])) {

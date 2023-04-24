@@ -1,4 +1,8 @@
 <?php
+   session_start();
+   if($_SESSION['id_juez'] != null) $id_juez = $_SESSION['id_juez'];
+   else header("Location:informativa.php");
+
    $id_calificacion = null;
 	if ( !empty($_GET['id'])) {
 		$id_calificacion = $_REQUEST['id'];

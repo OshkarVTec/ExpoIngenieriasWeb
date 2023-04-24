@@ -1,15 +1,8 @@
 <?php
+   require 'database.php';
    session_start();
-   $_SESSION["id_usuario"];
-   include 'database.php';
-   $pdo = Database::connect();
-   $sql = 'SELECT *  FROM r_jueces WHERE id_usuario = ?';
-   $q = $pdo->prepare($sql);
-   $q->execute(array($_SESSION['id_usuario']));
-   if($q->rowCount() == 0){
-      header('Location:informativa_presentacion.html');
-   }
-   $id_juez = $q->fetch(PDO::FETCH_ASSOC)['id_juez'];
+   if($_SESSION['id_juez'] != null) $id_juez = $_SESSION['id_juez'];
+   else header("Location:informativa.php");
 
 ?>
 <!DOCTYPE html>
