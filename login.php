@@ -50,19 +50,19 @@
          if($row > 0) {
             //checa si es admin
             if ($fetch['id_administrador'] != null) {
-               $_SESSION['admin'] = 1;
+               $_SESSION['admin'] = $fetch['id_administrador'];
                header("location: informativa_presentacion.html");
             //checa si es juez
            } if ($fetch['id_juez'] != null) {
-               $_SESSION['juez'] = 1;
+               $_SESSION['juez'] = $fetch['id_juez'];
                header("location: informativa_juez.html");
             //checa si es profesor
            } if ($fetch['id_docente'] != null) {
-               $_SESSION['docente'] = 1;
+               $_SESSION['docente'] = $fetch['id_docente'];
                header("location: informativa_juez.html");
             //checa si es estudiante
            } if ($fetch['matricula'] != null) {
-               $_SESSION['estudiante'] = 1;
+               $_SESSION['estudiante'] = $fetch['matricula'];
                header("location: informativa_estudiante.html");
            }
            $_SESSION['id_usuario'] = $fetch['id_usuario'];
