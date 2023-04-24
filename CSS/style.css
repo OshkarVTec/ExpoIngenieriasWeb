@@ -781,7 +781,7 @@ footer {
 
 .Error {
   color: red;
-  font-size: 28px;
+  /* font-size: 28px; */
   /* background-color: blue; */
   /* width: ; */
   /* display: flex; */
@@ -791,7 +791,7 @@ footer {
 
 .Sucess {
   color: green;
-  font-size: 28px;
+  /* font-size: 28px; */
   /* background-color: blue; */
   /* width: ; */
   /* display: flex; */
