@@ -3,7 +3,6 @@
    session_start();
    if($_SESSION['id_juez'] != null) $id_juez = $_SESSION['id_juez'];
    else header("Location:informativa.php");
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,14 +60,18 @@
       <table class="general">  
       <?php
       $pdo = Database::connect();
+      $sql = 'SELECT *  FROM r_ediciones WHERE activa = 1';
+      $q = $pdo->prepare($sql);
+      $q->execute();
+      $id_edicion = $q->fetch(PDO::FETCH_ASSOC)['id_edicion'];
       $sql = 'SELECT *  FROM r_calificaciones WHERE (puntos_rubro1 is null OR puntos_rubro2 is null OR puntos_rubro3 is null OR puntos_rubro4 is null) AND id_juez = ?';
       $q = $pdo->prepare($sql);
       $q->execute(array($id_juez));
       $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);
       foreach ($calificaciones as $row) {
-         $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
+         $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ? AND id_edicion = ?';
          $q = $pdo->prepare($sql);
-         $q->execute(array($row['id_proyecto']));
+         $q->execute(array($row['id_categoria'], $id_edicion));
          $proyecto = $q->fetch(PDO::FETCH_ASSOC);
          $sql = 'SELECT * FROM r_niveles_desarrollo WHERE id_nivel = ?';
          $q = $pdo->prepare($sql);

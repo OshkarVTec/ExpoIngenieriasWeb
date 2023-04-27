@@ -451,13 +451,31 @@ select:focus {
   /* margin-left: 1000px; */
   float: right;
   margin-right: 5%;
+  /* padding-bottom: 50px; */
+  margin-bottom: 30px;
 }
 /* CSS para edicion_de_expo_vista end */
 
 /* CSS para editar usuarios start */
 #instrucciones-editar-usuario {
   display: flex;
-  text-align: center;
+  /* text-align: center; */
+  /* background-color: gray; */
+}
+
+.pruebaZ {
+  /* float: left; */
+  font-size: 1px;
+  /* background-color: black; */
+  position: absolute;
+  right: 10%;
+  color: yellow;
+}
+
+.pruebaZ h2 {
+  /* color: ; */
+  color: #000035;
+  /* background-color: #00bdff; */
 }
 
 #texto-instruciones {
@@ -797,4 +815,12 @@ footer {
   /* display: flex; */
   margin: auto;
   text-align: center;
+}
+
+.email-column {
+  width: 380px; /* Change this value to whatever width you want */
+}
+
+.id-column {
+  width: 15px;
 }

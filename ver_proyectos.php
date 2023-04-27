@@ -19,13 +19,20 @@
    <?php
       include 'database.php';
       $pdo = Database::connect();
+      $sql = 'SELECT *  FROM r_ediciones WHERE activa = 1';
+      $q = $pdo->prepare($sql);
+      $q->execute();
+      $id_edicion = $q->fetch(PDO::FETCH_ASSOC)['id_edicion'];
       $sql = 'SELECT * FROM r_categorias ORDER BY id_categoria';
       foreach ($pdo->query($sql) as $row) {
          echo '<h1 class="label">'.$row['nombre'].'</h1>';
          echo '<div class = "container">';
          echo '<table class="general">';
-         $sql = 'SELECT * FROM r_proyectos WHERE id_categoria ='.$row['id_categoria'];
-         foreach ($pdo->query($sql) as $row) {
+         $sql = 'SELECT * FROM r_proyectos WHERE id_categoria = ? AND id_edicion = ?';
+         $q = $pdo->prepare($sql);
+         $q->execute(array($row['id_categoria'], $id_edicion));
+         $proyectos = $q->fetchAll(PDO::FETCH_ASSOC);
+         foreach ($proyectos as $row) {
             echo '<tr>';
             echo '<td>';
             echo '<a class="link" href="proyecto.php?id_proyecto='.$row['id_proyecto'].'">'. $row['nombre'] .'</a>';
