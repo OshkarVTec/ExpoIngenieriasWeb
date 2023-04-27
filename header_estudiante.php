@@ -21,7 +21,7 @@ $proyecto = $p_estudiantes['id_proyecto'];
        <li><?php echo '<a href="cuenta.php?id_usuario='.$_SESSION['id_usuario'].'">Mi Cuenta</a>';?></li>
        <li><?php
             echo '<a href="proyecto.php?id_proyecto='.$proyecto.'">Mi Proyecto</a>'?></li>
-       <li><a href="rubrica_evaluacion.html">Criterio de evaluación</a></li>
+       <li><a href="rubrica_evaluacion.php">Criterio de evaluación</a></li>
        <li><a href="GanadoresPage.html">Ganadores</a></li>
       </ul>
       </div>

@@ -1,3 +1,32 @@
+<?php
+   session_start();
+   $id_proyecto = null;
+	if ( !empty($_GET['id_proyecto'])) {
+		$id_proyecto = $_REQUEST['id_proyecto'];
+	}
+	require 'database.php';
+
+		$Error = null;
+
+      $pdo = Database::connect();
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $sql = 'SELECT * FROM r_rubrica';
+      $q = $pdo->prepare($sql);
+      $q->execute(array());
+      if($q->rowCount() > 0){
+        $row = $q->fetch(PDO::FETCH_ASSOC);
+        $id_rubrica = $row['id_rubrica'];
+        $nombre1 = $row['nombre1'];
+        $nombre2   = $row['nombre2'];
+        $nombre3 =$row['nombre3'];
+        $nombre4 = $row['nombre4'];
+        $descripcion1 = $row['descripcion1'];
+        $descripcion2 = $row['descripcion2'];   
+        $descripcion3 = $row['descripcion3'];
+        $descripcion4 = $row['descripcion4'];
+      }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

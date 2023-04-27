@@ -92,7 +92,7 @@
                         $w->execute(array($u_name['id_carrera']));
                         $c_name = $w->fetch(PDO::FETCH_ASSOC);
                         echo '<li>';
-                        echo $u_name['nombre'] . ' ' . $u_name['apellidoP'] . ' ' . $u_name['apellidoM'] . ' - ' . $c_name['nombre'];
+                        echo $u_name['nombre'] . ' ' . $u_name['apellidoP'] . ' ' . $u_name['apellidoM'] . ' - ' . $row['matricula'] . ' - ' . $c_name['nombre'];
                         echo '</li>';
                         Database::disconnect();
                     }

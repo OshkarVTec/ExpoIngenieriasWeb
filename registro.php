@@ -14,6 +14,7 @@
 		$contrasenia = ($_POST['contrasenia']);
 		$confirmar_contrasenia = ($_POST['confirmar_contrasenia']);
 		$tipo_usuario = $_POST['tipo_usuario'];
+		$carrera = $_POST['id_carrera'];
 		
 
 		// validate input
@@ -59,9 +60,9 @@
 			switch ($tipo_usuario) {
 				case "Estudiante":
 					list($matricula, $dominio) = explode('@', $correo);
-					$sql = "INSERT INTO r_estudiantes (matricula,nombre,apellidoP, apellidoM,id_usuario) values(?, ?, ?, ?, ?)";
+					$sql = "INSERT INTO r_estudiantes (matricula,nombre,apellidoP, apellidoM,id_usuario, id_carrera) values(?, ?, ?, ?, ?, ?)";
 					$q = $pdo->prepare($sql);
-					$q->execute(array($matricula,$nombre,$primer_apellido,$segundo_apellido,$id_usuario));
+					$q->execute(array($matricula,$nombre,$primer_apellido,$segundo_apellido,$id_usuario, $carrera));
 					break;
 				case "Docente":
 					$sql = "INSERT INTO r_docentes (id_docente,nombre,apellidoP, apellidoM,id_usuario) values(null, ?, ?, ?, ?)";
@@ -74,7 +75,6 @@
 					$q->execute(array($nombre,$primer_apellido,$segundo_apellido,$id_usuario));
 					break;
 			}
-			echo "hola";
 			Database::disconnect();
 			header("Location: login.php");
 		}
@@ -101,6 +101,47 @@
       <div class="container">
          <form  class="login" action="registro.php" method=POST>
             <table>  
+			<tr>
+                  <td>
+                     <label for="tipo_usuario">Tipo de usuario</label>
+                  </td>
+				  <?php 
+				  $rol = null;
+				  if ( !empty($_GET['rol'])) {
+					  $rol = $_REQUEST['rol'];
+				  }
+				  ?>
+                  <td>
+                     <select name="tipo_usuario" id="tipo_usuario" onchange="reloadPage(this.value)">
+					 	<option value="Externo" <?php if($rol=='Externo'){echo 'selected=true';}?>>Externo</option>
+                        <option value="Estudiante" <?php if($rol=='Estudiante'){echo 'selected=true';}?>>Estudiante</option>
+                        <option value="Docente" <?php if($rol=='Docente'){echo 'selected=true';}?>>Docente</option>
+                     </select> 
+                  </td>
+				</tr>
+				<tr>
+					<td>
+						<?php
+						if($rol == 'Estudiante'){
+							echo '<label for="Carrera">Carrera</label>';
+							echo '</td>';
+							echo '<td>';
+							echo '<select name= "id_carrera" id="id_carrera">';
+						
+                  		$pdo = Database::connect();
+                  		$query = 'SELECT * FROM r_carreras';
+						  
+                  		foreach ($pdo->query($query) as $row) {
+                  		   echo "<option  value=" . $row['id_carrera'] . ">" . $row['nombre'] . "</option>";
+                  		}
+						  Database::disconnect();
+						}
+						?>
+					</select>
+					</td>
+				</tr>
+				<tr id="materia">
+				</tr>
                <tr>
                   <td><label for="nombre">Nombre (s)</label></td>
                   <td><input type="text" name="nombre" value="<?php echo !empty($nombre)?$nombre:'';?>"></td>
@@ -125,18 +166,12 @@
                   <td><label for="confirmar_contrasenia">Confirmar contraseña</label></td>
                   <td><input type="password" name="confirmar_contrasenia" value="<?php echo !empty($confirmar_contrasenia)?$confirmar_contrasenia:'';?>"></td>
                </tr>
-               <tr>
-                  <td>
-                     <label for="tipo_usuario">Tipo de usuario</label>
-                  </td>
-                  <td>
-                     <select name="tipo_usuario" id="tipo_usuario">
-                        <option value="Estudiante">Estudiante</option>
-                        <option value="Juez">Docente</option>
-                        <option value="Externo">Externo</option>
-                     </select> 
-                  </td>
-               </tr>
+				<script>
+					function reloadPage(value) {
+  						window.location.href = "registro.php?rol=" + value;
+					}
+				</script>
+               
             </table>
             <div> 
                <td><input value="Registrarse" type="submit" class = "btn"></td>
