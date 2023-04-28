@@ -28,12 +28,14 @@
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
-          <a href="?orderby=docente">Ordenar por docente</a>
-          <a href="?orderby=estudiante">Ordenar por alumno</a>
-          <a href="?orderby=admin">Ordenar por admin</a>
-          <a href="?orderby=juez">Ordenar por juez</a>
-          <a href="?default">Ordenar default</a>
+          <a href="?orderby=admin">Mostrar administradores</a>
+          <a href="?orderby=estudiante">Mostrar estudiantes</a>
+          <a href="?orderby=docente">Mostrar docentes</a>
+          <a href="?orderby=juez">Mostrar jueces</a>
+          <a href="?orderby=juez-docente">Mostrar jueces-docentes</a>
+          <a href="?default">Mostrar todos</a>
         </div>
+      </div>
     </nav>
     </div>
 
@@ -56,57 +58,64 @@
           // Determine column to order by based on value of orderby
           switch ($_GET['orderby']) {
             case 'docente':
+              $sql = "SELECT r_usuarios.id_usuario, r_usuarios.correo FROM r_usuarios
+                      LEFT JOIN r_docentes ON r_usuarios.id_usuario = r_docentes.id_usuario
+                      LEFT JOIN r_jueces ON r_usuarios.id_usuario = r_jueces.id_usuario
+                      WHERE r_docentes.id_usuario IS NOT NULL AND r_jueces.id_usuario IS NULL
+                      ORDER BY r_docentes.id_usuario";
               
-              $orderby = 'r_docentes.id_docente';
               break;
             case 'estudiante':
-              $orderby = 'r_estudiantes.id_usuario';
+              $sql = "SELECT r_usuarios.id_usuario, r_usuarios.correo FROM r_usuarios
+                      LEFT JOIN r_estudiantes ON r_usuarios.id_usuario = r_estudiantes.id_usuario
+                      WHERE r_estudiantes.id_usuario IS NOT NULL
+                      ORDER BY r_estudiantes.id_usuario";
+              
               break;
             case 'admin':
-              $tabla = 'r_administradores';
-              $orderby = 'id_usuario';
+              $sql = "SELECT  r_usuarios.id_usuario, r_usuarios.correo FROM r_usuarios
+                      LEFT JOIN r_administradores ON r_usuarios.id_usuario = r_administradores.id_usuario
+                      WHERE r_administradores.id_usuario IS NOT NULL
+                      ORDER BY r_administradores.id_usuario";        
               break;
             case 'juez':
-              $orderby = 'r_jueces.id_usuario';
+              $sql = "SELECT r_usuarios.id_usuario, r_usuarios.correo FROM r_usuarios
+                      LEFT JOIN r_docentes ON r_usuarios.id_usuario = r_docentes.id_usuario
+                      LEFT JOIN r_jueces ON r_usuarios.id_usuario = r_jueces.id_usuario
+                      WHERE r_jueces.id_usuario IS NOT NULL AND r_docentes.id_usuario IS NULL
+                      ORDER BY r_jueces.id_usuario";
               break;
+              case 'juez-docente':
+                $sql = 'SELECT r_usuarios.id_usuario, r_usuarios.correo 
+                FROM r_usuarios
+                LEFT JOIN r_docentes ON r_usuarios.id_usuario = r_docentes.id_usuario
+                LEFT JOIN r_jueces ON r_usuarios.id_usuario = r_jueces.id_usuario
+                WHERE r_docentes.id_usuario IS NOT NULL AND r_jueces.id_usuario IS NOT NULL
+                ORDER BY r_usuarios.id_usuario';
+                
+                break;
             default:
-              $orderby = 'id_usuario';
+            $sql = 'SELECT * FROM r_usuarios ORDER BY id_usuario';
           }
 
-          // $sql = "SELECT * FROM r_usuarios
-          //         LEFT JOIN r_docentes ON r_usuarios.id_usuario = r_docentes.id_usuario
-          //         LEFT JOIN r_estudiantes ON r_usuarios.id_usuario = r_estudiantes.id_usuario
-          //         LEFT JOIN r_jueces ON r_usuarios.id_usuario = r_jueces.id_usuario
-          //         LEFT JOIN r_administradores ON r_usuarios.id_usuario = r_administradores.id_usuario
-          //         ORDER BY $orderby";
-          $sql = 'SELECT * FROM $tabla ORDER BY $orderby';
         } else {
-          // If orderby parameter is not set, order by id_usuario by default
           $sql = 'SELECT * FROM r_usuarios ORDER BY id_usuario';
         }
-
-
-        // $sql = 'SELECT * FROM r_usuarios ORDER BY id_usuario';
-
 
 
         foreach ($pdo->query($sql) as $row) {
           $id_usuario = $row['id_usuario'];
 
+          // echo 'hola';
+          // echo $id_usuario;
 
-
-          // $sql = 'SELECT r_usuarios.id_usuario, r_usuarios.correo, r_docentes.id_usuario AS docente_id, r_estudiantes.id_usuario AS estudiante_id, r_jueces.id_usuario AS juez_id, r_administradores.id_usuario AS admin_id FROM r_usuarios 
-          //         LEFT JOIN r_docentes ON r_usuarios.id_usuario = r_docentes.id_usuario 
-          //         LEFT JOIN r_estudiantes ON r_usuarios.id_usuario = r_estudiantes.id_usuario 
-          //         LEFT JOIN r_jueces ON r_usuarios.id_usuario = r_jueces.id_usuario 
-          //         LEFT JOIN r_administradores ON r_usuarios.id_usuario = r_administradores.id_usuario 
-          //         ORDER BY r_usuarios.id_usuario';
 
             // Check if the user is a Maestro
             $sql_maestro = "SELECT * FROM r_docentes WHERE id_usuario = ?";
             $stmt_maestro = $pdo->prepare($sql_maestro);
             $stmt_maestro->execute([$id_usuario]);
             $row_maestro = $stmt_maestro->fetch(PDO::FETCH_ASSOC);
+            // echo $row_maestro;
             $checked_maestro = $row_maestro ? 'checked' : '';
 
             // Check if the user is a Juez
@@ -142,7 +151,7 @@
             echo '<td class="email-column"><a class="link-edicion">'.$row['correo'].'</a></td>';
             echo '<td>';
             echo '<input type="checkbox" id="Maestro" name="Maestro"'.$checked_maestro.' />';
-            echo '<label for="Maestro">Maestro</label>';
+            echo '<label for="Maestro">Docente</label>';
             echo '</td>';
             
 
@@ -168,36 +177,9 @@
       ?>
 
 
-
       </table>
     </div>
     <button id="nueva-edicion-btn" class="btn">Guardar</button>
-
-    <!-- <h1 class="label">Administradores</h1>
-
-    <div class="container">
-      <table></table>
-    </div>
-
-    <h1 class="label">Alumnos</h1>
-
-    <div class="container">
-      <table></table>
-    </div>
-
-    <h1 class="label">Docentes</h1>
-
-    <div class="container">
-      <table></table>
-    </div>
-
-    <h1 class="label">Jueces</h1>
-
-    <div class="container">
-      <table></table>
-    </div> -->
-
-
     
   </body>
 </html>
