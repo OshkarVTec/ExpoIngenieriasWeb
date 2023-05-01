@@ -531,6 +531,21 @@ select:focus {
   /* justify-content: right; */
 }
 
+.btn-eliminar {
+  background-color: red;
+  color: black;
+  border: solid black;
+  /* justify-content: right; */
+  color: var(--wordaccentbg1R);
+  padding: 4px 8px;
+  /* background: var(--mainR); */
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+
 #guardar {
   /* background-color: darkred; */
   width: 50%;
@@ -823,4 +838,8 @@ footer {
 
 .id-column {
   width: 15px;
+}
+
+.row-botones {
+  width: 100px;
 }
