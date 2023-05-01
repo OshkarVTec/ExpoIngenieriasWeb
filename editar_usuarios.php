@@ -1,6 +1,6 @@
 <?php
 
-// 	require 'database.php';
+	// require 'database.php';
 
 //   // $activa = 1;
 
@@ -112,7 +112,7 @@
         // echo '<h1>Editar usuario</h1>';
         // echo '<p>ID de usuario: ' . $row['id_usuario'] . '</p>';
         // echo '<p>Correo: ' . $row['correo'] . '</p>';
-        echo $rol;
+        // echo $rol;
 
         if($rol == 'Juez-Docente'){
             $checked_maestro = 'checked';
@@ -120,7 +120,7 @@
             $checked_administrador = ($rol == 'Administrador') ? 'checked' : '';
             $checked_estudiante = ($rol == 'Estudiante') ? 'checked' : '';
         }else{
-            $checked_maestro = ($rol == 'Maestro') ? 'checked' : '';
+            $checked_maestro = ($rol == 'Docente') ? 'checked' : '';
             $checked_juez = ($rol == 'Juez') ? 'checked' : '';
             $checked_administrador = ($rol == 'Administrador') ? 'checked' : '';
             $checked_estudiante = ($rol == 'Estudiante') ? 'checked' : '';
@@ -128,7 +128,9 @@
         
 
         
-
+        echo '<div id="instrucciones-editar-usuario">';
+        echo '<h1 class="label">Editar '.$rol.'</h1>';
+        echo '</div>';
  
 
 
@@ -148,12 +150,16 @@
         // echo '<a class="btn" href="editar_usuarios.php?id_usuario=' . $id_usuario . '&rol=' . $rol . '">Editar</a>';
 
         // echo '</td>';
+        if($rol != 'Administrador'){
+            echo '<td class="row-botones">';
+            echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" onclick="return confirm(\'¿Estás seguro que deseas eliminar a este usuario?\')">Eliminar</a>';
+    
+            echo '</td>';   
+        }
 
-        echo '<td class="row-botones">';
-        echo '<a class="btn-eliminar" >Eliminar</a>';
-        echo '</td>';
 
-        echo '<td>';
+
+        echo '<td class="rol">';
         echo '<input type="checkbox" id="Maestro" name="Maestro"'.$checked_maestro.' />';
         echo '<label for="Maestro">Docente</label>';
         echo '</td>';
@@ -161,17 +167,17 @@
 
         
 
-        echo '<td>';
+        echo '<td class="rol">';
         echo '<input type="checkbox" id="Juez" name="Juez"'.$checked_juez.' />';
         echo '<label for="Juez">Juez</label>';
         echo '</td>';
 
-        echo '<td>';
+        echo '<td class="rol">';
         echo '<input type="checkbox" id="Administrador" name="Administrador"'.$checked_administrador.' />';
         echo '<label for="Administrador">Administrador</label>';
         echo '</td>';
 
-        echo '<td>';
+        echo '<td class="rol">';
         echo '<input type="checkbox" id="Estudiante" name="Estudiante"'.$checked_estudiante.' />';
         echo '<label for="Estudiante">Estudiante</label>';
         echo '</td>';
@@ -182,6 +188,12 @@
 
         echo '</table>';
         echo '</div>';
+
+        echo '</div>';
+        if($rol == 'Juez-Docente' || $rol == 'Juez' || $rol == 'Docente'){
+            echo '<button id="nueva-edicion-btn" class="btn">Guardar</button>';
+        }
+        
     ?>
 
 

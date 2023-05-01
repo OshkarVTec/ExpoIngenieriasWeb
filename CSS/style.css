@@ -833,13 +833,26 @@ footer {
 }
 
 .email-column {
-  width: 380px; /* Change this value to whatever width you want */
+  width: 350px; /* Change this value to whatever width you want */
 }
 
 .id-column {
   width: 15px;
 }
 
-.row-botones {
+/* .row-botones {
   width: 100px;
+} */
+
+.btn-vacio {
+  /* color: var(--wordaccentbg1R); */
+  background-color: white;
+  color: white;
+  padding: 6px 10px;
+  /* background: var(--mainR); */
+  border: none;
+  border-radius: 30px;
+  cursor: default;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
 }

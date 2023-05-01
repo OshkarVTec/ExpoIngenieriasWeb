@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Editar usuarios</title>
+    <title>Ver usuarios</title>
     <link rel="stylesheet" href="CSS/style.css" />
   </head>
   <body>
@@ -144,7 +144,7 @@
               $rol = 'Juez-Docente';
               
             } elseif ($row_maestro) {
-              $rol = 'Maestro';
+              $rol = 'Docente';
             } elseif ($row_juez) {
               $rol = 'Juez';
             } elseif ($row_administrador) {
@@ -171,14 +171,18 @@
 
             echo '<td class="email-column"><a class="link-edicion">'.$row['correo'].'</a></td>';
 
-            echo '<td class="row-botones">';
-            echo '<a class="btn" href="editar_usuarios.php?id_usuario=' . $id_usuario . '&rol=' . $rol . '">Editar</a>';
+            if($rol != 'Administrador'){          
+              echo '<td class="row-botones">';
+              echo '<a class="btn" href="editar_usuarios.php?id_usuario=' . $id_usuario . '&rol=' . $rol . '">Editar</a>';
+              echo '</td>';
+            }
 
-            echo '</td>';
+            if($rol == 'Administrador'){
+              echo '<td >';
+              echo '<a   class="btn-vacio">Editar</a>';
+              echo '</td>';
+            }
 
-            echo '<td class="row-botones">';
-            echo '<a class="btn-eliminar" >Eliminar</a>';
-            echo '</td>';
 
             echo '<td>';
             echo '<input type="checkbox" id="Maestro" name="Maestro"'.$checked_maestro.' />';
@@ -213,8 +217,7 @@
 
 
       </table>
-    </div>
-    <button id="nueva-edicion-btn" class="btn">Guardar</button>
+ 
     
   </body>
 </html>
