@@ -19,7 +19,11 @@
 
 
 
-
+    <!-- SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto , r_proyectos.nombre 
+    FROM r_jueces 
+    LEFT JOIN r_calificaciones ON r_calificaciones.id_juez = r_jueces.id_juez 
+    LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto 
+    WHERE r_proyectos.id_proyecto = 3; -->  <!--  INCLUIR ESTA QUERY Y BORRAR LA TABLA QUE HICE AYER -->
 
 
     <h1 class="label">Nivel de desarrollo: Idea</h1>
@@ -47,11 +51,11 @@
     echo '<a class="link-edicion">' . $row['nombre'] . '</a>';
 
     // Second query
-    $sql2 = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto
-      FROM r_jueces
-      LEFT JOIN r_jueces_proyectos ON r_jueces_proyectos.id_juez = r_jueces.id_juez
-      LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_jueces_proyectos.id_proyecto
-      WHERE r_proyectos.id_proyecto = ?";
+    $sql2 = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto  
+    FROM r_jueces 
+    LEFT JOIN r_calificaciones ON r_calificaciones.id_juez = r_jueces.id_juez 
+    LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto 
+    WHERE r_proyectos.id_proyecto = ?";
 
     $stmt = $pdo->prepare($sql2);
     $stmt->execute([$row['id_proyecto']]); // Bind the parameter with the value
@@ -112,10 +116,10 @@
       echo '<a class="link-edicion">' . $row['nombre'] . '</a>';
 
         // Second query
-        $sql2 = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto
-        FROM r_jueces
-        LEFT JOIN r_jueces_proyectos ON r_jueces_proyectos.id_juez = r_jueces.id_juez
-        LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_jueces_proyectos.id_proyecto
+        $sql2 = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto  
+        FROM r_jueces 
+        LEFT JOIN r_calificaciones ON r_calificaciones.id_juez = r_jueces.id_juez 
+        LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto 
         WHERE r_proyectos.id_proyecto = ?";
 
         $stmt = $pdo->prepare($sql2);
@@ -175,10 +179,10 @@
 
 
       // Second query
-      $sql2 = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto
-      FROM r_jueces
-      LEFT JOIN r_jueces_proyectos ON r_jueces_proyectos.id_juez = r_jueces.id_juez
-      LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_jueces_proyectos.id_proyecto
+      $sql2 = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto  
+      FROM r_jueces 
+      LEFT JOIN r_calificaciones ON r_calificaciones.id_juez = r_jueces.id_juez 
+      LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto 
       WHERE r_proyectos.id_proyecto = ?";
 
       $stmt = $pdo->prepare($sql2);

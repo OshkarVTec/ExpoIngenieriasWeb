@@ -45,10 +45,10 @@
 
         $pdo = Database::connect();
 
-        $sql = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto
-        FROM r_jueces
-        LEFT JOIN r_jueces_proyectos ON r_jueces_proyectos.id_juez = r_jueces.id_juez
-        LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_jueces_proyectos.id_proyecto
+        $sql = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto  
+        FROM r_jueces 
+        LEFT JOIN r_calificaciones ON r_calificaciones.id_juez = r_jueces.id_juez 
+        LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto 
         WHERE r_proyectos.id_proyecto = ?";
 
         $stmt = $pdo->prepare($sql);
