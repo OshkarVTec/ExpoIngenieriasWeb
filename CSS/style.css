@@ -154,6 +154,11 @@ h1 {
   padding-inline: 20px;
 }
 
+.mitad{
+  display: grid;
+  grid-template-columns: 40%40%;
+}
+
 .cuentabig p {
   font-size: 40px;
   padding: 0 20px;
@@ -166,6 +171,22 @@ h1 {
 
 .cuentabiglast p {
   font-size: 40px;
+}
+
+.logout button {
+  color: var(--wordaccentbg1R);
+  padding: 6px 10px;
+  background: #8B0000;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+}
+
+.logout button:hover {
+  /*background-color: var(--wordaccent2R);
+  color: var(--wordaccentbg1R); */
+  transform: scale(1.1);
 }
 
 .firstrow {
@@ -185,6 +206,7 @@ h1 {
   color: var(--wordaccent1R);
   font-weight: bold;
 }
+
 .btnP button {
   color: var(--wordaccentbg1R);
   padding: 6px 10px;

@@ -21,6 +21,7 @@
         $id_edicion = $row['id_edicion'];
         $id_user = $row['id_usuario'];
         $rol = "Estudiante";
+        $id_carrera = $row['id_carrera'];
       }
 
       $sql = 'SELECT * FROM r_docentes WHERE id_usuario = ?';
@@ -74,18 +75,29 @@
     <div class="container">
         <div class="firstrow">
             <h1 class="title">Mi Cuenta</h1>
+            <a href="logout.php" class="logout"><button>Logout</button></a>
         </div>
         <hr color="#1687A7">
 
         <br>
-        <p>Nombre</p>
+        <p>Nombre, Matricula y Carrera</p>
         <hr color="#1687A7" width="50%">
         <div class="cuentabig">
             <p><?php echo !empty($name)?$name:'';
                 echo ' ';
                 echo !empty($apellidoP)?$apellidoP:' ';
                 echo ' ';
-                echo !empty($apellidoM)?$apellidoM:'';?></p>
+                echo !empty($apellidoM)?$apellidoM:'';
+                echo ', ';
+                echo $matricula;
+                echo ' - ';
+                    $sql = 'SELECT * FROM r_carreras WHERE id_carrera = ?';
+                    $w = $pdo->prepare($sql);
+                    $w->execute(array($id_carrera));
+                    $c_name = $w->fetch(PDO::FETCH_ASSOC);
+                    echo $c_name['nombre'];
+                    Database::disconnect();
+                ?></p>
         </div>
 
         <br>

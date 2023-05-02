@@ -111,11 +111,11 @@
 
          <tr>
             <td><label for="poster">Link al poster:</label></td>
-            <td><input type="text" id="link" name="poster" value="<?php echo !empty($poster)?$poster:'';?>"></td>
+            <td><input type="text" id="linkp" name="poster" value="<?php echo !empty($poster)?$poster:'';?>"></td>
          </tr>
          <tr>
             <td><label for="video">Link al video:</label></td>
-            <td><input type="text" id="link" name="video" value="<?php echo !empty($video)?$video:'';?>"></td>
+            <td><input type="text" id="linkv" name="video" value="<?php echo !empty($video)?$video:'';?>"></td>
             </tr>
 
          <tr>
@@ -200,14 +200,52 @@
             $row = $q->fetch(PDO::FETCH_ASSOC);
             $status = $row['estatus'];
             if($status == 0){
-               echo '<input value="Actualizar Proyecto" type="submit" class = "btn" >';
+               echo '<input value="Actualizar Proyecto" type="submit" class = "btn" id="convert-btn">';
             }
             
             ?>
+           
+           <button>a</button>
          </div>
          <?php if (($Error != null)) ?>
 				<div class="Error"><?php echo $Error;?></div>
       </form>
+      <button id="convert-btn">test</button>
    </body>
 </html>
  
+<script>
+   ( function( $ ) {
+  
+  var url = $( '#linkv' ),
+      btn = $( '#convert-btn' );
+
+  btn.on( 'click', function( event ) {
+    found = url.val().match( /(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/ );
+    
+    if ( found[1].length ) {
+      new_url = 'https://www.youtube.com/embed/' + found[1];
+      
+      url.val( new_url );
+    }
+  } );
+  
+} )( jQuery );
+</script>
+
+<script>
+   ( function( $ ) {
+  
+  var url = $( '#linkp' ),
+      btn = $( '#convert-btn' );
+
+  btn.on( 'click', function( event ) {
+    found = url.val().match( /d\/([A-Za-z0-9_\-]+)/ );
+    if ( found[1].length ) {
+      new_url = 'https://drive.google.com/uc?export=view&id=' + found[1];
+      url.val( new_url );
+    }
+  } );
+  
+} )( jQuery );
+</script>
