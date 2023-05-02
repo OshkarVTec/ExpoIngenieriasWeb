@@ -194,3 +194,12 @@ CREATE TABLE r_calificaciones(
    ON DELETE RESTRICT
    ON UPDATE CASCADE
 );
+
+
+CREATE TABLE r_jueces_proyectos (
+  id_juez INT,
+  id_proyecto INT,
+  FOREIGN KEY (id_juez) REFERENCES r_jueces(id_juez) ON DELETE CASCADE ON UPDATE CASCADE,
+  FOREIGN KEY (id_proyecto) REFERENCES r_proyectos(id_proyecto) ON DELETE CASCADE ON UPDATE CASCADE,
+  PRIMARY KEY (id_juez, id_proyecto)
+);
