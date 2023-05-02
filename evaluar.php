@@ -9,7 +9,6 @@ else
 $status = null;
 if (!empty($_GET['status'])) {
    $status = $_REQUEST['status'];
-   echo "a";
 }
 ?>
 <!DOCTYPE html>
