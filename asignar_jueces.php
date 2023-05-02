@@ -26,47 +26,65 @@
     <div class="container">
     <table class="general">
 
-    <?php
+<?php
+  include 'database.php';
+  $pdo = Database::connect();
+
+  // First query
+  $sql = 'SELECT r_proyectos.id_proyecto, r_proyectos.nombre, r_categorias.nombre as categoria, r_niveles_desarrollo.nombre as nivel_de_desarrollo 
+    FROM r_proyectos 
+    LEFT JOIN r_categorias ON r_proyectos.id_proyecto = r_categorias.id_categoria 
+    LEFT JOIN r_niveles_desarrollo ON r_proyectos.id_nivel = r_niveles_desarrollo.id_nivel
+    WHERE r_niveles_desarrollo.id_nivel = 1;';
+
+  $q = $pdo->prepare($sql);
+  $q->execute(array());
+
+  // Loop through the results
+  foreach ($q as $row) {
+    echo '<tr>';
+    echo '<td>';
+    echo '<a class="link-edicion">' . $row['nombre'] . '</a>';
+
+    // Second query
+    $sql2 = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto
+      FROM r_jueces
+      LEFT JOIN r_jueces_proyectos ON r_jueces_proyectos.id_juez = r_jueces.id_juez
+      LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_jueces_proyectos.id_proyecto
+      WHERE r_proyectos.id_proyecto = ?";
+
+    $stmt = $pdo->prepare($sql2);
+    $stmt->execute([$row['id_proyecto']]); // Bind the parameter with the value
+    $rowCount = $stmt->rowCount();
+  
+
+    if ($row['categoria'] == 'Computacion') {
+      echo '<a class="categoria-compu" href="edicion_de_expo_editar.html">' . $row['categoria'] . '</a>';
+    } else if ($row['categoria'] == 'Bio') {
+      echo '<a class="categoria-bio" href="edicion_de_expo_editar.html">' . $row['categoria'] . '</a>';
+    } else if ($row['categoria'] == 'Ciencias Naturales') {
+      echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">' . $row['categoria'] . '</a>';
+    } else {
+      echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">Sin Categoria</a>';
+    }
+
+    echo '</td>';
+
+    echo '<td class="row-cantidad-jueces">';
+    echo '#Jueces Asignados: '.$rowCount.'';
+    echo '</td>';
+
+    echo '<td >';
+    echo "<a class='btn' href='ver_jueces.php?id_proyecto={$row['id_proyecto']}&nombre={$row['nombre']}'>Asignar</a>";
+    echo '</td>';
+    echo '</tr>';
+  }
+?>
 
 
-
-      include 'database.php';
-      $pdo = Database::connect();
-      $sql = 'SELECT r_proyectos.nombre , r_categorias.nombre as categoria, 
-      r_niveles_desarrollo.nombre as nivel_de_desarrollo 
-      FROM r_proyectos 
-      LEFT JOIN r_categorias ON r_proyectos.id_proyecto = r_categorias.id_categoria 
-      LEFT JOIN r_niveles_desarrollo ON r_proyectos.id_nivel = r_niveles_desarrollo.id_nivel
-      WHERE r_niveles_desarrollo.id_nivel = 1;';
-
-      $q = $pdo->prepare($sql);
-      $q->execute(array());
-      $proyectos = $q->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($proyectos as $row) {
-
-          echo '<tr>';
-          echo '<td>';
-          echo '<a class="link-edicion">'.$row['nombre'].'</a>';
-          
-          if($row['categoria']  == 'Computacion'){
-            echo '<a class="categoria-compu" href="edicion_de_expo_editar.html">'.$row['categoria'].'</a>';
-          }
-          else if($row['categoria']  == 'Bio'){
-            echo '<a class="categoria-bio" href="edicion_de_expo_editar.html">'.$row['categoria'].'</a>';
-          }
-          else if($row['categoria']  == 'Ciencias Naturales'){
-            echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">'.$row['categoria'].'</a>';
-          }
-          else{
-            echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">Sin Categoria</a>';
-          }
-        }
-
-    ?>
-
-    </td>
     </table>
     </div>
+
 
 
 
@@ -78,9 +96,7 @@
 
     <?php
 
-
-      $sql = 'SELECT r_proyectos.id_proyecto , r_proyectos.nombre , r_categorias.nombre as categoria, 
-      r_niveles_desarrollo.nombre as nivel_de_desarrollo 
+      $sql = 'SELECT r_proyectos.id_proyecto, r_proyectos.nombre, r_categorias.nombre as categoria, r_niveles_desarrollo.nombre as nivel_de_desarrollo 
       FROM r_proyectos 
       LEFT JOIN r_categorias ON r_proyectos.id_proyecto = r_categorias.id_categoria 
       LEFT JOIN r_niveles_desarrollo ON r_proyectos.id_nivel = r_niveles_desarrollo.id_nivel
@@ -89,54 +105,46 @@
       $q = $pdo->prepare($sql);
       $q->execute(array());
       $proyectos = $q->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($proyectos as $row) {
 
-          echo '<tr>';
-          echo '<td>';
-          echo '<a class="link-edicion">'.$row['nombre'].'</a>';
-          
+      foreach ($proyectos as $row) {
+      echo '<tr>';
+      echo '<td>';
+      echo '<a class="link-edicion">' . $row['nombre'] . '</a>';
 
-          if($row['categoria']  == 'Computacion'){
-            echo '<a class="categoria-compu" href="edicion_de_expo_editar.html">'.$row['categoria'].'</a>';
-          }
-          else if($row['categoria']  == 'Bio'){
-            echo '<a class="categoria-bio" href="edicion_de_expo_editar.html">'.$row['categoria'].'</a>';
-          }
-          else if($row['categoria']  == 'Ciencias Naturales'){
-            echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">'.$row['categoria'].'</a>';
-          }
-          else{
-            echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">Sin Categoria</a>';
-          }
-        }
+        // Second query
+        $sql2 = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto
+        FROM r_jueces
+        LEFT JOIN r_jueces_proyectos ON r_jueces_proyectos.id_juez = r_jueces.id_juez
+        LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_jueces_proyectos.id_proyecto
+        WHERE r_proyectos.id_proyecto = ?";
+
+        $stmt = $pdo->prepare($sql2);
+        $stmt->execute([$row['id_proyecto']]); // Bind the parameter with the value
+        $rowCount = $stmt->rowCount();
 
 
-        echo '<td>';
+      if ($row['categoria'] == 'Computacion') {
+      echo '<a class="categoria-compu" href="edicion_de_expo_editar.html">' . $row['categoria'] . '</a>';
+      } else if ($row['categoria'] == 'Bio') {
+      echo '<a class="categoria-bio" href="edicion_de_expo_editar.html">' . $row['categoria'] . '</a>';
+      } else if ($row['categoria'] == 'Ciencias Naturales') {
+      echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">' . $row['categoria'] . '</a>';
+      } else {
+      echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">Sin Categoria</a>';
+      }
 
-        // echo '<nav>';
-        // echo '<div class="dropdown">';
-        echo '<a class="btn"  href="ver_jueces.php?id_proyecto=' . $row['id_proyecto'] . '">Asignar</a>';
-        // echo '<h2>Filtrar</h2>';
-        // echo '<i class="fa fa-caret-down"></i>';
-        // echo '</button>';
-        // echo '<div class="dropdown-content">';
-        // echo '<a href="?orderby=admin">Mostrar </a>';
-        // echo '<a href="?orderby=estudiante">Mostrar </a>';
-        // echo '<a href="?orderby=docente">Mostrar docentes</a>';
-        // echo '<a href="?orderby=juez">Mostrar </a>';
-        // echo '<a href="?orderby=juez-docente">Mostrar -</a>';
-        // echo '<a href="?default">Mostrar todos</a>';
-        // echo '</div>';
-        // echo '</div>';
-        // echo '</nav>';
+      echo '<td class="row-cantidad-jueces">';
+      echo '#Jueces Asignados: '.$rowCount.'';
+      echo '</td>';
 
-        echo '</td>';
-
-        echo '</tr>';
-
+      echo '</td>';
+      echo '<td >';
+      echo "<a class='btn' href='ver_jueces.php?id_proyecto={$row['id_proyecto']}&nombre={$row['nombre']}'>Asignar</a>";
+      echo '</td>';
+      echo '</tr>';
+      }
     ?>
 
-    </td>
     </table>
     </div>
 
@@ -144,14 +152,13 @@
 
 
 
-    <h1 class="label">Nivel de desarrollo: Desarrollo Completo</h1>
+    <h1 class="label">Nivel de desarrollo: Desarrollo completo</h1>
     <div class="container">
     <table class="general">
 
     <?php
 
-      $sql = 'SELECT r_proyectos.nombre , r_categorias.nombre as categoria, 
-      r_niveles_desarrollo.nombre as nivel_de_desarrollo 
+      $sql = 'SELECT r_proyectos.id_proyecto, r_proyectos.nombre, r_categorias.nombre as categoria, r_niveles_desarrollo.nombre as nivel_de_desarrollo 
       FROM r_proyectos 
       LEFT JOIN r_categorias ON r_proyectos.id_proyecto = r_categorias.id_categoria 
       LEFT JOIN r_niveles_desarrollo ON r_proyectos.id_nivel = r_niveles_desarrollo.id_nivel
@@ -160,31 +167,50 @@
       $q = $pdo->prepare($sql);
       $q->execute(array());
       $proyectos = $q->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($proyectos as $row) {
 
-          echo '<tr>';
-          echo '<td>';
-          echo '<a class="link-edicion">'.$row['nombre'].'</a>';
-          
-          if($row['categoria']  == 'Computacion'){
-            echo '<a class="categoria-compu" href="edicion_de_expo_editar.html">'.$row['categoria'].'</a>';
-          }
-          else if($row['categoria']  == 'Bio'){
-            echo '<a class="categoria-bio" href="edicion_de_expo_editar.html">'.$row['categoria'].'</a>';
-          }
-          else if($row['categoria']  == 'Ciencias Naturales'){
-            echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">'.$row['categoria'].'</a>';
-          }
-          else{
-            echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">Sin Categoria</a>';
-          }
-        }
+      foreach ($proyectos as $row) {
+      echo '<tr>';
+      echo '<td>';
+      echo '<a class="link-edicion">' . $row['nombre'] . '</a>';
+
+
+      // Second query
+      $sql2 = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto
+      FROM r_jueces
+      LEFT JOIN r_jueces_proyectos ON r_jueces_proyectos.id_juez = r_jueces.id_juez
+      LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_jueces_proyectos.id_proyecto
+      WHERE r_proyectos.id_proyecto = ?";
+
+      $stmt = $pdo->prepare($sql2);
+      $stmt->execute([$row['id_proyecto']]); // Bind the parameter with the value
+      $rowCount = $stmt->rowCount();
+
+      if ($row['categoria'] == 'Computacion') {
+      echo '<a class="categoria-compu" href="edicion_de_expo_editar.html">' . $row['categoria'] . '</a>';
+      } else if ($row['categoria'] == 'Bio') {
+      echo '<a class="categoria-bio" href="edicion_de_expo_editar.html">' . $row['categoria'] . '</a>';
+      } else if ($row['categoria'] == 'Ciencias Naturales') {
+      echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">' . $row['categoria'] . '</a>';
+      } else {
+      echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">Sin Categoria</a>';
+      }
+
+      echo '<td class="row-cantidad-jueces">';
+      echo '#Jueces Asignados: '.$rowCount.'';
+      echo '</td>';
+
+      echo '</td>';
+      echo '<td>';
+      echo "<a class='btn' href='ver_jueces.php?id_proyecto={$row['id_proyecto']}&nombre={$row['nombre']}'>Asignar</a>";
+      echo '</td>';
+      echo '</tr>';
+      }
       Database::disconnect();
     ?>
 
-    </td>
     </table>
     </div>
+
 
 
 

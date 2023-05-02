@@ -865,6 +865,7 @@ footer {
   border-radius: 30px;
   cursor: default;
   text-decoration: none;
+  margin-left: 10px;
 }
 
 .categoria-compu {
@@ -875,6 +876,7 @@ footer {
   border-radius: 30px;
   cursor: default;
   text-decoration: none;
+  margin-left: 10px;
 }
 
 .categoria-ciencias-n {
@@ -885,4 +887,10 @@ footer {
   border-radius: 30px;
   cursor: default;
   text-decoration: none;
+  margin-left: 10px;
+}
+
+.row-cantidad-jueces {
+  /* position: absolute; */
+  text-align: center;
 }
