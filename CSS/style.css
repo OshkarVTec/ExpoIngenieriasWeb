@@ -553,6 +553,21 @@ select:focus {
   /* justify-content: right; */
 }
 
+.btn-eliminar {
+  background-color: red;
+  color: black;
+  border: solid black;
+  /* justify-content: right; */
+  color: var(--wordaccentbg1R);
+  padding: 4px 8px;
+  /* background: var(--mainR); */
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+
 #guardar {
   /* background-color: darkred; */
   width: 50%;
@@ -840,9 +855,64 @@ footer {
 }
 
 .email-column {
-  width: 380px; /* Change this value to whatever width you want */
+  width: 350px; /* Change this value to whatever width you want */
 }
 
 .id-column {
   width: 15px;
+}
+
+/* .row-botones {
+  width: 100px;
+} */
+
+.btn-vacio {
+  /* color: var(--wordaccentbg1R); */
+  background-color: white;
+  color: white;
+  padding: 6px 10px;
+  /* background: var(--mainR); */
+  border: none;
+  border-radius: 30px;
+  cursor: default;
+  transition: all 0.3s ease 0s;
+  text-decoration: none;
+}
+
+.categoria-bio {
+  padding: 6px 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: default;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.categoria-compu {
+  padding: 6px 10px;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: default;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.categoria-ciencias-n {
+  padding: 6px 10px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: default;
+  text-decoration: none;
+  margin-left: 10px;
+}
+
+.row-cantidad-jueces {
+  /* position: absolute; */
+  text-align: center;
 }
