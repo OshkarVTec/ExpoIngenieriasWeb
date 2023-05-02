@@ -43,9 +43,22 @@
 
 
 
+
+
+        //Te cuenta la cantidad de proyectos a la que ha sido asignado un juez
+        // SELECT COUNT(*) AS num_rows 
+        // FROM ( 
+        // SELECT r_jueces.nombre, r_jueces.apellidoP, r_jueces.apellidoM, r_proyectos.id_proyecto, 		r_jueces.id_juez 
+        // FROM r_jueces LEFT JOIN r_calificaciones ON r_calificaciones.id_juez = r_jueces.id_juez 
+        // LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto 
+        // WHERE r_jueces.id_juez = 2 
+        // ) AS subquery;
+
+
+
         $pdo = Database::connect();
 
-        $sql = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto  
+        $sql = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto, r_jueces.id_juez
         FROM r_jueces 
         LEFT JOIN r_calificaciones ON r_calificaciones.id_juez = r_jueces.id_juez 
         LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto 
@@ -60,10 +73,31 @@
         foreach ($proyectos as $row) {
 
 
+          //Segunda query
+          $sql2 = "SELECT COUNT(*) AS num_rows 
+          FROM ( 
+          SELECT r_jueces.nombre, r_jueces.apellidoP, r_jueces.apellidoM, r_proyectos.id_proyecto, 		r_jueces.id_juez 
+          FROM r_jueces LEFT JOIN r_calificaciones ON r_calificaciones.id_juez = r_jueces.id_juez 
+          LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto 
+          WHERE r_jueces.id_juez = ?
+          ) AS subquery";
+  
+          $stmt = $pdo->prepare($sql2);
+          $stmt->execute([$row['id_juez']]);
+          $result = $stmt->fetch();
+          $num_rows = $result['num_rows'];
+
+          // echo "Number of rows: " . $num_rows;
+
+
+
            
             echo '<tr>';
                 echo '<td><a class="link-edicion">'.$row['nombre'].' '.$row['apellidoP'].' '.$row['apellidoM'].'</a></td>';
-                echo '</td>';
+ 
+
+
+                echo '<td> #Proyectos asignados:'.$num_rows.' </td>';
             echo '</tr>';                       
 
         }
