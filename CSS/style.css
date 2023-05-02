@@ -856,3 +856,33 @@ footer {
   transition: all 0.3s ease 0s;
   text-decoration: none;
 }
+
+.categoria-bio {
+  padding: 6px 10px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: default;
+  text-decoration: none;
+}
+
+.categoria-compu {
+  padding: 6px 10px;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: default;
+  text-decoration: none;
+}
+
+.categoria-ciencias-n {
+  padding: 6px 10px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: default;
+  text-decoration: none;
+}

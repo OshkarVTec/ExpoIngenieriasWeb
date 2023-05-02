@@ -1,72 +1,3 @@
-<?php
-
-	// require 'database.php';
-
-//   // $activa = 1;
-
-// 	$id_edicion = null;
-// 	if ( !empty($_GET['id_edicion'])) {
-// 		$id_edicion = $_REQUEST['id_edicion'];
-// 	}
-
-
-// 	if ( $id_edicion == null ) {
-// 		header("Location: ver_usuarios.php");
-// 	}
-
-// 	if ( !empty($_POST)) {
-
-// 		$nombre   = $_POST['input-nombre'];
-// 		$fecha_inicio = $_POST['fecha_inicio'];
-// 		$fecha_final = $_POST['fecha_final'];
-// 		$activa = isset($_POST['activa']); 
-//     //checa si la checkbox está en checked y regresa un 1, si no regresa 0
-
-
-// 		/// validate input
-// 		$valid = true;
-
-// 		if (empty($nombre)) {
-// 			$submError = 'Introduce un nombre válido.';
-// 			$valid = false;
-// 		}
-
-// 		if (empty($fecha_inicio)) {
-// 			$marcError = 'Introduce una fecha de inicio.';
-// 			$valid = false;
-// 		}
-
-//     if (empty($fecha_final)) {
-// 			$marcError = 'Introduce una fecha de cierre.';
-// 			$valid = false;
-// 		}
-
-// 		// insert data
-// 		if ($valid) {
-// 			$pdo = Database::connect();
-// 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-// 			$sql = "UPDATE r_ediciones 
-//                   SET nombre = ?,  fecha_inicio = ?, fecha_final = ?, activa = ?
-//                   WHERE id_edicion = ?";
-// 			$q = $pdo->prepare($sql);
-// 			$q->execute(array($nombre, $fecha_inicio, $fecha_final, $activa , $id_edicion, ));
-// 			Database::disconnect();
-// 			// header("Location: edicion_de_expo_vista.php");
-// 		}
-//    }
-//    else{
-//       $pdo = Database::connect();
-//       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-//       $sql = 'SELECT * FROM r_ediciones WHERE id_edicion = ?';
-//       $q = $pdo->prepare($sql);
-//       $q->execute(array($id_edicion));
-//       $row = $q->fetch(PDO::FETCH_ASSOC);
-//       $nombre = $row['nombre'];
-//       $fecha_inicio = $row['fecha_inicio'];
-//       $fecha_final   = $row['fecha_final'];
-//       Database::disconnect();
-//    }
-?>
 
 
 <!DOCTYPE html>
@@ -125,8 +56,56 @@
             $checked_administrador = ($rol == 'Administrador') ? 'checked' : '';
             $checked_estudiante = ($rol == 'Estudiante') ? 'checked' : '';
         }
+
+    // Handle form submission
+    if (isset($_POST['submit'])) {
+    // Get the selected roles
+    $roles = isset($_POST['roles']) ? $_POST['roles'] : array();
+    
+    // Update the user's roles in the database
+    $pdo->beginTransaction();
+    try {
+        // Remove the user from all role tables
+        $pdo->query("DELETE FROM r_administradores WHERE id_usuario = $id_usuario");
+        $pdo->query("DELETE FROM r_docentes WHERE id_usuario = $id_usuario");
+        $pdo->query("DELETE FROM r_estudiantes WHERE id_usuario = $id_usuario");
+        $pdo->query("DELETE FROM r_jueces WHERE id_usuario = $id_usuario");
+
+        // Add the user to the selected role tables
+        foreach ($roles as $role) {
+        switch ($role) {
+            case 'administrador':
+            $pdo->query("INSERT INTO r_administradores (id_usuario) VALUES ($id_usuario)");
+            break;
+            case 'docente':
+            $pdo->query("INSERT INTO r_docentes (id_usuario) VALUES ($id_usuario)");
+            break;
+            case 'estudiante':
+            $pdo->query("INSERT INTO r_estudiantes (id_usuario) VALUES ($id_usuario)");
+            break;
+            case 'juez':
+            $pdo->query("INSERT INTO r_jueces (id_usuario) VALUES ($id_usuario)");
+            break;
+        }
+        }
+
+        // Commit the changes
+        $pdo->commit();
+
+        // Redirect to the page that shows the user's details
+        header("Location: ver_usuarios.php?id_usuario=$id_usuario&rol=$rol");
+        exit();
+    } catch (Exception $e) {
+        // Roll back the transaction and show an error message
+        $pdo->rollBack();
+        echo "An error occurred while updating the user's roles: " . $e->getMessage();
+    }
+    }
+
+          
         
 
+        echo '<form method="post" action="editar_usuarios.php?id_usuario=' . $id_usuario . '&rol=' . $rol . '">';
         
         echo '<div id="instrucciones-editar-usuario">';
         echo '<h1 class="label">Editar '.$rol.'</h1>';
@@ -191,9 +170,11 @@
 
         echo '</div>';
         if($rol == 'Juez-Docente' || $rol == 'Juez' || $rol == 'Docente'){
-            echo '<button id="nueva-edicion-btn" class="btn">Guardar</button>';
+            echo '<button id="nueva-edicion-btn" class="btn" type="submit" name="submit">Guardar</button>';
         }
         
+
+       echo ' </form>';
     ?>
 
 
