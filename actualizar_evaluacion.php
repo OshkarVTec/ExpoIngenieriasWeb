@@ -42,7 +42,7 @@ if (!empty($_POST)) {
       $q = $pdo->prepare($sql);
       $q->execute(array($r1, $r2, $r3, $r4, $comentarios, $id_calificacion));
       Database::disconnect();
-      header("Location: evaluar.php");
+      header("Location: evaluar.php?status=1");
    }
 } else {
    $pdo = Database::connect();
@@ -98,7 +98,7 @@ if (!empty($_POST)) {
    Database::disconnect();
    ?>
 
-   <form method="post" action="evaluacion.php?id=<?php echo $id_calificacion ?>">
+   <form method="post" action="actualizar_evaluacion.php?id=<?php echo $id_calificacion ?>">
       <div class="container">
          <table class="general">
             <?php

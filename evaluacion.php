@@ -42,7 +42,7 @@ if (!empty($_POST)) {
       $q = $pdo->prepare($sql);
       $q->execute(array($r1, $r2, $r3, $r4, $comentarios, $id_calificacion));
       Database::disconnect();
-      header("Location: evaluar.php");
+      header("Location: evaluar.php?status=1");
    }
 }
 
