@@ -1,3 +1,7 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,7 +13,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
    <script> 
     $(function(){
-      $("#header").load("header.html"); 
+      $("#header").load(<?php 
+        if($_SESSION['estudiante'] != null){
+            echo '"header_estudiante.php"';
+        } else if($_SESSION['admin'] != null){
+            echo '"header_admin.php"';
+        } else if($_SESSION['juez'] != null){
+            echo '"header_juez.php"';
+        } else if($_SESSION['docente'] != null){
+            echo '"header_docente.php"';
+        }
+        ?>); 
     });
     </script> 
   </head>
@@ -19,31 +33,23 @@
     <section id="container-informativa">
       <div id="container-seccion-izquierda">
         <h1>Inicia Expoingenierias</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis in
-          ullam eum, aut perferendis dolorum vitae magni rem dicta consequatur
-          accusantium, molestiae sint. Odit aspernatur tempora nisi asperiores,
-          facere ratione. A facilis voluptates obcaecati tempore doloremque
-          molestiae architecto temporibus ipsam. Doloribus recusandae aperiam
-          nesciunt sapiente amet est reiciendis? Numquam ab iure magni expedita
-          voluptas consequatur eligendi et ipsam in velit. Enim error, quisquam
-          fuga velit fugit, vel autem natus rem aspernatur ratione quidem
-          recusandae debitis! Neque inventore error officiis quia, quam corporis
-          dolores sunt! Aspernatur eveniet adipisci consequuntur alias sint?
-        </p>
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+          Iusto incidunt doloribus quia repudiandae error, aliquid aspernatur 
+          labore illo veniam inventore velit voluptates ipsa accusantium nulla 
+          voluptatum corrupti fugiat ratione? Molestiae.</p>
       </div>
       <div id="container-seccion-derecha" class="slideshow-container">
         <div id="container-seccion-derecha-img">
           <div class="mySlides fade">
-            <img src="../img/ingeniero.png" />
+            <img src="IMG/ingeniero.png" />
           </div>
 
           <div class="mySlides fade">
-            <img src="../img/imagen2.jpg" />
+            <img src="IMG/imagen2.jpg" />
           </div>
 
           <div class="mySlides fade">
-            <img src="../img/imagen3.jpg" />
+            <img src="IMG/imagen3.jpg" />
           </div>
         </div>
 
@@ -56,6 +62,6 @@
       </div>
     </section>
 
-    <script src="../js/informativa.js"></script>
+    <script src="js/informativa.js"></script>
   </body>
 </html>

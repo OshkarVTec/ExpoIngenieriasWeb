@@ -1,3 +1,6 @@
+<?php 
+  session_start();
+?>
 <header class="header">
     <div class="logo">
       <img src="IMG/logo-expo.png" alt="Logo de la pagina">
@@ -7,7 +10,7 @@
        <li><a href="evaluar.php">Evaluar</a></li>
        <li><a href="ver_proyectos.php">Ver proyectos</a></li>
        <li><a href="informativa_juez.html">Anuncios</a></li>
-       <li><a href="cuenta.php">Cuenta</a></li>
+       <li><?php echo '<a href="cuenta.php?id_usuario='.$_SESSION['id_usuario'].'">Mi Cuenta</a>';?></li>
       </ul>
       </div>
    </nav>

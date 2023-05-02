@@ -1,4 +1,4 @@
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +10,17 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
    <script> 
     $(function(){
-      $("#header").load("header.html"); 
+      $("#header").load(<?php 
+        if($_SESSION['estudiante'] != null){
+            echo '"header_estudiante.php"';
+        } else if($_SESSION['admin'] != null){
+            echo '"header_admin.php"';
+        } else if($_SESSION['juez'] != null){
+            echo '"header_juez.php"';
+        } else if($_SESSION['docente'] != null){
+            echo '"header_docente.php"';
+        }
+        ?>); 
     });
     </script> 
 </head>

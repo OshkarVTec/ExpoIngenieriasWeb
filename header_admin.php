@@ -1,3 +1,7 @@
+<?php 
+session_start();
+?>
+
 <header class="header">
    <div class="logo">
      <img src="IMG/logo-expo.png" alt="Logo de la pagina">
@@ -18,7 +22,7 @@
     <div class="dropdown-content">
       <a href="rubrica_evaluacion.html">Criterio de evaluación</a>
       <a href="">Editar usuarios</a>
-      <a href="cuenta.html">Cuenta</a>
+      <?php echo '<a href="cuenta.php?id_usuario='.$_SESSION['id_usuario'].'">Mi Cuenta</a>';?>
       <a href="edicion_de_expo_vista.html">Edición de Expo</a>
       <a href="">Reportes</a>
     </div>
