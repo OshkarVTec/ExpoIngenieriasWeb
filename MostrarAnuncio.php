@@ -2,15 +2,12 @@
         include 'database.php';
         $pdo = Database::connect();
 
-        // Get the ID from the query string
         $id_anuncio = $_GET['id_anuncio'];
 
-        //Get Rol
         $contenido = $_GET['contenido'];
         $multimedia = $_GET['multimedia'];
 
 
-        // Query the database for the user's details
         $sql = "SELECT * FROM r_anuncios WHERE id_anuncio = ?";
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id_anuncio]);
