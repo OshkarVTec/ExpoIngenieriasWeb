@@ -79,6 +79,28 @@ if (!empty($_POST)) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edición de expo editar</title>
   <link rel="stylesheet" href="CSS/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script>
+    $(function () {
+      $("#header").load(<?php
+      if ($_SESSION['estudiante'] != null) {
+        echo '"header_estudiante.php"';
+      } else if ($_SESSION['admin'] != null) {
+        echo '"header_admin.php"';
+      } else if ($_SESSION['juez'] != null) {
+        if ($_SESSION['docente'] != null)
+          echo '"header_juez.php"';
+        else
+          echo '"header_docente_juez.php"';
+      } else if ($_SESSION['docente'] != null) {
+        echo '"header_docente.php"';
+      }
+      ?>);
+    });
+    $(function () {
+      $("#footer").load("footer.html");
+    })
+  </script>
 </head>
 
 <body>

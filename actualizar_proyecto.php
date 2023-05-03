@@ -115,6 +115,9 @@ if (!empty($_POST)) {
          }
          ?>);
       });
+      $(function () {
+         $("#footer").load("footer.html");
+      })
    </script>
 </head>
 
@@ -246,22 +249,22 @@ if (!empty($_POST)) {
 </html>
 
 <script>
-   (function ($) {
+      (function ($) {
 
-      var url = $('#linkv'),
-         btn = $('#convert-btn');
+         var url = $('#linkv'),
+            btn = $('#convert-btn');
 
-      btn.on('click', function (event) {
-         found = url.val().match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+         btn.on('click', function (event) {
+            found = url.val().match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
 
-         if (found[1].length) {
-            new_url = 'https://www.youtube.com/embed/' + found[1];
+            if (found[1].length) {
+               new_url = 'https://www.youtube.com/embed/' + found[1];
 
-            url.val(new_url);
-         }
-      });
+               url.val(new_url);
+            }
+         });
 
-   })(jQuery);
+      })(jQuery);
 </script>
 
 <script>

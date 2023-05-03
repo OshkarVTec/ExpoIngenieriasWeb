@@ -45,12 +45,18 @@ if ($q->rowCount() > 0) {
             } else if ($_SESSION['admin'] != null) {
                 echo '"header_admin.php"';
             } else if ($_SESSION['juez'] != null) {
-                echo '"header_juez.php"';
+                if ($_SESSION['docente'] != null)
+                    echo '"header_juez.php"';
+                else
+                    echo '"header_docente_juez.php"';
             } else if ($_SESSION['docente'] != null) {
                 echo '"header_docente.php"';
             }
             ?>);
         });
+        $(function () {
+            $("#footer").load("footer.html");
+        })
     </script>
 </head>
 

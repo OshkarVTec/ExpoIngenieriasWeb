@@ -82,6 +82,9 @@ Database::disconnect();
             }
             ?>);
         });
+        $(function () {
+            $("#footer").load("footer.html");
+        })
     </script>
 </head>
 

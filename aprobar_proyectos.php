@@ -55,6 +55,9 @@ if (!empty($_POST)) {
          }
          ?>);
       });
+      $(function () {
+         $("#footer").load("footer.html");
+      })
    </script>
 </head>
 
