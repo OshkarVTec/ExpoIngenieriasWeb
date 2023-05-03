@@ -32,6 +32,11 @@
     ?> 
 
 
+  <!-- INSERT INTO `r_calificaciones`(`puntos_rubro1`, `puntos_rubro2`, 
+  `puntos_rubro3`, `puntos_rubro4`, `comentarios`, `fecha`, `id_proyecto`, `id_juez`) 
+  VALUES (0,0,0,0,'',?,?,?) -->
+
+
     <div class="container">
     <table class="general">
 

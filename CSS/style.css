@@ -154,7 +154,7 @@ h1 {
   padding-inline: 20px;
 }
 
-.mitad{
+.mitad {
   display: grid;
   grid-template-columns: 40%40%;
 }
@@ -176,7 +176,7 @@ h1 {
 .logout button {
   color: var(--wordaccentbg1R);
   padding: 6px 10px;
-  background: #8B0000;
+  background: #8b0000;
   border: none;
   border-radius: 30px;
   cursor: pointer;
@@ -855,28 +855,29 @@ footer {
 }
 
 .email-column {
-  width: 350px; /* Change this value to whatever width you want */
+  width: 200px; /* Change this value to whatever width you want */
+  /* background-color: #00a2dd; */
+}
+
+.rol-column {
+  /* background-color: #8b0000; */
+  width: 100px;
+  /* background-color: chocolate; */
 }
 
 .id-column {
-  width: 15px;
+  width: 100px;
 }
 
-/* .row-botones {
-  width: 100px;
-} */
+.row-editar {
+  width: 150px;
+  /* background-color: #b8b8b8; */
+}
 
-.btn-vacio {
-  /* color: var(--wordaccentbg1R); */
-  background-color: white;
-  color: white;
-  padding: 6px 10px;
-  /* background: var(--mainR); */
-  border: none;
-  border-radius: 30px;
-  cursor: default;
-  transition: all 0.3s ease 0s;
-  text-decoration: none;
+.row-eliminar {
+  width: 100px;
+  /* background-color: #b8b8b8; */
+  /* background-color: darkorchid; */
 }
 
 .categoria-bio {
