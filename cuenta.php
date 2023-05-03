@@ -150,29 +150,30 @@ Database::disconnect();
         <br>
         <?php
         if ($rol == 'Estudiante') {
-            echo '<p> Mi Proyecto</p>';
-            echo '<hr color="#1687A7" width="50%">';
-            echo '<div class="cuentabig">';
-            echo '<ul class="cuentalast">';
-            echo '<li><p>';
-
             $pdo = Database::connect();
             $sql = 'SELECT * FROM r_proyecto_estudiantes WHERE matricula = ?';
             $q = $pdo->prepare($sql);
             $q->execute(array($matricula));
             $p_estudiantes = $q->fetch(PDO::FETCH_ASSOC);
             $proyecto = $p_estudiantes['id_proyecto'];
+            if ($proyecto != NULL) {
+                echo '<p> Mi Proyecto</p>';
+                echo '<hr color="#1687A7" width="50%">';
+                echo '<div class="cuentabig">';
+                echo '<ul class="cuentalast">';
+                echo '<li><p>';
 
-            $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
-            $q = $pdo->prepare($sql);
-            $q->execute(array($proyecto));
-            $p_name = $q->fetch(PDO::FETCH_ASSOC);
-            $proyectos = $p_name['nombre'];
-            echo $proyectos;
-            Database::disconnect();
-            echo '</a></li>';
-            echo '<li>';
-            echo '<a href="proyecto.php?id_proyecto=' . $proyecto . '" class="btnP"><button>Editar</button></a>';
+                $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
+                $q = $pdo->prepare($sql);
+                $q->execute(array($proyecto));
+                $p_name = $q->fetch(PDO::FETCH_ASSOC);
+                $proyectos = $p_name['nombre'];
+                echo $proyectos;
+                Database::disconnect();
+                echo '</a></li>';
+                echo '<li>';
+                echo '<a href="proyecto.php?id_proyecto=' . $proyecto . '" class="btnP"><button>Editar</button></a>';
+            }
         }
         echo '</li>';
         ?>
