@@ -913,7 +913,19 @@ footer {
   margin-left: 10px;
 }
 
+.row-nombre-proyecto {
+  width: 350px;
+  /* background-color: black; */
+}
+
+.row-etiqueta {
+  width: 250px;
+  /* background-color: darkslategrey; */
+}
+
 .row-cantidad-jueces {
   /* position: absolute; */
-  text-align: center;
+  /* text-align: center; */
+  /* background-color: #8b0000; */
+  width: 225px;
 }
