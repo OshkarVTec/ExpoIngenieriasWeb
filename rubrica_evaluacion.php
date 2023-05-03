@@ -16,10 +16,10 @@
       if($q->rowCount() > 0){
         $row = $q->fetch(PDO::FETCH_ASSOC);
         $id_rubrica = $row['id_rubrica'];
-        $nombre1 = $row['nombre1'];
-        $nombre2   = $row['nombre2'];
-        $nombre3 =$row['nombre3'];
-        $nombre4 = $row['nombre4'];
+        $rubro1 = $row['nombre1'];
+        $rubro2   = $row['nombre2'];
+        $rubro3 =$row['nombre3'];
+        $rubro4 = $row['nombre4'];
         $descripcion1 = $row['descripcion1'];
         $descripcion2 = $row['descripcion2'];   
         $descripcion3 = $row['descripcion3'];
@@ -55,34 +55,28 @@
 <body>
    <div id="header"></div>
    <div class = "container">
-      <a href="#" class="btnP"><button>Editar</button></a>
-      <table class="rubrica">  
-         <thead> 
-         <tr>
-            <th>Subcompetencia</th>
-            <th>Destacado</th>
-            <th>Sólido</th>
-            <th>Básico</th>
-            <th>Incipiente</th>
+      <?php 
+         if($_SESSION['admin'] != null){
+         echo '<a href="#" class="btnP"><button>Editar</button></a>}'; }?>
+      <h1>Rubrica de Evaluación</h1>
+      <table class="rubrica">
+        <thead>
+            <tr>
+            <th><?php echo $rubro1; ?></th>
+            <th><?php echo $rubro2; ?></th>
+            <th><?php echo $rubro3; ?></th>
+            <th><?php echo $rubro4; ?></th>
          </tr>
-         </thead>
-         <tbody>
-         <tr>
-            <td>Competencia 1</td>
-            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium distinctio nostrum quam! Officia tempore earum eius nam architecto. Quaerat doloremque, nesciunt laboriosam aut dolorem minima aliquid quo molestiae dolorum odio?</td>
-            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus officia inventore at ut atque eum quae illum quaerat eaque laboriosam quasi impedit ea repudiandae corporis dolore nisi, ab, nemo libero.</td>
-            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores esse ullam excepturi ut nisi vitae nesciunt voluptatem. Incidunt, omnis, nesciunt similique nihil animi, temporibus quas cupiditate aut blanditiis earum aliquid?</td>
-            <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum ab quae itaque excepturi reprehenderit dignissimos molestias blanditiis veritatis! Culpa dolore suscipit blanditiis, vero debitis quae quisquam assumenda nobis repudiandae ut?</td>
-         </tr>
-         <tr>
-            <td>Competencia 2</td>
-            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium distinctio nostrum quam! Officia tempore earum eius nam architecto. Quaerat doloremque, nesciunt laboriosam aut dolorem minima aliquid quo molestiae dolorum odio?</td>
-            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Possimus officia inventore at ut atque eum quae illum quaerat eaque laboriosam quasi impedit ea repudiandae corporis dolore nisi, ab, nemo libero.</td>
-            <td>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolores esse ullam excepturi ut nisi vitae nesciunt voluptatem. Incidunt, omnis, nesciunt similique nihil animi, temporibus quas cupiditate aut blanditiis earum aliquid?</td>
-            <td>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nostrum ab quae itaque excepturi reprehenderit dignissimos molestias blanditiis veritatis! Culpa dolore suscipit blanditiis, vero debitis quae quisquam assumenda nobis repudiandae ut?</td>
-         </tr>
-      </tbody>
-      </table>
+        </thead>
+        <tbody>
+            <tr>
+            <td><?php echo $descripcion1; ?></td>
+            <td><?php echo $descripcion2; ?></td>
+            <td><?php echo $descripcion3; ?></td>
+            <td><?php echo $descripcion4; ?></td>
+            </tr>
+        </tbody>    
+    </table>
    </div>
 </body>
 </html>

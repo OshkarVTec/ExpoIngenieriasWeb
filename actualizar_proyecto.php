@@ -205,12 +205,10 @@
             
             ?>
            
-           <button>a</button>
          </div>
          <?php if (($Error != null)) ?>
 				<div class="Error"><?php echo $Error;?></div>
       </form>
-      <button id="convert-btn">test</button>
    </body>
 </html>
  

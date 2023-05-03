@@ -58,7 +58,19 @@
 			$q = $pdo->prepare($sql);
 			$q->execute(array($poster,$descripcion, $name, $video, $uf, $docente, $categoria, ));
 			Database::disconnect();
-			header("Location: informativa.html");
+
+         $sql = 'SELECT * FROM r_proyectos WHERE nombre = ?';
+         $q = $pdo->prepare($sql);
+         $q->execute(array($name));
+         $row = $q->fetch(PDO::FETCH_ASSOC);
+         $id_proyecto = $row['id_proyecto'];
+			$sql = "INSERT INTO r_proyecto_estudiantes (id_registro, matricula, id_proyecto) 
+                                values (?, ?, ?)";
+                                
+			$q = $pdo->prepare($sql);
+			$q->execute(array(null, $_SESSION['estudiante'], $id_proyecto));
+			Database::disconnect();
+			header("Location: informativa.php");
 		}
 	}
 ?>

@@ -129,9 +129,28 @@ session_start();
             <div>
                 <h1>Calificacion y Retroalimentacion</h1>
                 <div class="calbox">
-                    <p class="cal">99</p> 
+                    <p class="cal"><?php  
+                    $promedios;
+                    $i = 1;
+                    $pdo = Database::connect();
+                    $sql = 'SELECT * FROM r_calificaciones WHERE id_proyecto = ?';
+                    $q = $pdo->prepare($sql);
+                    $q->execute(array($id_proyecto));
+                    $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);
+                    foreach($calificaciones as $row){
+                        $promedio = ($row['puntos_rubro1'] + $row['puntos_rubro2'] + $row['puntos_rubro3'] + $row['puntos_rubro4'])/4;
+                        $promedios = ($promedios + $promedio)/$i;
+                        $i = $i+1;
+                    }
+
+                    echo $promedios;
+
+                    Database::disconnect();
+                    ?></p> 
                     <hr color="#FFFFFF">
-                    <a href="#" class="caltext">Ver mas +</a>
+                    <?php 
+                        echo '<a href="proyecto_retro.php?id_proyecto='.$id_proyecto.'" class = "caltext">Ver Mas +</a>';
+                    ?>
                 </div>
             </div>
         </div>
