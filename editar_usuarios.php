@@ -137,29 +137,70 @@
         // }
 
 
+        if($rol == 'Docente'){
+          echo '<td class="rol" >';
+          echo '<input  type="checkbox" id="Maestro" name="roles[]"'.$checked_maestro.' />';
+          echo '<label  for="Maestro">Docente</label>';
+          echo '</td>';
+  
+  
+          
+  
+          echo '<td class="rol">';
+          echo '<input type="checkbox" id="Juez" name="roles[]"'.$checked_juez.' />';
+          echo '<label for="Juez">Juez</label>';
+          echo '</td>';
+        }
 
-        echo '<td class="rol">';
-        echo '<input type="checkbox" id="Maestro" name="Maestro"'.$checked_maestro.' />';
-        echo '<label for="Maestro">Docente</label>';
-        echo '</td>';
+        if($rol == 'Sin Asignar'){
+          echo '<td class="rol">';
+          echo '<input type="checkbox" id="Maestro" name="roles[]"'.$checked_maestro.' />';
+          echo '<label for="Maestro">Docente</label>';
+          echo '</td>';
+  
+  
+          
+  
+          echo '<td class="rol">';
+          echo '<input type="checkbox" id="Juez" name="roles[]"'.$checked_juez.' />';
+          echo '<label for="Juez">Juez</label>';
+          echo '</td>';
+  
+          echo '<td class="rol">';
+          echo '<input type="checkbox" id="Administrador" name="Administrador"'.$checked_administrador.' />';
+          echo '<label for="Administrador">Administrador</label>';
+          echo '</td>';
+  
+          echo '<td class="rol">';
+          echo '<input type="checkbox" id="Estudiante" name="Estudiante"'.$checked_estudiante.' />';
+          echo '<label for="Estudiante">Estudiante</label>';
+          echo '</td>';
+        }
+
+
+
+        // echo '<td class="rol">';
+        // echo '<input type="checkbox" id="Maestro" name="Maestro"'.$checked_maestro.' />';
+        // echo '<label for="Maestro">Docente</label>';
+        // echo '</td>';
 
 
         
 
-        echo '<td class="rol">';
-        echo '<input type="checkbox" id="Juez" name="Juez"'.$checked_juez.' />';
-        echo '<label for="Juez">Juez</label>';
-        echo '</td>';
+        // echo '<td class="rol">';
+        // echo '<input type="checkbox" id="Juez" name="Juez"'.$checked_juez.' />';
+        // echo '<label for="Juez">Juez</label>';
+        // echo '</td>';
 
-        echo '<td class="rol">';
-        echo '<input type="checkbox" id="Administrador" name="Administrador"'.$checked_administrador.' />';
-        echo '<label for="Administrador">Administrador</label>';
-        echo '</td>';
+        // echo '<td class="rol">';
+        // echo '<input type="checkbox" id="Administrador" name="Administrador"'.$checked_administrador.' />';
+        // echo '<label for="Administrador">Administrador</label>';
+        // echo '</td>';
 
-        echo '<td class="rol">';
-        echo '<input type="checkbox" id="Estudiante" name="Estudiante"'.$checked_estudiante.' />';
-        echo '<label for="Estudiante">Estudiante</label>';
-        echo '</td>';
+        // echo '<td class="rol">';
+        // echo '<input type="checkbox" id="Estudiante" name="Estudiante"'.$checked_estudiante.' />';
+        // echo '<label for="Estudiante">Estudiante</label>';
+        // echo '</td>';
 
 
 
@@ -169,7 +210,7 @@
         echo '</div>';
 
         echo '</div>';
-        if($rol == 'Juez-Docente' || $rol == 'Juez' || $rol == 'Docente'){
+        if($rol == 'Docente' || $rol == 'Sin Asignar'){
             echo '<button id="nueva-edicion-btn" class="btn" type="submit" name="submit">Guardar</button>';
         }
         

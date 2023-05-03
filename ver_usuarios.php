@@ -13,12 +13,10 @@
     </header>
 
     <div id="instrucciones-editar-usuario">
-      <h1 class="label">Usuarios aprobados</h1>
+      <h1 class="label">Ver Usuarios </h1>
       <h5 id="texto-instruciones">
-        Selecciona para aprobar y da clic en Guardar para registrar los cambios
+        Selecciona para eliminar o editar el rol de un usuario.
       </h5>
-
-
 
 
     <nav class="pruebaZ">
@@ -38,10 +36,6 @@
       </div>
     </nav>
     </div>
-
-
-    
-
 
 
     <div class="container">
@@ -89,7 +83,7 @@
                       ORDER BY r_administradores.id_usuario";        
               break;
             case 'juez':
-              $sql = "SELECT r_usuarios.id_usuario, r_usuarios.correo FROM r_usuarios
+              $sql = "SELECT r_usuarios.id_usuario, r_usuarios.correo, r_jueces.id_juez FROM r_usuarios
                       LEFT JOIN r_docentes ON r_usuarios.id_usuario = r_docentes.id_usuario
                       LEFT JOIN r_jueces ON r_usuarios.id_usuario = r_jueces.id_usuario
                       WHERE r_jueces.id_usuario IS NOT NULL AND r_docentes.id_usuario IS NULL
@@ -135,6 +129,12 @@
             $row_juez = $stmt_juez->fetch(PDO::FETCH_ASSOC);
             $checked_juez = $row_juez ? 'checked' : '';
 
+            // if(isset($row_juez)){
+            //   $isJuez = true;
+            // }else{
+            //   $isJuez = false;
+            // }
+
             // Check if the user is an Administrador
             $sql_administrador = "SELECT * FROM r_administradores WHERE id_usuario = ?";
             $stmt_administrador = $pdo->prepare($sql_administrador);
@@ -168,6 +168,13 @@
             
             
 
+            // echo 'Hola';
+            if(isset($row['id_juez'])){
+              echo $row['id_juez'];
+            }
+            
+      
+
 
 
             echo '<tr>';
@@ -192,22 +199,146 @@
             echo '<pre>'.$rol.' </pre>';
             echo '</td>';
 
-            if($rol != 'Administrador'){
-              echo '<td class="row-eliminar">';
-              echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" 
-              onclick="return confirm(\'¿Estás seguro que deseas eliminar a este usuario?\')">Eliminar</a>';
-              echo '</td>';   
+
+            // if($rol != 'Administrador'){
+            //   echo '<td class="row-eliminar">';
+            //   echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" 
+            //   onclick="return confirm(\'¿Estás seguro que deseas eliminar a este usuario?\')">Eliminar</a>';
+            //   echo '</td>';   
+            // }
+
+            if($rol == 'Juez' || $rol == 'Juez-Docente'){
+
+              // First query to retrieve 'id_juez'
+              $sql_informacion_juez = "SELECT r_jueces.id_juez 
+              FROM r_jueces
+              WHERE r_jueces.id_usuario = ?";
+
+              $stmt = $pdo->prepare($sql_informacion_juez);
+              $stmt->execute([$row['id_usuario']]); // Bind the parameter with the value
+              $row_juez = $stmt->fetch(PDO::FETCH_ASSOC);
+
+              //Contar cantidad de proyectos que un juez en particular ha calificado
+              $sql_cantidad_calificaciones = "SELECT r_jueces.nombre, r_jueces.apellidoP, r_jueces.apellidoM, r_jueces.id_juez 
+              FROM r_jueces 
+              LEFT JOIN r_calificaciones ON r_jueces.id_juez = r_calificaciones.id_juez 
+              WHERE r_calificaciones.id_juez = ?";
+
+  
+              $stmt = $pdo->prepare($sql_cantidad_calificaciones);
+              $stmt->execute([$row_juez['id_juez']]); // Bind the parameter with the value
+              $rowCount = $stmt->rowCount();
+  
+  
+              // echo $rowCount;
+
+              if($rowCount > 0){
+                echo '<td class="row-eliminar">';
+                echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" 
+                onclick="return confirm(\'Este juez ha calificado '.$rowCount.' proyecto(s), si lo eliminas borrarás sus calificaciones asignadas a otros proyectos. ¿Deseas continuar?\')">Eliminar**</a>';
+                echo '</td>'; 
+              }else{
+                echo '<td class="row-eliminar">';
+                echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" 
+                onclick="return confirm(\'¿Esta acción es irreversible, deseas continuar?\')">Eliminar</a>';
+                echo '</td>';
+              }
+
+
+
             }
 
 
-            if($rol != 'Administrador' && $rol != 'Estudiante'){          
+            if($rol == 'Docente'){
+
+              // First query to retrieve 'id_docente'
+              $sql_informacion_juez = "SELECT r_docentes.id_docente 
+              FROM r_docentes
+              WHERE r_docentes.id_usuario = ?";
+
+              $stmt = $pdo->prepare($sql_informacion_juez);
+              $stmt->execute([$row['id_usuario']]); // Bind the parameter with the value
+              $row_juez = $stmt->fetch(PDO::FETCH_ASSOC);
+
+              //Contar cantidad de proyectos a los que un docente esta vinculado
+              $sql_cantidad_calificaciones = "SELECT r_docentes.nombre, r_docentes.apellidoP, r_docentes.apellidoM, r_docentes.id_docente 
+              FROM r_docentes 
+              LEFT JOIN r_proyectos ON r_docentes.id_docente = r_proyectos.id_docente 
+              WHERE r_proyectos.id_docente = ?";
+
+              $stmt = $pdo->prepare($sql_cantidad_calificaciones);
+              $stmt->execute([$row_juez['id_docente']]); // Bind the parameter with the value
+              $rowCount = $stmt->rowCount();
+
+              // echo $rowCount;
+
+              if($rowCount > 0){
+                echo '<td class="row-eliminar">';
+                echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" 
+                onclick="return confirm(\'Este docente ha sido asignado a '.$rowCount.' proyecto(s), si lo eliminas borrarás todos los proyectos vinculados así como las calificaciones de los mismos. ¿Deseas continuar?\')">Eliminar**</a>';
+                echo '</td>'; 
+              }else{
+                echo '<td class="row-eliminar">';
+                echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" 
+                onclick="return confirm(\'¿Esta acción es irreversible, deseas continuar?\')">Eliminar</a>';
+                echo '</td>';
+              }
+            }
+
+
+            if($rol == 'Estudiante'){
+
+              // First query to retrieve 'matricula'
+              $sql_informacion_juez = "SELECT r_estudiantes.matricula 
+              FROM r_estudiantes
+              WHERE r_estudiantes.id_usuario = ?";
+
+              $stmt = $pdo->prepare($sql_informacion_juez);
+              $stmt->execute([$row['id_usuario']]); // Bind the parameter with the value
+              $row_juez = $stmt->fetch(PDO::FETCH_ASSOC);
+
+              //Contar cantidad de proyectos a los que un estudiante esta vinculado
+              $sql_cantidad_calificaciones = "SELECT  r_estudiantes.matricula 
+              FROM r_estudiantes LEFT JOIN r_proyecto_estudiantes ON r_estudiantes.matricula = r_proyecto_estudiantes.matricula 
+              WHERE r_proyecto_estudiantes.matricula = ?";
+
+
+              $stmt = $pdo->prepare($sql_cantidad_calificaciones);
+              $stmt->execute([$row_juez['matricula']]); // Bind the parameter with the value
+              $rowCount = $stmt->rowCount();
+
+              // echo $rowCount;
+
+              if($rowCount > 0){
+                echo '<td class="row-eliminar">';
+                echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" 
+                onclick="return confirm(\'Este alumno ha sido asignado a '.$rowCount.' proyecto(s), eliminarlo resulta en una acción muy disruptiva ¿Estás completamente seguro de que deseas continuar?\')">Eliminar**</a>';
+                echo '</td>'; 
+              }else{
+                echo '<td class="row-eliminar">';
+                echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" 
+                onclick="return confirm(\'¿Esta acción es irreversible, deseas continuar?\')">Eliminar</a>';
+                echo '</td>';
+              }
+            }
+
+
+            if($rol == 'Sin Asignar'){
+              echo '<td class="row-eliminar">';
+              echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" 
+              onclick="return confirm(\'¿Esta acción es irreversible, deseas continuar?\')">Eliminar</a>';
+              echo '</td>';
+            }
+
+
+            if($rol != 'Administrador' && $rol != 'Estudiante' && $rol != 'Juez'){          
               echo '<td class="row-editar">';
               echo '<a class="btn" href="editar_usuarios.php?id_usuario=' . $id_usuario . '&rol=' . $rol . '">Editar Rol</a>';
               echo '</td>';
               
             }
 
-            if($rol == 'Administrador' || $rol == 'Estudiante'){
+            if($rol == 'Administrador' || $rol == 'Estudiante' || $rol == 'Juez' ){
               echo '<td class="row-editar">';
               // echo '<a   class="btn-vacio"></a>';
               echo '</td>';
@@ -220,6 +351,7 @@
               echo '</td>';
 
             }
+
 
 
 

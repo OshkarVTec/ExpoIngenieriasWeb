@@ -185,6 +185,8 @@
       LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto 
       WHERE r_proyectos.id_proyecto = ?";
 
+
+
       $stmt = $pdo->prepare($sql2);
       $stmt->execute([$row['id_proyecto']]); // Bind the parameter with the value
       $rowCount = $stmt->rowCount();
