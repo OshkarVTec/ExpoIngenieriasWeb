@@ -16,7 +16,7 @@ if (!($_SESSION['id_juez'] != null || $_SESSION['admin'] != null || $_SESSION['i
    <script>
       $(function () {
          $("#header").load(<?php
-         if ($_SESSION['estudiante'] != null) {
+         if ($_SESSION['matricula'] != null) {
             echo '"header_estudiante.php"';
          } else if ($_SESSION['admin'] != null) {
             echo '"header_admin.php"';

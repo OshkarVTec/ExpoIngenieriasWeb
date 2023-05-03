@@ -28,8 +28,8 @@
          // LEFT JOIN r_administradores ON r_usuarios.id_usuario = r_administradores.id_usuario
          // WHERE correo=? AND contrasenia=?";
 
-         $sql = "SELECT 
-         r_usuarios.*,
+         $sql = "SELECT
+         r_usuarios.id_usuario,
          r_administradores.id_administrador,
          r_jueces.id_juez,
          r_docentes.id_docente,
@@ -62,7 +62,7 @@
                header("location: informativa.php");
             //checa si es estudiante
            } if ($fetch['matricula'] != null) {
-               $_SESSION['estudiante'] = $fetch['matricula'];
+               $_SESSION['matricula'] = $fetch['matricula'];
                header("location: informativa.php");
            }
            $_SESSION['id_usuario'] = $fetch['id_usuario'];
