@@ -154,9 +154,9 @@ Database::disconnect();
             $sql = 'SELECT * FROM r_proyecto_estudiantes WHERE matricula = ?';
             $q = $pdo->prepare($sql);
             $q->execute(array($matricula));
-            $p_estudiantes = $q->fetch(PDO::FETCH_ASSOC);
-            $proyecto = $p_estudiantes['id_proyecto'];
-            if ($proyecto != NULL) {
+            $p_estudiantes = $q->fetchAll(PDO::FETCH_ASSOC);
+            foreach ($p_estudiantes as $row) {
+                $proyecto = $row['id_proyecto'];
                 echo '<p> Mi Proyecto</p>';
                 echo '<hr color="#1687A7" width="50%">';
                 echo '<div class="cuentabig">';
@@ -165,7 +165,7 @@ Database::disconnect();
 
                 $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
                 $q = $pdo->prepare($sql);
-                $q->execute(array($proyecto));
+                $q->execute(array($row));
                 $p_name = $q->fetch(PDO::FETCH_ASSOC);
                 $proyectos = $p_name['nombre'];
                 echo $proyectos;
