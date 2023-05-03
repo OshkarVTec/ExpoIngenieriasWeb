@@ -37,6 +37,19 @@ if ($q->rowCount() > 0) {
     $id_edicion = $row['id_edicion'];
     $id_user = $row['id_usuario'];
     $rol = "Docente";
+    $sql = 'SELECT * FROM r_jueces WHERE id_usuario = ?';
+    $q = $pdo->prepare($sql);
+    $q->execute(array($id_usuario));
+    if ($q->rowCount() > 0) {
+        $row = $q->fetch(PDO::FETCH_ASSOC);
+        $name = $row['nombre'];
+        $matricula = $row['matricula'];
+        $apellidoP = $row['apellidoP'];
+        $apellidoM = $row['apellidoM'];
+        $id_edicion = $row['id_edicion'];
+        $id_user = $row['id_usuario'];
+        $rol = "Juez/Docente";
+    }
 }
 
 $sql = 'SELECT * FROM r_jueces WHERE id_usuario = ?';
@@ -74,9 +87,9 @@ Database::disconnect();
                 echo '"header_admin.php"';
             } else if ($_SESSION['juez'] != null) {
                 if ($_SESSION['docente'] != null)
-                    echo '"header_juez.php"';
-                else
                     echo '"header_docente_juez.php"';
+                else
+                    echo '"header_juez.php"';
             } else if ($_SESSION['docente'] != null) {
                 echo '"header_docente.php"';
             }
