@@ -99,7 +99,8 @@ Database::disconnect();
         <hr color="#1687A7">
 
         <br>
-        <p>Nombre, Matricula y Carrera</p>
+
+        <p>Nombre</p>
         <hr color="#1687A7" width="50%">
         <div class="cuentabig">
             <p>
@@ -108,18 +109,33 @@ Database::disconnect();
                 echo !empty($apellidoP) ? $apellidoP : ' ';
                 echo ' ';
                 echo !empty($apellidoM) ? $apellidoM : '';
-                echo ', ';
-                echo $matricula;
-                echo ' - ';
-                $sql = 'SELECT * FROM r_carreras WHERE id_carrera = ?';
-                $w = $pdo->prepare($sql);
-                $w->execute(array($id_carrera));
-                $c_name = $w->fetch(PDO::FETCH_ASSOC);
-                echo $c_name['nombre'];
-                Database::disconnect();
                 ?>
             </p>
         </div>
+        <?php
+        if ($rol == 'Estudiante') {
+            echo "<p>Matricula</p>";
+            echo "<hr color=\"#1687A7\" width=\"50%\">";
+            echo "<div class=\"cuentabig\">";
+            echo "<p>";
+            echo $matricula;
+            echo "</p>";
+            echo "</div>";
+
+            echo "<p>Carrera</p>";
+            echo "<hr color=\"#1687A7\" width=\"50%\">";
+            echo "<div class=\"cuentabig\">";
+            echo "<p>";
+            $sql = 'SELECT * FROM r_carreras WHERE id_carrera = ?';
+            $w = $pdo->prepare($sql);
+            $w->execute(array($id_carrera));
+            $c_name = $w->fetch(PDO::FETCH_ASSOC);
+            echo $c_name['nombre'];
+            echo "</p>";
+            echo "</div>";
+        }
+        ?>
+
 
         <br>
         <p>Correo Electrónico</p>
