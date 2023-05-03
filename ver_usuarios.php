@@ -24,7 +24,7 @@
     <nav class="pruebaZ">
       <div class="dropdown">
         <button class="dropbtn">
-          <h2>Filtrar</h2>
+          <h2>Filtrar &#9660;</h2>
           <i class="fa fa-caret-down"></i>
         </button>
         <div class="dropdown-content">
@@ -40,10 +40,20 @@
     </div>
 
 
+    
+
 
 
     <div class="container">
       <table class="general">
+
+      <tr>
+      <th class="id-column">ID usuario</th>
+      <th class="email-column">Correo</th>
+      <th class="rol-column">Rol</th>
+      <th class="row-editar"></th>
+      <th class="row-eliminar"></th>
+      </tr>
 
 
 
@@ -169,43 +179,47 @@
 
 
 
-            echo '<td class="email-column"><a class="link-edicion">'.$row['correo'].'</a></td>';
+          
 
-            if($rol != 'Administrador'){          
-              echo '<td class="row-botones">';
-              echo '<a class="btn" href="editar_usuarios.php?id_usuario=' . $id_usuario . '&rol=' . $rol . '">Editar</a>';
+            // echo '<td class="email-column"><a class="link-edicion">'.$row['correo'].'</a></td>';
+
+
+            echo '<td class="email-column">';
+            echo '<pre><a class="rol-edicion">'.$row['correo'].'  </a></pre>';
+            echo '</td>';
+
+            echo '<td class="rol-column">';
+            echo '<pre>'.$rol.' </pre>';
+            echo '</td>';
+
+            if($rol != 'Administrador'){
+              echo '<td class="row-eliminar">';
+              echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" 
+              onclick="return confirm(\'¿Estás seguro que deseas eliminar a este usuario?\')">Eliminar</a>';
+              echo '</td>';   
+            }
+
+
+            if($rol != 'Administrador' && $rol != 'Estudiante'){          
+              echo '<td class="row-editar">';
+              echo '<a class="btn" href="editar_usuarios.php?id_usuario=' . $id_usuario . '&rol=' . $rol . '">Editar Rol</a>';
               echo '</td>';
+              
+            }
+
+            if($rol == 'Administrador' || $rol == 'Estudiante'){
+              echo '<td class="row-editar">';
+              // echo '<a   class="btn-vacio"></a>';
+              echo '</td>';
+
             }
 
             if($rol == 'Administrador'){
-              echo '<td >';
-              echo '<a   class="btn-vacio">Editar</a>';
+              echo '<td class="row-eliminar">';
+              // echo '<a   class="btn-vacio"></a>';
               echo '</td>';
+
             }
-
-
-            echo '<td>';
-            echo '<input type="checkbox" id="Maestro" name="Maestro"'.$checked_maestro.' />';
-            echo '<label for="Maestro">Docente</label>';
-            echo '</td>';
-
-
-            
-
-            echo '<td>';
-            echo '<input type="checkbox" id="Juez" name="Juez"'.$checked_juez.' />';
-            echo '<label for="Juez">Juez</label>';
-            echo '</td>';
-
-            echo '<td>';
-            echo '<input type="checkbox" id="Administrador" name="Administrador"'.$checked_administrador.' />';
-            echo '<label for="Administrador">Administrador</label>';
-            echo '</td>';
-
-            echo '<td>';
-            echo '<input type="checkbox" id="Estudiante" name="Estudiante"'.$checked_estudiante.' />';
-            echo '<label for="Estudiante">Estudiante</label>';
-            echo '</td>';
 
 
 

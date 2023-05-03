@@ -129,12 +129,12 @@
         // echo '<a class="btn" href="editar_usuarios.php?id_usuario=' . $id_usuario . '&rol=' . $rol . '">Editar</a>';
 
         // echo '</td>';
-        if($rol != 'Administrador'){
-            echo '<td class="row-botones">';
-            echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" onclick="return confirm(\'¿Estás seguro que deseas eliminar a este usuario?\')">Eliminar</a>';
+        // if($rol != 'Administrador'){
+        //     echo '<td class="row-botones">';
+        //     echo '<a class="btn-eliminar" href="borrar_usuario.php?id_usuario='.$id_usuario.'" onclick="return confirm(\'¿Estás seguro que deseas eliminar a este usuario?\')">Eliminar</a>';
     
-            echo '</td>';   
-        }
+        //     echo '</td>';   
+        // }
 
 
 
