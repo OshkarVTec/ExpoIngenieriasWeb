@@ -61,6 +61,8 @@
 
 
 
+
+
         $pdo = Database::connect();
 
         $sql = "SELECT r_jueces.nombre, r_jueces.apellidoP ,r_jueces.apellidoM, r_proyectos.id_proyecto, r_jueces.id_juez
@@ -78,7 +80,7 @@
         foreach ($proyectos as $row) {
 
 
-          //Segunda query
+          //cuenta los jueces que han sido asignados al proyecto actual
           $sql2 = "SELECT COUNT(*) AS num_rows 
           FROM ( 
           SELECT r_jueces.nombre, r_jueces.apellidoP, r_jueces.apellidoM, r_proyectos.id_proyecto, 		r_jueces.id_juez 
@@ -102,17 +104,95 @@
  
 
 
-                echo '<td> #Proyectos asignados:'.$num_rows.' </td>';
+                echo '<td> #Proyectos asignados: '.$num_rows.' </td>';
             echo '</tr>';                       
 
         }
 
-        Database::disconnect();
+
     }
 
     // header("Location: ver_usuarios.php");
     
-    exit();
+    // exit();
 ?>
+
     </table>
     </div>
+
+
+
+
+
+
+    <div id="instrucciones-editar-usuario">
+    <h1 class="label">Jueces sin asignar a este proyecto</h1>
+    <!-- <h5 id="texto-instruciones">
+    
+    </h5> -->
+    </div>
+
+  
+  <div class="container">
+  <table class="general">  
+
+
+
+<?php
+
+        $id_proyecto = $_GET['id_proyecto'];
+
+        //Te dice los jueces que forman parte de la edicion activa y que no forman parte del proyecto actual
+        $sql = "SELECT *
+        FROM r_jueces
+        WHERE id_edicion = (
+          SELECT id_edicion
+          FROM r_ediciones
+          WHERE activa = 1
+        )
+        AND id_juez NOT IN (
+          SELECT id_juez
+          FROM r_calificaciones
+          WHERE id_proyecto = ?
+        )";
+
+        $q = $pdo->prepare($sql);
+        $q->execute([$id_proyecto]); // Bind the parameter with the value
+        // $rowCount = $stmt->rowCount();
+
+
+
+
+        // $proyectos = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($q as $row) {
+
+
+        echo '<tr>';
+        echo '<td><a class="link-edicion">'.$row['nombre'].' '.$row['apellidoP'].' '.$row['apellidoM'].'</a></td>';
+
+        //Segunda query para contar la cantidad que veces que dicho juez ha sido asignado, excluyendo el proyecto actual
+        //y que sean proyectos vigentes
+
+        $sql2 = "SELECT COUNT(DISTINCT rc.id_proyecto)
+        FROM r_calificaciones rc
+        JOIN r_proyectos rp ON rc.id_proyecto = rp.id_proyecto
+        JOIN r_ediciones re ON rp.id_edicion = re.id_edicion
+        WHERE rc.id_juez = ? AND rc.id_proyecto != ? AND re.activa = 1";
+
+        $q = $pdo->prepare($sql2);
+        $q->execute([$row['id_juez'],$id_proyecto]);
+
+        $num_assignments = $q->fetchColumn();
+
+        echo '<td>#Proyectos asignados: '.$num_assignments.' </td>';
+
+
+        echo '</tr>';   
+
+        }
+
+        Database::disconnect();
+?>
+
+  </table>
+  </div>
