@@ -1,11 +1,11 @@
 <?php
 session_start();
-include 'database.php';
-session_start();
 if ($_SESSION['id_docente'] != null)
    $id_juez = $_SESSION['id_docente'];
 else
    header("Location:informativa.php");
+
+require 'database.php';
 if (!empty($_POST)) {
    $id_proyecto = $_POST['id'];
    if (isset($_POST['aprobar'])) {

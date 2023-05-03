@@ -1,11 +1,10 @@
 <?php
 session_start();
-require 'database.php';
 if ($_SESSION['matricula'] != null)
    $matricula = $_SESSION['matricula'];
 else
    header("Location:informativa.php");
-
+require 'database.php';
 $Error = null;
 
 if (!empty($_POST)) {

@@ -1,3 +1,8 @@
+<?php
+session_start();
+if (!($_SESSION['admin'] != null))
+   header("Location:informativa.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>

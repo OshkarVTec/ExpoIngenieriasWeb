@@ -1,10 +1,11 @@
 <?php
-require 'database.php';
 session_start();
 if ($_SESSION['id_juez'] != null)
    $id_juez = $_SESSION['id_juez'];
 else
    header("Location:informativa.php");
+
+require 'database.php';
 
 $status = null;
 if (!empty($_GET['status'])) {
