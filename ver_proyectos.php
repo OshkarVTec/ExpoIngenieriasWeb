@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!($_SESSION['id_juez'] != null || $_SESSION['admin'] != null || $_SESSION['id_docente'] != null))
+if (!($_SESSION['juez'] != null || $_SESSION['admin'] != null || $_SESSION['docente'] != null))
    header("Location:informativa.php");
 ?>
 <!DOCTYPE html>

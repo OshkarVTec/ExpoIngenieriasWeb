@@ -16,8 +16,9 @@ $idproyecto = $proyecto['id_proyecto'];
    </div>
    <nav class="menu">
       <ul class="nav-links">   
-      <li><a href="ver_proyectos.php">Aprobar proyectos</a></li>
+      <li><a href="aprobar_proyectos.php">Aprobar proyectos</a></li>
       <li><a href="informativa.php">Anuncios</a></li>
+      <li><a href="ver_proyectos.php">Ver proyectos</a></li>
       <li><?php echo '<a href="cuenta.php?id_usuario='.$_SESSION['id_usuario'].'">Mi Cuenta</a>';?></li>
      </ul>
      </div>

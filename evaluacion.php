@@ -1,7 +1,7 @@
 <?php
 session_start();
-if ($_SESSION['id_juez'] != null)
-   $id_juez = $_SESSION['id_juez'];
+if ($_SESSION['juez'] != null)
+   $id_juez = $_SESSION['juez'];
 else
    header("Location:informativa.php");
 
