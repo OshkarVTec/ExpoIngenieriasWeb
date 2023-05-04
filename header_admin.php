@@ -21,7 +21,7 @@ session_start();
       </button>
     <div class="dropdown-content">
       <a href="rubrica_evaluacion.php">Criterio de evaluación</a>
-      <a href="editar_usuarios.php">Editar usuarios</a>
+      <a href="ver_usuarios.php">Editar usuarios</a>
       <?php echo '<a href="cuenta.php?id_usuario='.$_SESSION['id_usuario'].'">Mi Cuenta</a>';?>
       <a href="edicion_de_expo_vista.php">Edición de Expo</a>
     </div>
