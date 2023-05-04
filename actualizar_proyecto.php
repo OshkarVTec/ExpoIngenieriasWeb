@@ -67,8 +67,24 @@ if (!empty($_POST)) {
                   WHERE id_proyecto = ?";
       $q = $pdo->prepare($sql);
       $q->execute(array($poster, $descripcion, $name, $video, $uf, $docente, $categoria, $id_proyecto));
+      $sql = 'DELETE FROM r_proyecto_estudiantes WHERE id_proyecto = ?';
+      $q = $pdo->prepare($sql);
+      $q->execute(array($id_proyecto));
+      $sql = "INSERT INTO r_proyecto_estudiantes (id_registro, matricula, id_proyecto) 
+                                values (?, ?, ?)";
+      $q = $pdo->prepare($sql);
+      $q->execute(array(null, $_SESSION['matricula'], $id_proyecto));
+      $select = $_POST['pers'];
+      foreach ($select as $value) {
+         $query = "SELECT * FROM r_estudiantes WHERE matricula = '$value'";
+         $result = $pdo->query($query);
+         $row = $result->fetch(PDO::FETCH_ASSOC);
+         $sql = "INSERT INTO r_proyecto_estudiantes (matricula, id_proyecto) VALUES (?,?)";
+         $q = $pdo->prepare($sql);
+         $q->execute(array($row['matricula'], $id_proyecto));
+      }
       Database::disconnect();
-      header("Location: informativa_estudiante.html");
+      header("Location: mis_proyectos.php");
    }
 } else {
    $pdo = Database::connect();
@@ -95,7 +111,7 @@ if (!empty($_POST)) {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Nuevos Anuncios</title>
+   <title>Crear Proyecto</title>
    <link rel="stylesheet" href="CSS/style.css">
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
    <script>
@@ -122,22 +138,38 @@ if (!empty($_POST)) {
 </head>
 
 <body>
-   <header class="header">
-      <div class="logo">
-         <a href="informativa_presentacion.html"><img src="IMG/logo-expo.png" alt="Logo de la pagina"></a>
-      </div>
-      <h1>Announcement Form</h1>
-   </header>
+   <div id="header"></div>
    <div class="ventana">
       <h1 class="label"></h1>
       <div class="container">
          <form class="login" action="actualizar_proyecto.php?id_proyecto=<?php echo $id_proyecto ?>" method=POST>
             <table>
+
                <tr>
                   <td><label for="name">Nombre del Proyecto:</label></td>
                   <td><input type="text" id="title" name="name" value="<?php echo !empty($name) ? $name : ''; ?>"></td>
-                  <td><input value="Agregar compañeros" type="submit" class="btn"></td>
+                  <td>
+                  <td class="pruebaZ">
+                     <div class="dropdown">
+                        <button class="dropbtn">
+                           <h2>Agregar compañeros</h2>
+                           <i class="fa fa-caret-down"></i>
+                        </button>
+                        <div class="dropdown-content">
+                           <?php
+                           $query = 'SELECT * FROM r_estudiantes WHERE matricula != "' . $_SESSION['matricula'] . '"';
+                           foreach ($pdo->query($query) as $row) {
+                              echo '<input type="checkbox" name="pers[]" value="' . $row['matricula'] . '">';
+                              echo '<label>' . $row['nombre'] . ' ' . $row['apellidoP'] . ' ' . $row['apellidoM'] . '</label><br>';
+                           }
+                           echo '</div>';
+                           echo '</div>';
+                           ?>
+                  </td>
+
                </tr>
+
+
 
                <tr>
                   <td><label for="poster">Link al poster:</label></td>
@@ -155,13 +187,9 @@ if (!empty($_POST)) {
                   <td>
                      <select name="uf">
                         <?php
-                        $pdo = Database::connect();
                         $query = 'SELECT * FROM r_ufs';
                         foreach ($pdo->query($query) as $row) {
-                           if ($row['id_uf'] == $uf)
-                              echo "<option selected value='" . $row['id_uf'] . "'>" . $row['nombre'] . "</option>";
-                           else
-                              echo "<option value='" . $row['id_uf'] . "'>" . $row['nombre'] . "</option>";
+                           echo "<option value='" . $row['id_uf'] . "'>" . $row['nombre'] . "</option>";
                         }
                         Database::disconnect();
                         ?>
@@ -177,10 +205,7 @@ if (!empty($_POST)) {
                         $pdo = Database::connect();
                         $query = 'SELECT * FROM r_docentes';
                         foreach ($pdo->query($query) as $row) {
-                           if ($row['id_docente'] == $docente)
-                              echo "<option selected value='" . $row['id_docente'] . "'>" . $row['nombre'] . " " . $row['apellidoP'] . "</option>";
-                           else
-                              echo "<option value='" . $row['id_docente'] . "'>" . $row['nombre'] . " " . $row['apellidoP'] . "</option>";
+                           echo "<option value='" . $row['id_docente'] . "'>" . $row['nombre'] . " " . $row['apellidoP'] . "</option>";
                         }
                         Database::disconnect();
                         ?>
@@ -196,10 +221,23 @@ if (!empty($_POST)) {
                         $pdo = Database::connect();
                         $query = 'SELECT * FROM r_categorias';
                         foreach ($pdo->query($query) as $row) {
-                           if ($row['id_categoria'] == $categoria)
-                              echo "<option selected value='" . $row['id_categoria'] . "'>" . $row['nombre'] . "</option>";
-                           else
-                              echo "<option value='" . $row['id_categoria'] . "'>" . $row['nombre'] . "</option>";
+                           echo "<option value='" . $row['id_categoria'] . "'>" . $row['nombre'] . "</option>";
+                        }
+                        Database::disconnect();
+                        ?>
+                     </select>
+                  </td>
+               </tr>
+
+               <tr>
+                  <td><label for="nivel">Seleccionar nivel de desarrollo:</label></td>
+                  <td>
+                     <select name="nivel">
+                        <?php
+                        $pdo = Database::connect();
+                        $query = 'SELECT * FROM r_niveles_desarrollo';
+                        foreach ($pdo->query($query) as $row) {
+                           echo "<option value='" . $row['id_nivel'] . "'>" . $row['nombre'] . "</option>";
                         }
                         Database::disconnect();
                         ?>
@@ -210,40 +248,24 @@ if (!empty($_POST)) {
                <tr>
                   <td><label for="descripcion">Descripcion:</label></td>
                   <td><textarea id="comment"
-                        name="descripcion"><?php echo !empty($descripcion) ? $descripcion : ''; ?></textarea></td>
+                        name="descripcion"><?php echo !empty($descripcion) ? $descripcion : ''; ?></textarea>
+                  </td>
                </tr>
 
             </table>
             <div>
                <button class="cancel" onclick="history.go(-1);">Cancelar</button>
-               <?php
-               session_start();
-               $pdo = Database::connect();
-               $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-               $sql = 'SELECT * FROM r_proyecto_estudiantes WHERE matricula = ?';
-               $q = $pdo->prepare($sql);
-               $q->execute(array($_SESSION['matricula']));
-               $p_estudiantes = $q->fetch(PDO::FETCH_ASSOC);
-               $proyecto = $p_estudiantes['id_proyecto'];
-
-               $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-               $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
-               $q = $pdo->prepare($sql);
-               $q->execute(array($proyecto));
-               $row = $q->fetch(PDO::FETCH_ASSOC);
-               $status = $row['estatus'];
-               if ($status == 0) {
-                  echo '<input value="Actualizar Proyecto" type="submit" class = "btn" id="convert-btn">';
-               }
-
-               ?>
-
+               <input value="Actualizar Proyecto" type="submit" class="btn" id="convert-btn">
             </div>
             <?php if (($Error != null)) ?>
             <div class="Error">
                <?php echo $Error; ?>
             </div>
          </form>
+      </div>
+   </div>
+   <article></article>
+   <div id="footer"></div>
 </body>
 
 </html>
