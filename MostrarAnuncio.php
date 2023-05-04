@@ -33,7 +33,6 @@
       <a href="#" class="btn"><button>Log In</button></a>
    </header>
    <div class = "small_window">
-      <h1 class="label">Log in</h1>
       <div class="container">
 
 
