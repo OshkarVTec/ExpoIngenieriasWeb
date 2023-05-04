@@ -1,6 +1,5 @@
 INSERT INTO r_ediciones (nombre, fecha_inicio, fecha_final, activa) VALUES
-('Edicion 1', '2022-01-01', '2022-12-31', 1),
-('Edicion 2', '2023-01-01', '2023-12-31', 0);
+('Febrero Junio 2023', '2022-01-01', '2022-12-31', 1);
 
 INSERT INTO r_usuarios (correo, contrasenia) VALUES
 ('user1@example.com', 'password1'),
@@ -62,4 +61,5 @@ VALUES (8, 9, 7, 8, 'Buen trabajo, pero hay que mejorar en algunas áreas', '202
 INSERT INTO r_carreras VALUES (NULL, 'ITC'),
 (NULL, 'IRS');
 
+INSERT INTO r_administradores VALUES (NULL, 'Rafael', 'Aguilar', 'Campos', '5');
 INSERT INTO r_administradores VALUES (NULL, 'Rafael', 'Aguilar', 'Campos', '5');

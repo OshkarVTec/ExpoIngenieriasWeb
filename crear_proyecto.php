@@ -2,6 +2,10 @@
 session_start();
 require 'database.php';
 $pdo = Database::connect();
+$sql = 'SELECT *  FROM r_ediciones WHERE activa = 1';
+$q = $pdo->prepare($sql);
+$q->execute();
+$id_edicion = $q->fetch(PDO::FETCH_ASSOC)['id_edicion'];
 
 $Error = null;
 
@@ -53,10 +57,10 @@ if (!empty($_POST)) {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "INSERT INTO r_proyectos (id_proyecto, poster, description, estatus, nombre, video, 
                                 fecha_registro, id_uf,  id_docente, id_edicion, id_categoria, id_nivel) 
-                                values (NULL, ?, ?, false, ?,?, current_timestamp(), ?, ?, 1, ?, ?)";
+                                values (NULL, ?, ?, false, ?,?, current_timestamp(), ?, ?, ?, ?, ?)";
 
     $q = $pdo->prepare($sql);
-    $q->execute(array($poster, $descripcion, $name, $video, $uf, $docente, $categoria, $nivel));
+    $q->execute(array($poster, $descripcion, $name, $video, $uf, $docente, $id_edicion, $categoria, $nivel));
     Database::disconnect();
 
     $sql = 'SELECT * FROM r_proyectos WHERE nombre = ?';

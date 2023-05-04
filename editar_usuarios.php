@@ -48,6 +48,10 @@ else
   <?php
   include 'database.php';
   $pdo = Database::connect();
+  $sql = 'SELECT *  FROM r_ediciones WHERE activa = 1';
+  $q = $pdo->prepare($sql);
+  $q->execute();
+  $id_edicion = $q->fetch(PDO::FETCH_ASSOC)['id_edicion'];
 
   // Get the ID from the query string
   $id_usuario = $_GET['id_usuario'];
@@ -122,7 +126,7 @@ else
             $stmt->execute([$id_usuario]);
             if ($stmt->rowCount() > 0)
               break;
-            $pdo->query("INSERT INTO r_jueces (id_usuario) VALUES ($id_usuario)");
+            $pdo->query("INSERT INTO r_jueces (id_usuario, id_edicion) VALUES ($id_usuario,$id_edicion)");
             break;
         }
       }

@@ -8,7 +8,7 @@ session_start();
    </div>
    <nav class="menu">
       <ul class="nav-links">
-         <li><a href="ver_proyectos.php">Aprobar proyectos</a></li>
+         <li><a href="aprobar_proyectos.php">Aprobar proyectos</a></li>
          <li><a href="evaluar.php">Evaluar</a></li>
          <li><a href="informativa.php">Anuncios</a></li>
          <li>
