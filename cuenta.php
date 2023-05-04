@@ -107,7 +107,7 @@ Database::disconnect();
     <div class="container">
         <div class="firstrow">
             <h1 class="title">Mi Cuenta</h1>
-            <a href="logout.php" class="logout"><button>Logout</button></a>
+            <a href="logout.php" class="logout"><button>Log Out</button></a>
         </div>
         <hr color="#1687A7">
 
