@@ -12,29 +12,29 @@ session_start();
   <title>Informativa</title>
   <link rel="stylesheet" href="CSS/style.css" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script>
-        $(function () {
-            $("#header").load(<?php
-            if ($_SESSION['matricula'] != null) {
-                echo '"header_estudiante.php"';
-            } else if ($_SESSION['admin'] != null) {
-                echo '"header_admin.php"';
-            } else if ($_SESSION['juez'] != null) {
-                if ($_SESSION['docente'] != null)
-                    echo '"header_docente_juez.php"';
-                else
-                    echo '"header_juez.php"';
-            } else if ($_SESSION['docente'] != null) {
-                echo '"header_docente.php"';
-            } else{
-               echo '"header_login.html"';
-            }
-            ?>);
-        });
-        $(function () {
-            $("#footer").load("footer.html");
-        })
-    </script>
+  <script>
+    $(function () {
+      $("#header").load(<?php
+      if ($_SESSION['matricula'] != null) {
+        echo '"header_estudiante.php"';
+      } else if ($_SESSION['admin'] != null) {
+        echo '"header_admin.php"';
+      } else if ($_SESSION['juez'] != null) {
+        if ($_SESSION['docente'] != null)
+          echo '"header_docente_juez.php"';
+        else
+          echo '"header_juez.php"';
+      } else if ($_SESSION['docente'] != null) {
+        echo '"header_docente.php"';
+      } else {
+        echo '"header_login.html"';
+      }
+      ?>);
+    });
+    $(function () {
+      $("#footer").load("footer.html");
+    })
+  </script>
 </head>
 
 <body>
@@ -60,6 +60,9 @@ session_start();
     }
     ?>
   </div>
+  <article></article>
+  <div id="footer"></div>
+
 </body>
 
 </html>
