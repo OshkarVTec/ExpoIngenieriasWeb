@@ -80,15 +80,7 @@ if (!$_SESSION['admin'])
         $rowCount = $stmt->rowCount();
 
 
-        if ($row['categoria'] == 'Computacion') {
-          echo '<a class="categoria-compu" href="edicion_de_expo_editar.html">' . $row['categoria'] . '</a>';
-        } else if ($row['categoria'] == 'Bio') {
-          echo '<a class="categoria-bio" href="edicion_de_expo_editar.html">' . $row['categoria'] . '</a>';
-        } else if ($row['categoria'] == 'Ciencias Naturales') {
-          echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">' . $row['categoria'] . '</a>';
-        } else {
-          echo '<a class="categoria-ciencias-n" href="edicion_de_expo_editar.html">Sin Categoria</a>';
-        }
+        echo '<p>' . $row['categoria'] . '</p>';
         echo '</td>';
 
 
