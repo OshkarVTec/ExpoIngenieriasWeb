@@ -36,10 +36,11 @@
 
   // First query
   $sql = 'SELECT r_proyectos.id_proyecto, r_proyectos.nombre, r_categorias.nombre as categoria, r_niveles_desarrollo.nombre as nivel_de_desarrollo 
-    FROM r_proyectos 
-    LEFT JOIN r_categorias ON r_proyectos.id_proyecto = r_categorias.id_categoria 
-    LEFT JOIN r_niveles_desarrollo ON r_proyectos.id_nivel = r_niveles_desarrollo.id_nivel
-    WHERE r_niveles_desarrollo.id_nivel = 1;';
+  FROM r_proyectos 
+  LEFT JOIN r_categorias ON r_proyectos.id_proyecto = r_categorias.id_categoria 
+  LEFT JOIN r_niveles_desarrollo ON r_proyectos.id_nivel = r_niveles_desarrollo.id_nivel
+  LEFT JOIN r_ediciones ON r_ediciones.id_edicion = r_proyectos.id_edicion
+  WHERE r_niveles_desarrollo.id_nivel = 1 AND r_ediciones.activa = 1 AND r_proyectos.estatus = true';
 
   $q = $pdo->prepare($sql);
   $q->execute(array());
@@ -107,10 +108,11 @@
 
   // First query
   $sql = 'SELECT r_proyectos.id_proyecto, r_proyectos.nombre, r_categorias.nombre as categoria, r_niveles_desarrollo.nombre as nivel_de_desarrollo 
-    FROM r_proyectos 
-    LEFT JOIN r_categorias ON r_proyectos.id_proyecto = r_categorias.id_categoria 
-    LEFT JOIN r_niveles_desarrollo ON r_proyectos.id_nivel = r_niveles_desarrollo.id_nivel
-    WHERE r_niveles_desarrollo.id_nivel = 2;';
+  FROM r_proyectos 
+  LEFT JOIN r_categorias ON r_proyectos.id_proyecto = r_categorias.id_categoria 
+  LEFT JOIN r_niveles_desarrollo ON r_proyectos.id_nivel = r_niveles_desarrollo.id_nivel
+  LEFT JOIN r_ediciones ON r_ediciones.id_edicion = r_proyectos.id_edicion
+  WHERE r_niveles_desarrollo.id_nivel = 2 AND r_ediciones.activa = 1 AND r_proyectos.estatus = true;';
 
   $q = $pdo->prepare($sql);
   $q->execute(array());
@@ -177,10 +179,11 @@
 
   // First query
   $sql = 'SELECT r_proyectos.id_proyecto, r_proyectos.nombre, r_categorias.nombre as categoria, r_niveles_desarrollo.nombre as nivel_de_desarrollo 
-    FROM r_proyectos 
-    LEFT JOIN r_categorias ON r_proyectos.id_proyecto = r_categorias.id_categoria 
-    LEFT JOIN r_niveles_desarrollo ON r_proyectos.id_nivel = r_niveles_desarrollo.id_nivel
-    WHERE r_niveles_desarrollo.id_nivel = 3;';
+  FROM r_proyectos 
+  LEFT JOIN r_categorias ON r_proyectos.id_proyecto = r_categorias.id_categoria 
+  LEFT JOIN r_niveles_desarrollo ON r_proyectos.id_nivel = r_niveles_desarrollo.id_nivel
+  LEFT JOIN r_ediciones ON r_ediciones.id_edicion = r_proyectos.id_edicion
+  WHERE r_niveles_desarrollo.id_nivel = 3 AND r_ediciones.activa = 1 AND r_proyectos.estatus = true';
 
   $q = $pdo->prepare($sql);
   $q->execute(array());
