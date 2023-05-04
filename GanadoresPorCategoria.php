@@ -4,6 +4,18 @@ if ($_SESSION['admin'] != null)
    $id_juez = $_SESSION['admin'];
 else
    header("Location:informativa.php");
+
+ //  if(!empty($_POST)){
+ //     $premio = $_POST['premio'];
+ //     $pdo = Database::connect();
+ //     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+ //     $sql = "INSERT INTO r_proyectos (premio) where id_ values (?)";
+//
+ //     $q = $pdo->prepare($sql);
+ //     $q->execute(array($premio));
+ //     Database::disconnect();
+ //     header("Location: informativa.php");
+ //  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,7 +71,9 @@ else
     $proyectos = $q->fetchAll(PDO::FETCH_ASSOC);
 
 
-
+    $postvalues = array();
+    $idps = array();
+    $i=0;
     foreach ($proyectos as $row) {
       echo '<tr>';
       echo '<td>';
@@ -67,53 +81,52 @@ else
       echo '<td class = "column">';
       $promedios = 0;
       $i = 1;
-
+      $id_proyecto = $row['id_proyecto'];
       $sql = 'SELECT * FROM r_calificaciones WHERE id_proyecto = ?';
       $q = $pdo->prepare($sql);
       $q->execute(array($row['id_proyecto']));
       $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);
-      foreach ($calificaciones as $row) {
-          $promedio = ($row['puntos_rubro1'] + $row['puntos_rubro2'] + $row['puntos_rubro3'] + $row['puntos_rubro4']) / 4;
+      foreach ($calificaciones as $row1) {
+          $promedio = ($row1['puntos_rubro1'] + $row1['puntos_rubro2'] + $row1['puntos_rubro3'] + $row1['puntos_rubro4']) / 4;
           $promedios = ($promedios + $promedio) / $i;
           $i = $i + 1;
       }
-      echo '<form method="post">';
+      echo '<form action="GanadoresPorCategoria.php" method="POST">';
       echo $promedios;
-      echo '<select name="select">
+      echo '<select name="premio">
               <option value="1" >Primer lugar</option>
               <option value="2">Segundo lugar</option>
-              <option value="3">Tercer lugar</option>
-              <option value="4">No ganador</option>
+              <option value="3" selected=true>Tercer lugar</option>
+              <option value="4" >No ganador</option>
               
             </select>';
 
       echo '</td>';
       echo '</td>';
       echo '</tr>';
+
+      array_push($postvalues, $_POST['premio']);
+      array_push($idps, $id_proyecto);      
     }
     echo '</table>';
     echo '</div>';
-    //echo '<a class="link" href="proyecto.php?id_proyecto='.$row['id_proyecto'].'">'. $row['premio'] .'</a>';
+    
   }
 
 
-
+  if (isset($_POST['submit'])) {
+    foreach($idps as $row){
+    $sql = "UPDATE r_proyectos SET premio=? WHERE id_proyecto=?";
+    $q = $pdo->prepare($sql);
+    $q->execute(array($postvalues[$i], $row[$i]));
+    $i = $i+1;
+    }
+  Database::disconnect();
+  header("Location: informativa.php");
+}
 
 
   Database::disconnect();
-
-  if (isset($_POST['submit'])) {
-    if ($_POST['select'] == '1') {
-      $sql = "UPDATE r_proyectos SET premio=1 WHERE id_proyecto=?";
-    } elseif ($_POST['select'] == '2') {
-      $sql = "UPDATE r_proyectos SET premio=2 WHERE id_proyecto=?";
-    } elseif ($_POST['select'] == '3') {
-      $sql = "UPDATE r_proyectos SET premio=3 WHERE id_proyecto=?";
-    } elseif ($_POST['select'] == '4') {
-      $sql = "UPDATE r_proyectos SET premio=0 WHERE id_proyecto=?";
-    }
-
-  }
   ?>
 
 
