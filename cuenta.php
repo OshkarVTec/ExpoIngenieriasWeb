@@ -132,7 +132,7 @@ Database::disconnect();
             echo "<hr color=\"#1687A7\" width=\"50%\">";
             echo "<div class=\"cuentabig\">";
             echo "<p>";
-            echo $matricula;
+            echo $_SESSION['matricula'];
             echo "</p>";
             echo "</div>";
 
