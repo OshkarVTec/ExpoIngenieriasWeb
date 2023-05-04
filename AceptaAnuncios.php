@@ -41,7 +41,7 @@
       ?>
       
       <form method="post">
-        <table>
+        
             <tr>
               <th>Contenido</th>
               
