@@ -40,15 +40,15 @@ if ($q->rowCount() > 0) {
     <script>
         $(function () {
             $("#header").load(<?php
-            if ($_SESSION['estudiante'] != null) {
+            if ($_SESSION['matricula'] != null) {
                 echo '"header_estudiante.php"';
             } else if ($_SESSION['admin'] != null) {
                 echo '"header_admin.php"';
             } else if ($_SESSION['juez'] != null) {
                 if ($_SESSION['docente'] != null)
-                    echo '"header_juez.php"';
-                else
                     echo '"header_docente_juez.php"';
+                else
+                    echo '"header_juez.php"';
             } else if ($_SESSION['docente'] != null) {
                 echo '"header_docente.php"';
             }
@@ -65,7 +65,7 @@ if ($q->rowCount() > 0) {
     <div class="container">
         <?php
         if ($_SESSION['admin'] != null) {
-            echo '<a href="#" class="btnP"><button>Editar</button></a>}';
+            echo '<a href="#" class="btnP"><button>Editar</button></a>';
         } ?>
         <h1>Rubrica de Evaluación</h1>
         <table class="rubrica">
@@ -103,6 +103,8 @@ if ($q->rowCount() > 0) {
             </tbody>
         </table>
     </div>
+    <article></article>
+    <div id="footer"></div>
 </body>
 
 </html>

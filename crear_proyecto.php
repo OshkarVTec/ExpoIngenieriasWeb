@@ -71,7 +71,7 @@ if (!empty($_POST)) {
                                 values (?, ?, ?)";
 
       $q = $pdo->prepare($sql);
-      $q->execute(array(null, $_SESSION['estudiante'], $id_proyecto));
+      $q->execute(array(null, $_SESSION['matricula'], $id_proyecto));
       Database::disconnect();
       header("Location: informativa.php");
    }
@@ -91,7 +91,7 @@ if (!empty($_POST)) {
    <script>
       $(function () {
          $("#header").load(<?php
-         if ($_SESSION['estudiante'] != null) {
+         if ($_SESSION['matricula'] != null) {
             echo '"header_estudiante.php"';
          } else if ($_SESSION['admin'] != null) {
             echo '"header_admin.php"';

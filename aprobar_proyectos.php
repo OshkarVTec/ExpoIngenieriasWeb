@@ -1,7 +1,7 @@
 <?php
 session_start();
-if ($_SESSION['id_docente'] != null)
-   $id_juez = $_SESSION['id_docente'];
+if ($_SESSION['docente'] != null)
+   $id_docente = $_SESSION['docente'];
 else
    header("Location:informativa.php");
 
@@ -41,15 +41,15 @@ if (!empty($_POST)) {
    <script>
       $(function () {
          $("#header").load(<?php
-         if ($_SESSION['estudiante'] != null) {
+         if ($_SESSION['matricula'] != null) {
             echo '"header_estudiante.php"';
          } else if ($_SESSION['admin'] != null) {
             echo '"header_admin.php"';
          } else if ($_SESSION['juez'] != null) {
             if ($_SESSION['docente'] != null)
-               echo '"header_juez.php"';
-            else
                echo '"header_docente_juez.php"';
+            else
+               echo '"header_juez.php"';
          } else if ($_SESSION['docente'] != null) {
             echo '"header_docente.php"';
          }
@@ -77,7 +77,7 @@ if (!empty($_POST)) {
          foreach ($proyectos as $row) {
             echo '<tr>';
             echo '<td>';
-            echo '<a class="link" href="proyecto.php?id=' . $row['id_proyecto'] . '">' . $row['nombre'] . '</a>';
+            echo '<a class="link" href="proyecto.php?id_proyecto=' . $row['id_proyecto'] . '">' . $row['nombre'] . '</a>';
             echo '</td>';
             echo '<td class = "two_objects_column">';
             echo '<form method = "POST" action = "aprobar_proyectos.php">';
@@ -105,7 +105,7 @@ if (!empty($_POST)) {
          foreach ($proyectos as $row) {
             echo '<tr>';
             echo '<td>';
-            echo '<a class="link" href="proyecto.php?id=' . $row['id_proyecto'] . '">' . $row['nombre'] . '</a>';
+            echo '<a class="link" href="proyecto.php?id_proyecto=' . $row['id_proyecto'] . '">' . $row['nombre'] . '</a>';
             echo '</td>';
             echo '</tr>';
          }

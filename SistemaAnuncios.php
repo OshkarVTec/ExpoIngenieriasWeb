@@ -24,6 +24,7 @@
          $pdo = Database::connect();
 
          
+         
 
 
     $anuns = array("Anuncio 1", "Anuncio 2");
@@ -44,11 +45,15 @@
          echo '<td><a class="link" href="MostrarAnuncio.php?id_anuncio=' . $id_anuncio . '&contenido=' . $contenido . '">'. 'Anuncio ' . $row['id_anuncio'] . '</a></td>';
          echo '<td class="tabla">';
          //echo '<td><input type="checkbox" id="Activar"> <label for="Activar">Activar</label>';
-         echo '<a class="btn" href="actualizar_anuncio.php.php?id_anuncio=' . $id_anuncio . '&contenido=' . $contenido . '">Editar</a>';
-         echo '</td>';
+         echo '<a class="btn" href="actualizar_anuncio.php?id_anuncio=' . $id_anuncio . '&contenido=' . $contenido . '">Editar</a>';
+            echo '<a class="btn-eliminar" href="borrar_anuncio.php?id_anuncio='.$id_anuncio.'" 
+            onclick="return confirm(\'¿Desea eliminar este elemento?\')">Eliminar</a>';
+            echo '</td>';
+
          echo '</tr>';
         }
-
+        
+      
 
 
         //foreach () {   

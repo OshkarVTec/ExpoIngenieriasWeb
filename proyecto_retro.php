@@ -54,7 +54,7 @@ Database::disconnect();
     <script>
         $(function () {
             $("#header").load(<?php
-            if ($_SESSION['estudiante'] != null) {
+            if ($_SESSION['matricula'] != null) {
                 echo '"header_estudiante.php"';
             } else if ($_SESSION['admin'] != null) {
                 echo '"header_admin.php"';
@@ -71,36 +71,37 @@ Database::disconnect();
 <body>
     <div id="header"></div>
     <div class="container">
-
-        <table class="rubrica">
-            <thead>
-                <tr>
-                    <th>Nombre del Juez</th>
-                    <th>Retroalimentación</th>
-                    <th>
-                        <?php echo $rubro1; ?>
-                    </th>
-                    <th>
-                        <?php echo $rubro2; ?>
-                    </th>
-                    <th>
-                        <?php echo $rubro3; ?>
-                    </th>
-                    <th>
-                        <?php echo $rubro4; ?>
-                    </th>
-                    <th>Promedio</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $promedios;
-                $i = 0;
-                $pdo = Database::connect();
-                $sql = 'SELECT * FROM r_calificaciones WHERE id_proyecto = ?';
-                $q = $pdo->prepare($sql);
-                $q->execute(array($id_proyecto));
-                $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);
+    <?php
+    $promedios;
+    $i = 0;
+    $pdo = Database::connect();
+    $sql = 'SELECT * FROM r_calificaciones WHERE id_proyecto = ?';
+    $q = $pdo->prepare($sql);
+    $q->execute(array($id_proyecto));
+    $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);
+    if($calificaciones){
+        echo '<table class="rubrica">';
+        echo    '<thead>';
+        echo        '<tr>';
+        echo            '<th>Nombre del Juez</th>';
+        echo            '<th>Retroalimentación</th>';
+        echo            '<th>';
+        echo                $rubro1;
+        echo            '</th>';
+        echo            '<th>';
+        echo                $rubro2;
+        echo            '</th>';
+        echo            '<th>';
+        echo                $rubro3;
+        echo            '</th>';
+        echo            '<th>';
+        echo                $rubro4;
+        echo            '</th>';
+        echo            '<th>Promedio</th>';
+        echo        '</tr>';
+        echo    '</thead>';
+        echo    '<tbody>';
+                
                 foreach ($calificaciones as $row) {
                     $pdo = Database::connect();
                     $sql = 'SELECT * FROM r_jueces WHERE id_juez = ?';
@@ -122,7 +123,8 @@ Database::disconnect();
                 }
                 echo '<tr>';
                 echo '<td></td>' . '<td></td>' . '<td></td>' . '<td></td>' . '<td></td>' . '<td>' . 'Calificacion Final' . '</td>' . '<td>' . $promedios / $i . '</td>';
-                echo '</tr>'
+                echo '</tr>';
+            }
                     ?>
             </tbody>
         </table>

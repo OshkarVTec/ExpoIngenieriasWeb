@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!($_SESSION['id_juez'] != null || $_SESSION['admin'] != null || $_SESSION['id_docente'] != null))
+if (!($_SESSION['juez'] != null || $_SESSION['admin'] != null || $_SESSION['docente'] != null))
    header("Location:informativa.php");
 ?>
 <!DOCTYPE html>
@@ -16,15 +16,15 @@ if (!($_SESSION['id_juez'] != null || $_SESSION['admin'] != null || $_SESSION['i
    <script>
       $(function () {
          $("#header").load(<?php
-         if ($_SESSION['estudiante'] != null) {
+         if ($_SESSION['matricula'] != null) {
             echo '"header_estudiante.php"';
          } else if ($_SESSION['admin'] != null) {
             echo '"header_admin.php"';
          } else if ($_SESSION['juez'] != null) {
             if ($_SESSION['docente'] != null)
-               echo '"header_juez.php"';
-            else
                echo '"header_docente_juez.php"';
+            else
+               echo '"header_juez.php"';
          } else if ($_SESSION['docente'] != null) {
             echo '"header_docente.php"';
          }

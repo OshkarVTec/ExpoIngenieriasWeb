@@ -1,7 +1,7 @@
 <?php
 session_start();
-if ($_SESSION['id_juez'] != null)
-   $id_juez = $_SESSION['id_juez'];
+if ($_SESSION['juez'] != null)
+   $id_juez = $_SESSION['juez'];
 else
    header("Location:informativa.php");
 
@@ -25,15 +25,15 @@ if (!empty($_GET['status'])) {
    <script>
       $(function () {
          $("#header").load(<?php
-         if ($_SESSION['estudiante'] != null) {
+         if ($_SESSION['matricula'] != null) {
             echo '"header_estudiante.php"';
          } else if ($_SESSION['admin'] != null) {
             echo '"header_admin.php"';
          } else if ($_SESSION['juez'] != null) {
             if ($_SESSION['docente'] != null)
-               echo '"header_juez.php"';
-            else
                echo '"header_docente_juez.php"';
+            else
+               echo '"header_juez.php"';
          } else if ($_SESSION['docente'] != null) {
             echo '"header_docente.php"';
          }
@@ -69,7 +69,7 @@ if (!empty($_GET['status'])) {
             $nivel = $q->fetch(PDO::FETCH_ASSOC);
             echo '<tr>';
             echo '<td>';
-            echo '<a class="link" href="proyecto.php?id=' . $proyecto['id_proyecto'] . '">' . $proyecto['nombre'] . '</a>';
+            echo '<a class="link" href="proyecto.php?id_proyecto=' . $proyecto['id_proyecto'] . '">' . $proyecto['nombre'] . '</a>';
             echo '<p>Nivel de desarrollo: ' . $nivel['nombre'] . '</p>';
             echo '</td>';
             echo '<td class = "two_objects_column">';
@@ -111,7 +111,7 @@ if (!empty($_GET['status'])) {
             echo '<p>Nivel de desarrollo: ' . $nivel['nombre'] . '</p>';
             echo '</td>';
             echo '<td>';
-            echo '<a class="btn" href="evaluacion.php?id=' . $row['id_calificacion'] . '">Evaluar</a>';
+            echo '<a class="btn" href="evaluacion.php?id_proyecto=' . $row['id_calificacion'] . '">Evaluar</a>';
             echo '</td>';
             echo '</tr>';
          }

@@ -1,67 +1,68 @@
 <?php
-    session_start();
+session_start();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Informativa</title>
-    <link rel="stylesheet" href="CSS/style.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-   <script> 
-    $(function(){
-      $("#header").load(<?php 
-        if($_SESSION['estudiante'] != null){
-            echo '"header_estudiante.php"';
-        } else if($_SESSION['admin'] != null){
-            echo '"header_admin.php"';
-        } else if($_SESSION['juez'] != null){
-            echo '"header_juez.php"';
-        } else if($_SESSION['docente'] != null){
-            echo '"header_docente.php"';
-        }
-        ?>); 
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Informativa</title>
+  <link rel="stylesheet" href="CSS/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script>
+    $(function () {
+      $("#header").load(<?php
+      if ($_SESSION['matricula'] != null) {
+        echo '"header_estudiante.php"';
+      } else if ($_SESSION['admin'] != null) {
+        echo '"header_admin.php"';
+      } else if ($_SESSION['juez'] != null) {
+        if ($_SESSION['docente'] != null)
+          echo '"header_docente_juez.php"';
+        else
+          echo '"header_juez.php"';
+      } else if ($_SESSION['docente'] != null) {
+        echo '"header_docente.php"';
+      } else {
+        echo '"header_login.html"';
+      }
+      ?>);
     });
-    </script> 
-  </head>
-  <body>
-    <div id="header"></div>
+    $(function () {
+      $("#footer").load("footer.html");
+    })
+  </script>
+</head>
 
-    <section id="container-informativa">
-      <div id="container-seccion-izquierda">
-        <h1>Inicia Expoingenierias</h1>
-        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
-          Iusto incidunt doloribus quia repudiandae error, aliquid aspernatur 
-          labore illo veniam inventore velit voluptates ipsa accusantium nulla 
-          voluptatum corrupti fugiat ratione? Molestiae.</p>
-      </div>
-      <div id="container-seccion-derecha" class="slideshow-container">
-        <div id="container-seccion-derecha-img">
-          <div class="mySlides fade">
-            <img src="IMG/ingeniero.png" />
-          </div>
+<body>
+  <div id="header"></div>
+  <h1 class="label">Anuncios</h1>
+  <div class="container">
 
-          <div class="mySlides fade">
-            <img src="IMG/imagen2.jpg" />
-          </div>
+    <?php
+    require 'database.php';
+    $pdo = Database::connect();
+    $sql = "SELECT * FROM r_anuncios WHERE vigente = 1";
+    $stmt = $pdo->query($sql);
+    $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-          <div class="mySlides fade">
-            <img src="IMG/imagen3.jpg" />
-          </div>
-        </div>
+    foreach ($anuncios as $anuncio) {
+      //echo '<div class="mySlides fade">';
+      echo '<tr>';
+      echo '<div>';
+      echo '<p>' . $anuncio['contenido'] . '</p>';
+      echo '</div>';
+      echo '<img src="' . $anuncio['multimedia'] . '">';
+      echo '</tr>';
+    }
+    ?>
+  </div>
+  <article></article>
+  <div id="footer"></div>
 
-        <!-- The dots/circles -->
-        <!-- <div id="container-seccion-derecha-btnes" style="text-align: center"> -->
-        <span class="dot" onclick="currentSlide(1)"></span>
-        <span class="dot" onclick="currentSlide(2)"></span>
-        <span class="dot" onclick="currentSlide(3)"></span>
-        <!-- </div> -->
-      </div>
-    </section>
+</body>
 
-    <script src="js/informativa.js"></script>
-  </body>
 </html>

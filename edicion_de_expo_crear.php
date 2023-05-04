@@ -104,15 +104,7 @@ if (!empty($_POST)) {
 </head>
 
 <body>
-  <header class="header">
-    <div class="logo">
-      <a href="informativa_presentacion.html">
-        <img src="IMG/logo-expo.png" alt="Logo de la pagina" />
-      </a>
-    </div>
-    <a href="#" class="btn"><button>Log In</button></a>
-  </header>
-
+  <div id="header"></div>
   <!-- <p>aaaaaa</p> -->
   <!-- <p><br><br><br><br></p> -->
 
@@ -187,36 +179,6 @@ if (!empty($_POST)) {
       </div>
     </form>
   </div>
-
-  <footer>
-    <div id="footer-seccion-superior">
-      <div class="seccion-superior">
-        <h3>Tecnológico de Monterrey campus Puebla</h3>
-        <h4>Atlixcáyotl 5718</h4>
-        <h4>Reserva Territorial Atlixcáyotl, 72453</h4>
-      </div>
-      <div id="seccion-iconos">
-        <img id="telefono" src="IMG/telefono_icon.png" alt="" />
-        <img src="../img/email_icon.png" alt="" />
-      </div>
-      <div id="info-contacto" class="seccion-superior">
-        <h4>+52 81 8358 2000</h4>
-        <h4>jraguilar@tec.mx</h4>
-      </div>
-    </div>
-
-    <hr />
-
-    <div id="footer-seccion-inferior">
-      <div id="redes-sociales">
-        <img id="facebook_icon" src="../img/facebook_icon.png" alt="" onclick="redireccionFacebook()" />
-        <img id="insta-icon" src="../img/insta_icon.png" alt="" onclick="redireccionIG()" />
-      </div>
-      <div id="logo-footer">
-        <img src="../img/expo_logo.png" alt="" onclick="redireccionLogo()" />
-      </div>
-    </div>
-  </footer>
 </body>
 
 </html>

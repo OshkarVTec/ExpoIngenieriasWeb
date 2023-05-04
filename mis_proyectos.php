@@ -24,15 +24,15 @@ $Error = null;
     <script>
         $(function () {
             $("#header").load(<?php
-            if ($_SESSION['estudiante'] != null) {
+            if ($_SESSION['matricula'] != null) {
                 echo '"header_estudiante.php"';
             } else if ($_SESSION['admin'] != null) {
                 echo '"header_admin.php"';
             } else if ($_SESSION['juez'] != null) {
                 if ($_SESSION['docente'] != null)
-                    echo '"header_juez.php"';
-                else
                     echo '"header_docente_juez.php"';
+                else
+                    echo '"header_juez.php"';
             } else if ($_SESSION['docente'] != null) {
                 echo '"header_docente.php"';
             }
@@ -53,7 +53,7 @@ $Error = null;
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = 'SELECT * FROM r_proyecto_estudiantes WHERE matricula = ?';
             $q = $pdo->prepare($sql);
-            $q->execute(array($_SESSION['estudiante']));
+            $q->execute(array($_SESSION['matricula']));
             $proyectos = $q->fetchAll(PDO::FETCH_ASSOC);
             foreach ($proyectos as $row) {
                 $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
@@ -75,6 +75,8 @@ $Error = null;
             </tr>
         </table>
     </div>
+    <article></article>
+    <div id="footer"></div>
 </body>
 
 </html>

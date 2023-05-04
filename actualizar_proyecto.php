@@ -101,15 +101,15 @@ if (!empty($_POST)) {
    <script>
       $(function () {
          $("#header").load(<?php
-         if ($_SESSION['estudiante'] != null) {
+         if ($_SESSION['matricula'] != null) {
             echo '"header_estudiante.php"';
          } else if ($_SESSION['admin'] != null) {
             echo '"header_admin.php"';
          } else if ($_SESSION['juez'] != null) {
             if ($_SESSION['docente'] != null)
-               echo '"header_juez.php"';
-            else
                echo '"header_docente_juez.php"';
+            else
+               echo '"header_juez.php"';
          } else if ($_SESSION['docente'] != null) {
             echo '"header_docente.php"';
          }
@@ -222,7 +222,7 @@ if (!empty($_POST)) {
                $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                $sql = 'SELECT * FROM r_proyecto_estudiantes WHERE matricula = ?';
                $q = $pdo->prepare($sql);
-               $q->execute(array($_SESSION['estudiante']));
+               $q->execute(array($_SESSION['matricula']));
                $p_estudiantes = $q->fetch(PDO::FETCH_ASSOC);
                $proyecto = $p_estudiantes['id_proyecto'];
 

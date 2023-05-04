@@ -58,3 +58,8 @@ INSERT INTO r_calificaciones (puntos_rubro1, puntos_rubro2, puntos_rubro3, punto
 VALUES (8, 9, 7, 8, 'Buen trabajo, pero hay que mejorar en algunas áreas', '2022-05-01 10:30:00', 1, 1),
        (6, 7, 9, 8, 'Excelente trabajo, pero la presentación podría mejorar', '2022-05-02 11:45:00', 2, 2),
        (null, null, null, null, '', '2022-05-02 11:45:00', 3, 2);
+
+INSERT INTO r_carreras VALUES (NULL, 'ITC'),
+(NULL, 'IRS');
+
+INSERT INTO r_administradores VALUES (NULL, 'Rafael', 'Aguilar', 'Campos', '5');
