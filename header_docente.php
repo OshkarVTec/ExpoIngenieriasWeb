@@ -1,13 +1,5 @@
 <?php
 session_start();
-require 'database.php';
-$pdo = Database::connect();
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$sql = 'SELECT * FROM r_proyectos WHERE id_docente = ?';
-$q = $pdo->prepare($sql);
-$q->execute(array($_SESSION['docente']));
-$proyecto = $q->fetch(PDO::FETCH_ASSOC);
-$idproyecto = $proyecto['id_proyecto'];
 ?>
 
 <header class="header">
