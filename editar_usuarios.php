@@ -126,7 +126,13 @@ else
             $stmt->execute([$id_usuario]);
             if ($stmt->rowCount() > 0)
               break;
-            $pdo->query("INSERT INTO r_jueces (id_usuario, id_edicion) VALUES ($id_usuario,$id_edicion)");
+            $sql = "SELECT * FROM r_usuarios_sin_asignar WHERE id_usuario = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$id_usuario]);
+            $usuario = $stmt->fetch();
+            $sql = "INSERT INTO r_jueces (nombre, apellidoP, apellidoM, id_usuario, id_edicion) VALUES (?, ?, ?, ?, ?)";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute(array($usuario['nombre'], $usuario['apellidoP'], $usuario['apellidoM'],$id_usuario, $id_edicion));
             break;
         }
       }
