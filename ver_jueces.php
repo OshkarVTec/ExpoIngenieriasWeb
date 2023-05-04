@@ -121,8 +121,10 @@
     </table>
     </div>
 
-
+    <div>
     <button id="nueva-edicion-btn" class="btn" type="submit" name="deasignar">Guardar</button>
+    </div>
+    
 
     <?php
       echo '<input id="input-hidden" type="hidden" name="id_proyecto" value="'.$id_proyecto.'" ?>';
@@ -218,14 +220,18 @@
 ?>
 
   </table>
+  
+  </div>
+
+    <div>
+  <button id="nueva-edicion-btn" class="btn" type="submit" name="asignar">Guardar</button>
   </div>
 
 
   <?php
-      echo '<input id="input-hidden" type="hidden" name="id_proyecto" value="'.$id_proyecto.' "?>';
+      echo '<input  type="hidden" name="id_proyecto" value="'.$id_proyecto.' "?>';
     ?>
 
 
-  <button id="nueva-edicion-btn" class="btn" type="submit" name="asignar">Guardar</button>
 
   </form>
