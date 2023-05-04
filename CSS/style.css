@@ -79,7 +79,13 @@
 
 body {
   background-color: var(--backgroundR);
+  display:flex; 
+  flex-direction:column; 
+  min-height: 100vh; 
+  margin:0;
 }
+
+article{ flex:1; }
 
 h1 {
   color: var(--mainR);
@@ -585,7 +591,7 @@ select:focus {
 /* Estilos para el footer start*/
 
 footer {
-  background-color: #276678;
+  background-color: var(--mainR);
   color: #ffffff;
 }
 
