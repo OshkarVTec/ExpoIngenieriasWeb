@@ -54,7 +54,11 @@ if (!empty($_GET['status'])) {
          if ($status != NULL)
             echo '<div class="Sucess">Cambios guardados</div>';
          $pdo = Database::connect();
-         $sql = 'SELECT *  FROM r_calificaciones WHERE puntos_rubro1 is not null AND puntos_rubro2 is not null AND puntos_rubro3 is not null AND puntos_rubro4 is not null AND id_juez = ?';
+         $sql = 'SELECT *  FROM r_calificaciones 
+         JOIN r_proyectos ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto
+         JOIN r_ediciones ON r_proyectos.id_edicion = r_ediciones.id_edicion
+         WHERE puntos_rubro1 is not null AND puntos_rubro2 is not null AND puntos_rubro3 is not null AND puntos_rubro4 is not null AND id_juez = ?
+         AND r_ediciones.activa = 1';
          $q = $pdo->prepare($sql);
          $q->execute(array($id_juez));
          $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);
@@ -92,14 +96,18 @@ if (!empty($_GET['status'])) {
          $q = $pdo->prepare($sql);
          $q->execute();
          $id_edicion = $q->fetch(PDO::FETCH_ASSOC)['id_edicion'];
-         $sql = 'SELECT *  FROM r_calificaciones WHERE (puntos_rubro1 is null OR puntos_rubro2 is null OR puntos_rubro3 is null OR puntos_rubro4 is null) AND id_juez = ?';
+         $sql = 'SELECT *  FROM r_calificaciones 
+         JOIN r_proyectos ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto
+         JOIN r_ediciones ON r_proyectos.id_edicion = r_ediciones.id_edicion
+         WHERE (puntos_rubro1 is null OR puntos_rubro2 is null OR puntos_rubro3 is null OR puntos_rubro4 is null) AND id_juez = ?
+         AND r_ediciones.activa = 1';
          $q = $pdo->prepare($sql);
          $q->execute(array($id_juez));
          $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);
          foreach ($calificaciones as $row) {
-            $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ? AND id_edicion = ?';
+            $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
             $q = $pdo->prepare($sql);
-            $q->execute(array($row['id_categoria'], $id_edicion));
+            $q->execute(array($row['id_proyecto']));
             $proyecto = $q->fetch(PDO::FETCH_ASSOC);
             $sql = 'SELECT * FROM r_niveles_desarrollo WHERE id_nivel = ?';
             $q = $pdo->prepare($sql);
