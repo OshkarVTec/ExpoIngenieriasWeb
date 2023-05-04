@@ -184,27 +184,29 @@ Database::disconnect();
             $q = $pdo->prepare($sql);
             $q->execute(array($matricula));
             $p_estudiantes = $q->fetchAll(PDO::FETCH_ASSOC);
+            echo '<p> Mi Proyecto</p>';
+            echo '<hr color="#1687A7" width="50%">';
+            echo '<div class="cuentabig">';
+            echo '<ul class="cuentalast">';
             foreach ($p_estudiantes as $row) {
                 $proyecto = $row['id_proyecto'];
-                echo '<p> Mi Proyecto</p>';
-                echo '<hr color="#1687A7" width="50%">';
-                echo '<div class="cuentabig">';
-                echo '<ul class="cuentalast">';
-                echo '<li><p>';
-
                 $sql = 'SELECT * FROM r_proyectos WHERE id_proyecto = ?';
                 $q = $pdo->prepare($sql);
-                $q->execute(array($row));
+                $q->execute(array($row['id_proyecto']));
                 $p_name = $q->fetch(PDO::FETCH_ASSOC);
                 $proyectos = $p_name['nombre'];
+                echo '<li><p>';
                 echo $proyectos;
-                Database::disconnect();
-                echo '</a></li>';
+                echo '</p>';
+                echo '</li>';
                 echo '<li>';
-                echo '<a href="proyecto.php?id_proyecto=' . $proyecto . '" class="btnP"><button>Editar</button></a>';
+                echo '<a href="proyecto.php?id_proyecto=' . $proyecto . '" class="btnP"><button>Ver Más</button></a>';
+                echo '</li>';
+                echo '<br>';
+                Database::disconnect();
             }
+            echo '</ul>';
         }
-        echo '</li>';
         ?>
 
         </ul>
