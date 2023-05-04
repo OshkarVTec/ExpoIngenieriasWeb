@@ -1,9 +1,6 @@
 <?php
 session_start();
 $id_proyecto = null;
-if (!empty($_GET['id_proyecto'])) {
-    $id_proyecto = $_REQUEST['id_proyecto'];
-}
 require 'database.php';
 
 $Error = null;
@@ -65,7 +62,7 @@ if ($q->rowCount() > 0) {
     <div class="container">
         <?php
         if ($_SESSION['admin'] != null) {
-            echo '<a href="#" class="btnP"><button>Editar</button></a>';
+            echo '<a href="actualizar_rubrica.php" class="btnP"><button>Editar</button></a>';
         } ?>
         <h1>Rubrica de Evaluación</h1>
         <table class="rubrica">
