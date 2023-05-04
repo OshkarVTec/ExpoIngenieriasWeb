@@ -391,9 +391,10 @@ if (!($_SESSION['admin'] != null))
 
     </table>
   </div>
+
   <article></article>
   <div id="footer"></div>
 
 </body>
 
-</html>s
+</html>

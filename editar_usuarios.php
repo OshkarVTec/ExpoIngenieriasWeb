@@ -181,8 +181,7 @@ else
 
   if ($rol == 'Docente') {
     echo '<td class="rol" >';
-    echo '<input  type="checkbox" value="Docente" name="roles[]"' . $checked_maestro . ' />';
-    echo '<label  for="Docente">Docente</label>';
+    echo '<p>Docente</p>';
     echo '</td>';
 
 
@@ -195,13 +194,6 @@ else
   }
 
   if ($rol == 'Sin Asignar') {
-    echo '<td class="rol">';
-    echo '<input type="checkbox" value="Docente" name="roles[]"' . $checked_maestro . ' />';
-    echo '<label for="Docente">Docente</label>';
-    echo '</td>';
-
-
-
 
     echo '<td class="rol">';
     echo '<input type="checkbox" value="Juez" name="roles[]"' . $checked_juez . ' />';
@@ -211,11 +203,6 @@ else
     echo '<td class="rol">';
     echo '<input type="checkbox" value="Administrador" name="roles[]"' . $checked_administrador . ' />';
     echo '<label for="Administrador">Administrador</label>';
-    echo '</td>';
-
-    echo '<td class="rol">';
-    echo '<input type="checkbox" value="Estudiante" name="roles[]"' . $checked_estudiante . ' />';
-    echo '<label for="Estudiante">Estudiante</label>';
     echo '</td>';
   }
 
@@ -251,7 +238,6 @@ else
   echo '</table>';
   echo '</div>';
 
-  echo '</div>';
   if ($rol == 'Docente' || $rol == 'Sin Asignar') {
     echo '<button id="nueva-edicion-btn" class="btn" type="submit" name="submit">Guardar</button>';
   }
@@ -259,7 +245,6 @@ else
 
   echo ' </form>';
   ?>
-
 
   <article></article>
   <div id="footer"></div>
