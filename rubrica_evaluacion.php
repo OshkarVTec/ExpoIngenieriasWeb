@@ -65,7 +65,7 @@ if ($q->rowCount() > 0) {
     <div class="container">
         <?php
         if ($_SESSION['admin'] != null) {
-            echo '<a href="#" class="btnP"><button>Editar</button></a>}';
+            echo '<a href="#" class="btnP"><button>Editar</button></a>';
         } ?>
         <h1>Rubrica de Evaluación</h1>
         <table class="rubrica">
