@@ -28,6 +28,13 @@
             echo '</h5>';
         echo '</div>';
 
+        echo '<div id="instrucciones-editar-usuario">';
+        echo '<h1 class="label">Jueces asignados a este proyecto: </h1>';
+        echo '<!-- <h5 id="texto-instruciones">';
+
+        echo '</h5> -->';
+        echo '</div>';
+
 
     ?> 
 
@@ -41,25 +48,16 @@
     <table class="general">
 
 
+
+
 <?php
     if(isset($_GET['id_proyecto'])) {
         $id_proyecto = $_GET['id_proyecto'];
         include 'database.php';
 
 
-
-
-
-        //Te cuenta la cantidad de proyectos a la que ha sido asignado un juez
-        // SELECT COUNT(*) AS num_rows 
-        // FROM ( 
-        // SELECT r_jueces.nombre, r_jueces.apellidoP, r_jueces.apellidoM, r_proyectos.id_proyecto, 		r_jueces.id_juez 
-        // FROM r_jueces LEFT JOIN r_calificaciones ON r_calificaciones.id_juez = r_jueces.id_juez 
-        // LEFT JOIN r_proyectos ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto 
-        // WHERE r_jueces.id_juez = 2 
-        // ) AS subquery;
-
-
+        //form para quitar jueces
+        echo '<form method="POST" action="asignar_juez.php" onsubmit="return true;">';
 
 
 
@@ -100,33 +98,47 @@
 
            
             echo '<tr>';
-                echo '<td><a class="link-edicion">'.$row['nombre'].' '.$row['apellidoP'].' '.$row['apellidoM'].'</a></td>';
- 
+                
+                echo '<td id="nombre-juez"><a class="link-edicion">'.$row['nombre'].' '.$row['apellidoP'].' '.$row['apellidoM'].'</a></td>';
 
+                //checkbox
+                
+  echo '<td id="agregar-quitar-juez"><input type="checkbox" name="judge_id[]" value="'.$row['id_juez'].'" '.($num_rows > 0 ? 'checked' : '').'></td>';
+  
+ 
 
                 echo '<td> #Proyectos asignados: '.$num_rows.' </td>';
             echo '</tr>';                       
 
         }
 
-
+        
     }
 
-    // header("Location: ver_usuarios.php");
-    
-    // exit();
 ?>
 
     </table>
     </div>
 
 
+    <button id="nueva-edicion-btn" class="btn" type="submit" name="deasignar">Guardar</button>
+
+    <?php
+      echo '<input id="input-hidden" type="hidden" name="id_proyecto" value="'.$id_proyecto.'" ?>';
+    ?>
+
+    </form>
 
 
 
 
-    <div id="instrucciones-editar-usuario">
-    <h1 class="label">Jueces sin asignar a este proyecto</h1>
+
+
+
+
+
+    <div id="separador" id="instrucciones-editar-usuario" >
+    <h1 class="label">Jueces sin asignar a este proyecto: </h1>
     <!-- <h5 id="texto-instruciones">
     
     </h5> -->
@@ -141,6 +153,9 @@
 <?php
 
         $id_proyecto = $_GET['id_proyecto'];
+
+        echo '<form method="POST" action="asignar_juez.php" onsubmit="return true;">';
+
 
         //Te dice los jueces que forman parte de la edicion activa y que no forman parte del proyecto actual
         $sql = "SELECT *
@@ -168,10 +183,15 @@
 
 
         echo '<tr>';
-        echo '<td><a class="link-edicion">'.$row['nombre'].' '.$row['apellidoP'].' '.$row['apellidoM'].'</a></td>';
+        echo '<td id="nombre-juez"><a class="link-edicion">'.$row['nombre'].' '.$row['apellidoP'].' '.$row['apellidoM'].'</a></td>';
 
-        //Segunda query para contar la cantidad que veces que dicho juez ha sido asignado, excluyendo el proyecto actual
-        //y que sean proyectos vigentes
+        //checkbox
+        // echo '<td id="agregar-quitar-juez"><input type="checkbox" id="activa" name="activa"   /></td>';
+        echo '<td id="agregar-quitar-juez"><input type="checkbox" name="judge_id[]" value="'.$row['id_juez'].'"></td>';
+
+
+
+
 
         $sql2 = "SELECT COUNT(DISTINCT rc.id_proyecto)
         FROM r_calificaciones rc
@@ -191,8 +211,18 @@
 
         }
 
+        
+
         Database::disconnect();
 ?>
 
   </table>
   </div>
+
+  <button id="nueva-edicion-btn" class="btn" type="submit" name="asignar">Guardar</button>
+
+  <?php
+      echo '<input id="input-hidden" type="hidden" name="id_proyecto" value="'.$id_proyecto.' "?>';
+    ?>
+
+  </form>
