@@ -10,7 +10,7 @@ session_start();
     <ul class="nav-links">
       <li><a href="GanadoresPorCategoria.php">Ganadores</a></li>
       <li><a href="ver_proyectos.php">Ver proyectos</a></li>
-      <li><a href="e.html">Editar anuncios</a></li>
+      <li><a href="SistemaAnuncios.php">Editar anuncios</a></li>
       <li><a href="asignar_jueces.php">Asignar jueces</a></li>
     </ul>
   </nav>
