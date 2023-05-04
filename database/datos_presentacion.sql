@@ -55,8 +55,8 @@ VALUES
    ('Juez', 'Lopez', 'López', 5, 1);
 
    INSERT INTO r_proyectos (poster, description, estatus, nombre, video, fecha_registro, id_uf, id_docente, id_edicion, id_categoria, id_nivel, premio)
-VALUES ('https://drive.google.com/file/d/1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q/view?usp=share_link', 'This is a project about machine learning', true, 'Machine Learning Project', 'https://www.youtube.com/watch?v=v9WBUqUvGvs', NOW(), 'UF001', 2, 1, 1,1,0),
-       ('https://drive.google.com/file/d/1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q/view?usp=share_link', 'This is another project about machine learning', true, 'Another Machine Learning Project', 'https://www.youtube.com/watch?v=v9WBUqUvGvs', NOW(), 'UF002', 1, 1, 1,1,0),
-       ('https://drive.google.com/file/d/1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q/view?usp=share_link', 'This is a third project about machine learning', true, 'Creación de nanomateriales', 'https://www.youtube.com/watch?v=v9WBUqUvGvs', NOW(), 'UF001', 2, 1, 1,2,0),
-       ('https://drive.google.com/file/d/1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q/view?usp=share_link', 'This is a fourth project about machine learning', true, 'Mezcal sin azúcar', 'https://www.youtube.com/watch?v=v9WBUqUvGvs', NOW(), 'UF002', 2, 1, 1,2,0),
-       ('https://drive.google.com/file/d/1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q/view?usp=share_link', 'This is a fifth project about machine learning', false, 'Prueba de caída libre', 'https://www.youtube.com/watch?v=v9WBUqUvGvs', NOW(), 'UF002', 2, 1, 1,2,0);
+VALUES ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is a project about machine learning', true, 'Machine Learning Project', '//www.youtube.com/embed/nJIrvbkr4pk', NOW(), 'UF001', 2, 1, 1,1,0),
+       ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is another project about machine learning', true, 'Another Machine Learning Project', '//www.youtube.com/embed/nJIrvbkr4pk', NOW(), 'UF002', 1, 1, 1,1,0),
+       ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is a third project about machine learning', true, 'Creación de nanomateriales', '//www.youtube.com/embed/nJIrvbkr4pk', NOW(), 'UF001', 2, 1, 1,2,0),
+       ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is a fourth project about machine learning', true, 'Mezcal sin azúcar', '//www.youtube.com/embed/nJIrvbkr4pk', NOW(), 'UF002', 2, 1, 1,2,0),
+       ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is a fifth project about machine learning', false, 'Prueba de caída libre', '//www.youtube.com/embed/nJIrvbkr4pk', NOW(), 'UF002', 2, 1, 1,2,0);
