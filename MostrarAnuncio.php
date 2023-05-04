@@ -67,10 +67,10 @@
                
                   
                  
-                    echo '<td class="email-column"><a class="link-edicion">'.$row['contenido'].'</a><br><br></td>';
+                    echo '<td class="email-column"><a class="anuncio">'.$row['contenido'].'</a><br><br></td>';
 
             
-                    echo '<td class="email-column"><a class="link-edicion">'.$row['multimedia'].'</a></td>';
+                    echo '<td class="email-column"><a class="anuncio">'.$row['multimedia'].'</a></td>';
                   Database::disconnect();
                
                
@@ -92,7 +92,7 @@
         </div>
 
             <div>
-               <a class = "link" href="pruebadeanuncios.php">Regresar</a>
+               <a class = "link" href="SistemaAnuncios.php">Regresar</a>
             </div>
 
 
