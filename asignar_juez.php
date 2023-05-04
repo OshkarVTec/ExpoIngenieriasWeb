@@ -6,19 +6,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $pdo = Database::connect();
 
     if (isset($_POST['deasignar'])) {
-        $judge_ids = $_POST['id_juez'];
+        $judge_ids = $_POST['judge_id'];
 
-        $sql = "DELETE FROM r_calificaciones WHERE id_proyecto = ?";
+        // Delete selected judges from r_calificaciones table
+        $sql = "DELETE FROM r_calificaciones WHERE id_proyecto = ? AND id_juez IN (" . implode(',', array_fill(0, count($judge_ids), '?')) . ")";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(array($project_id));
-
-
-        $sql = "INSERT INTO r_calificaciones (puntos_rubro1, puntos_rubro2, puntos_rubro3, puntos_rubro4, comentarios, fecha, id_proyecto, id_juez) VALUES (0, 0, 0, 0, '', NULL, ?, ?)";
-
-        foreach ($judge_ids as $judge_id) {
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute([$project_id, $judge_id]);
-        }
+        $params = array_merge([$project_id], $judge_ids);
+        $stmt->execute($params);
     }
     
     if (isset($_POST['asignar'])) {

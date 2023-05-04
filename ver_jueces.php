@@ -103,7 +103,8 @@
 
                 //checkbox
                 
-  echo '<td id="agregar-quitar-juez"><input type="checkbox" name="judge_id[]" value="'.$row['id_juez'].'" '.($num_rows > 0 ? 'checked' : '').'></td>';
+  echo '<td id="agregar-quitar-juez"><input type="checkbox" name="judge_id[]" value="'.$row['id_juez'].'"></td>';
+
   
  
 
@@ -219,10 +220,12 @@
   </table>
   </div>
 
-  <button id="nueva-edicion-btn" class="btn" type="submit" name="asignar">Guardar</button>
 
   <?php
       echo '<input id="input-hidden" type="hidden" name="id_proyecto" value="'.$id_proyecto.' "?>';
     ?>
+
+
+  <button id="nueva-edicion-btn" class="btn" type="submit" name="asignar">Guardar</button>
 
   </form>
