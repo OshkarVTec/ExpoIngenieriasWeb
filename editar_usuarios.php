@@ -15,17 +15,32 @@ else
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Edición de expo editar</title>
   <link rel="stylesheet" href="CSS/style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+  <script>
+    $(function () {
+      $("#header").load(<?php
+      if ($_SESSION['matricula'] != null) {
+        echo '"header_estudiante.php"';
+      } else if ($_SESSION['admin'] != null) {
+        echo '"header_admin.php"';
+      } else if ($_SESSION['juez'] != null) {
+        if ($_SESSION['docente'] != null)
+          echo '"header_docente_juez.php"';
+        else
+          echo '"header_juez.php"';
+      } else if ($_SESSION['docente'] != null) {
+        echo '"header_docente.php"';
+      }
+      ?>);
+    });
+    $(function () {
+      $("#footer").load("footer.html");
+    })
+  </script>
 </head>
 
 <body>
-  <header class="header">
-    <div class="logo">
-      <a href="informativa_presentacion.html">
-        <img src="IMG/logo-expo.png" alt="Logo de la pagina" />
-      </a>
-    </div>
-    <a href="#" class="btn"><button>Log In</button></a>
-  </header>
+  <div id="header"></div>
 
 
 
@@ -73,25 +88,40 @@ else
     // Update the user's roles in the database
     $pdo->beginTransaction();
     try {
-      // Remove the user from all role tables
-      $pdo->query("DELETE FROM r_administradores WHERE id_usuario = $id_usuario");
-      $pdo->query("DELETE FROM r_docentes WHERE id_usuario = $id_usuario");
-      $pdo->query("DELETE FROM r_estudiantes WHERE id_usuario = $id_usuario");
-      $pdo->query("DELETE FROM r_jueces WHERE id_usuario = $id_usuario");
 
       // Add the user to the selected role tables
       foreach ($roles as $role) {
         switch ($role) {
-          case 'administrador':
+          case 'Administrador':
+            $sql = "SELECT * FROM r_administradores WHERE id_usuario = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$id_usuario]);
+            if ($stmt->rowCount() > 0)
+              break;
             $pdo->query("INSERT INTO r_administradores (id_usuario) VALUES ($id_usuario)");
             break;
-          case 'docente':
+          case 'Docente':
+            $sql = "SELECT * FROM r_docentes WHERE id_usuario = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$id_usuario]);
+            if ($stmt->rowCount() > 0)
+              break;
             $pdo->query("INSERT INTO r_docentes (id_usuario) VALUES ($id_usuario)");
             break;
-          case 'estudiante':
+          case 'Estudiante':
+            $sql = "SELECT * FROM r_estudiantes WHERE id_usuario = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$id_usuario]);
+            if ($stmt->rowCount() > 0)
+              break;
             $pdo->query("INSERT INTO r_estudiantes (id_usuario) VALUES ($id_usuario)");
             break;
-          case 'juez':
+          case 'Juez':
+            $sql = "SELECT * FROM r_jueces WHERE id_usuario = ?";
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([$id_usuario]);
+            if ($stmt->rowCount() > 0)
+              break;
             $pdo->query("INSERT INTO r_jueces (id_usuario) VALUES ($id_usuario)");
             break;
         }
@@ -101,7 +131,7 @@ else
       $pdo->commit();
 
       // Redirect to the page that shows the user's details
-      header("Location: ver_usuarios.php?id_usuario=$id_usuario&rol=$rol");
+      header("Location: ver_usuarios.php?");
       exit();
     } catch (Exception $e) {
       // Roll back the transaction and show an error message
@@ -147,40 +177,40 @@ else
 
   if ($rol == 'Docente') {
     echo '<td class="rol" >';
-    echo '<input  type="checkbox" id="Maestro" name="roles[]"' . $checked_maestro . ' />';
-    echo '<label  for="Maestro">Docente</label>';
+    echo '<input  type="checkbox" value="Docente" name="roles[]"' . $checked_maestro . ' />';
+    echo '<label  for="Docente">Docente</label>';
     echo '</td>';
 
 
 
 
     echo '<td class="rol">';
-    echo '<input type="checkbox" id="Juez" name="roles[]"' . $checked_juez . ' />';
+    echo '<input type="checkbox" value="Juez" name="roles[]"' . $checked_juez . ' />';
     echo '<label for="Juez">Juez</label>';
     echo '</td>';
   }
 
   if ($rol == 'Sin Asignar') {
     echo '<td class="rol">';
-    echo '<input type="checkbox" id="Maestro" name="roles[]"' . $checked_maestro . ' />';
-    echo '<label for="Maestro">Docente</label>';
+    echo '<input type="checkbox" value="Docente" name="roles[]"' . $checked_maestro . ' />';
+    echo '<label for="Docente">Docente</label>';
     echo '</td>';
 
 
 
 
     echo '<td class="rol">';
-    echo '<input type="checkbox" id="Juez" name="roles[]"' . $checked_juez . ' />';
+    echo '<input type="checkbox" value="Juez" name="roles[]"' . $checked_juez . ' />';
     echo '<label for="Juez">Juez</label>';
     echo '</td>';
 
     echo '<td class="rol">';
-    echo '<input type="checkbox" id="Administrador" name="Administrador"' . $checked_administrador . ' />';
+    echo '<input type="checkbox" value="Administrador" name="roles[]"' . $checked_administrador . ' />';
     echo '<label for="Administrador">Administrador</label>';
     echo '</td>';
 
     echo '<td class="rol">';
-    echo '<input type="checkbox" id="Estudiante" name="Estudiante"' . $checked_estudiante . ' />';
+    echo '<input type="checkbox" value="Estudiante" name="roles[]"' . $checked_estudiante . ' />';
     echo '<label for="Estudiante">Estudiante</label>';
     echo '</td>';
   }
@@ -188,8 +218,8 @@ else
 
 
   // echo '<td class="rol">';
-  // echo '<input type="checkbox" id="Maestro" name="Maestro"'.$checked_maestro.' />';
-  // echo '<label for="Maestro">Docente</label>';
+  // echo '<input type="checkbox" id="Docente" name="Docente"'.$checked_maestro.' />';
+  // echo '<label for="Docente">Docente</label>';
   // echo '</td>';
   
 
@@ -227,7 +257,8 @@ else
   ?>
 
 
-
+  <article></article>
+  <div id="footer"></div>
 </body>
 
 </html>
