@@ -41,12 +41,12 @@
       ?>
       
       <form method="post">
-        <table>
+        
             <tr>
               <th>Contenido</th>
               
               <th>Multimedia</th>
-              <th>Vigente</th>
+              <th>Activo</th>
               <td class = "tabla">
                 <td><button class = "btn" type="submit">Guardar</button></td>
          </tr>
@@ -63,6 +63,9 @@
               </tr>
               <?php endforeach; ?>
         </table>
+        <div>
+               <a class = "link" href="SistemaAnuncios.php">Regresar</a>
+            </div>
 
         
       </form>
@@ -71,5 +74,7 @@
          </tr>
       </table>
    </div>
+   <article></article>
+   <div id="footer"></div>
 </body>
 </html>

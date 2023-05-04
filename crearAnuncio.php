@@ -10,15 +10,19 @@ $Error = null;
 
 if (!empty($_POST)) {
 
-   $anuncio = $S_post['anuncio'];
-   $multimedia = $S_post['multimedia'];
-   $vigencia = $S_post['vigencia'];
+   $anuncio = $_POST['anuncio'];
+   $multimedia = $_POST['multimedia'];
+   if (isset($_POST['vigente'])) {
+      $vigente = 1;
+   } else {
+      $vigente = 0;
+   }
 
 
    // validate input
    $valid = true;
 
-   if (empty($name)) {
+   if (empty($anuncio)) {
       $Error = 'Anuncio vacio';
       $valid = false;
    }
@@ -28,12 +32,12 @@ if (!empty($_POST)) {
       $pdo = Database::connect();
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $sql = "INSERT INTO r_anuncios (id_anuncio, contenido, multimedia, vigente) 
-                                values (NULL, ?, ?, false, ?,?, current_timestamp(), ?, ?, 1, ?)";
+                                values (NULL, ?, ?, ?)";
 
       $q = $pdo->prepare($sql);
-      $q->execute(array($anuncio, ));
+      $q->execute(array($anuncio, $multimedia, $vigente));
       Database::disconnect();
-      header("Location: informativa.html");
+      header("Location: SistemaAnuncios.php");
    }
 }
 ?>
@@ -47,15 +51,32 @@ if (!empty($_POST)) {
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Nuevos Anuncios</title>
    <link rel="stylesheet" href="CSS/style.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+   <script>
+      $(function () {
+         $("#header").load(<?php
+         if ($_SESSION['matricula'] != null) {
+            echo '"header_estudiante.php"';
+         } else if ($_SESSION['admin'] != null) {
+            echo '"header_admin.php"';
+         } else if ($_SESSION['juez'] != null) {
+            if ($_SESSION['docente'] != null)
+               echo '"header_docente_juez.php"';
+            else
+               echo '"header_juez.php"';
+         } else if ($_SESSION['docente'] != null) {
+            echo '"header_docente.php"';
+         }
+         ?>);
+      });
+      $(function () {
+         $("#footer").load("footer.html");
+      })
+   </script>
 </head>
 
 <body>
-   <header class="header">
-      <div class="logo">
-         <a href="informativa_presentacion.html"><img src="IMG/logo-expo.png" alt="Logo de la pagina"></a>
-      </div>
-      <h1>Announcement Form</h1>
-   </header>
+   <div id="header"></div>
    <div class="ventana">
       <h1 class="label"></h1>
       <div class="container">
@@ -76,73 +97,22 @@ if (!empty($_POST)) {
 
 
                <tr>
-                  <td><label for="link">Vigencia:</label></td>
-                  <td>
-                     <select>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option value="11">11</option>
-                        <option value="12">12</option>
-                        <option value="13">13</option>
-                        <option value="14">14</option>
-                        <option value="15">15</option>
-                        <option value="16">16</option>
-                        <option value="17">17</option>
-                        <option value="18">18</option>
-                        <option value="19">19</option>
-                        <option value="20">20</option>
-                        <option value="11">11</option>
-                        <option value="22">22</option>
-                        <option value="23">23</option>
-                        <option value="24">24</option>
-                        <option value="25">25</option>
-                        <option value="26">26</option>
-                        <option value="27">27</option>
-                        <option value="28">28</option>
-                        <option value="29">29</option>
-                        <option value="30">30</option>
-                        <option value="31">31</option>
-                     </select>
-
-
-
-
-
-                     <select>
-                        <option value="Enero">Enero</option>
-                        <option value="Febrero">Febrero</option>
-                        <option value="Marzo">Marzo</option>
-                        <option value="Abril">Abril</option>
-                        <option value="Mayo">Mayo</option>
-                        <option value="Junio">Junio</option>
-                        <option value="Julio">Julio</option>
-                        <option value="Agosto">Agosto</option>
-                        <option value="Septiembre">Septiembre</option>
-                        <option value="Octubre">Octubre</option>
-                        <option value="Noviembre">Noviembre</option>
-                        <option value="Diciembre">Diciembre</option>
-                     </select>
-
-                  <td><input type="text" id="link" name="poster" placeholder="Fecha: 00:00"
-                        value="<?php echo !empty($poster) ? $poster : ''; ?>"></td>
+                  <td><label for="link">Vigente:</label></td>
+                  <td><input type="checkbox" name="vigente"></td>
 
 
             </table>
             <td><input value="Agregar anuncio" type="submit" class="btn"></td>
-            <button type="button" id="cancel">Cancelar</button>
+            <button class="cancel" onclick="history.go(-1);">Cancelar</button>
             <?php if (($Error != null)) ?>
             <div class="Error">
                <?php echo $Error; ?>
             </div>
          </form>
+      </div>
+   </div>
+   <article></article>
+   <div id="footer"></div>
 </body>
 
 </html>

@@ -39,14 +39,7 @@ else
 </head>
 
 <body>
-  <header class="header">
-    <div class="logo">
-      <a href="informativa_presentacion.html">
-        <img src="IMG/logo-expo.png" alt="Logo de la pagina" />
-      </a>
-    </div>
-    <a href="#" class="btn"><button>Log In</button></a>
-  </header>
+  <div id="header"></div>
   <h1 class="label">Edición de la Expo</h1>
   <div class="container">
     <table class="general">
@@ -111,6 +104,8 @@ else
     </table>
   </div>
   <a href="edicion_de_expo_crear.php"><button id="nueva-edicion-btn" class="btn">Nueva edición</button></a>
+  <article></article>
+  <div id="footer"></div>
 </body>
 
 </html>

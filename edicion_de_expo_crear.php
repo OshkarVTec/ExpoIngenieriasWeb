@@ -179,6 +179,8 @@ if (!empty($_POST)) {
       </div>
     </form>
   </div>
+  <article></article>
+  <div id="footer"></div>
 </body>
 
 </html>

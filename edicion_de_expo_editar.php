@@ -20,10 +20,9 @@ if (!empty($_POST)) {
   $nombre = $_POST['input-nombre'];
   $fecha_inicio = $_POST['fecha_inicio'];
   $fecha_final = $_POST['fecha_final'];
-  if (isset($_POST['activa'])){
+  if (isset($_POST['activa'])) {
     $activa = 1;
-  }
-  else{
+  } else {
     $activa = 0;
   }
   //checa si la checkbox está en checked y regresa un 1, si no regresa 0
@@ -122,7 +121,7 @@ if (!empty($_POST)) {
 
   <div id="forms-editar-edicion-expo" class="container">
     <form action="edicion_de_expo_editar.php?id_edicion=<?php echo $id_edicion ?>" method=POST>
-    <?php
+      <?php
       if (isset($valid) && isset($exito)) {
         echo '<div class="Sucess">' . $exito . '</div>';
       }
@@ -202,6 +201,8 @@ if (!empty($_POST)) {
       </div>
     </form>
   </div>
+  <article></article>
+  <div id="footer"></div>
 
 </body>
 
