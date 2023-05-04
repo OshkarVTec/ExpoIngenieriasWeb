@@ -183,7 +183,7 @@ Database::disconnect();
             $pdo = Database::connect();
             $sql = 'SELECT * FROM r_proyecto_estudiantes WHERE matricula = ?';
             $q = $pdo->prepare($sql);
-            $q->execute(array($matricula));
+            $q->execute(array($_SESSION['matricula']));
             $p_estudiantes = $q->fetchAll(PDO::FETCH_ASSOC);
             echo '<p> Mi Proyecto</p>';
             echo '<hr color="#1687A7" width="50%">';
