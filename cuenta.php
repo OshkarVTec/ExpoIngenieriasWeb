@@ -16,10 +16,8 @@ $q->execute(array($id_usuario));
 if ($q->rowCount() > 0) {
     $row = $q->fetch(PDO::FETCH_ASSOC);
     $name = $row['nombre'];
-    $matricula = $row['matricula'];
     $apellidoP = $row['apellidoP'];
     $apellidoM = $row['apellidoM'];
-    $id_edicion = $row['id_edicion'];
     $id_user = $row['id_usuario'];
     $rol = "Estudiante";
     $id_carrera = $row['id_carrera'];
@@ -31,10 +29,8 @@ $q->execute(array($id_usuario));
 if ($q->rowCount() > 0) {
     $row = $q->fetch(PDO::FETCH_ASSOC);
     $name = $row['nombre'];
-    $matricula = $row['matricula'];
     $apellidoP = $row['apellidoP'];
     $apellidoM = $row['apellidoM'];
-    $id_edicion = $row['id_edicion'];
     $id_user = $row['id_usuario'];
     $rol = "Docente";
     $sql = 'SELECT * FROM r_jueces WHERE id_usuario = ?';
@@ -42,12 +38,7 @@ if ($q->rowCount() > 0) {
     $q->execute(array($id_usuario));
     if ($q->rowCount() > 0) {
         $row = $q->fetch(PDO::FETCH_ASSOC);
-        $name = $row['nombre'];
-        $matricula = $row['matricula'];
-        $apellidoP = $row['apellidoP'];
-        $apellidoM = $row['apellidoM'];
         $id_edicion = $row['id_edicion'];
-        $id_user = $row['id_usuario'];
         $rol = "Juez/Docente";
     }
 }
@@ -58,12 +49,22 @@ $q->execute(array($id_usuario));
 if ($q->rowCount() > 0) {
     $row = $q->fetch(PDO::FETCH_ASSOC);
     $name = $row['nombre'];
-    $matricula = $row['matricula'];
     $apellidoP = $row['apellidoP'];
     $apellidoM = $row['apellidoM'];
     $id_edicion = $row['id_edicion'];
     $id_user = $row['id_usuario'];
     $rol = "Juez";
+}
+$sql = 'SELECT * FROM r_administradores WHERE id_usuario = ?';
+$q = $pdo->prepare($sql);
+$q->execute(array($id_usuario));
+if ($q->rowCount() > 0) {
+    $row = $q->fetch(PDO::FETCH_ASSOC);
+    $name = $row['nombre'];
+    $apellidoP = $row['apellidoP'];
+    $apellidoM = $row['apellidoM'];
+    $id_user = $row['id_usuario'];
+    $rol = "Administador";
 }
 Database::disconnect();
 ?>
