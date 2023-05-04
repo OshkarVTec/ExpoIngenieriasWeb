@@ -36,6 +36,15 @@ if (!empty($_POST)) {
 		$Error = 'Por favor escribe un correo';
 		$valid = false;
 	} else {
+		$pdo = Database::connect();
+		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$sql = "SELECT * FROM r_usuarios WHERE correo = ?";
+		$q = $pdo->prepare($sql);
+		$q->execute(array($correo));
+		if ($q->rowCount() > 0) {
+			$Error = 'El correo ingresado ya está en uso';
+			$valid = false;
+		}
 		list($matricula, $dominio) = explode('@', $correo);
 	}
 	if (empty($contrasenia)) {
