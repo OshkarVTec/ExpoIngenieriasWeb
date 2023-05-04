@@ -1,10 +1,11 @@
 <?php
-require 'database.php';
 session_start();
-if ($_SESSION['id_juez'] != null)
-   $id_juez = $_SESSION['id_juez'];
+if ($_SESSION['juez'] != null)
+   $id_juez = $_SESSION['juez'];
 else
    header("Location:informativa.php");
+
+require 'database.php';
 
 $status = null;
 if (!empty($_GET['status'])) {
@@ -23,18 +24,24 @@ if (!empty($_GET['status'])) {
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
    <script>
       $(function () {
-         $("#header").load(<?php 
-        if($_SESSION['estudiante'] != null){
+         $("#header").load(<?php
+         if ($_SESSION['matricula'] != null) {
             echo '"header_estudiante.php"';
-        } else if($_SESSION['admin'] != null){
+         } else if ($_SESSION['admin'] != null) {
             echo '"header_admin.php"';
-        } else if($_SESSION['juez'] != null){
-            echo '"header_juez.php"';
-        } else if($_SESSION['docente'] != null){
+         } else if ($_SESSION['juez'] != null) {
+            if ($_SESSION['docente'] != null)
+               echo '"header_docente_juez.php"';
+            else
+               echo '"header_juez.php"';
+         } else if ($_SESSION['docente'] != null) {
             echo '"header_docente.php"';
-        }
-        ?>);
+         }
+         ?>);
       });
+      $(function () {
+         $("#footer").load("footer.html");
+      })
    </script>
 </head>
 

@@ -80,34 +80,10 @@
     }
    ?>
 
-<tr>
-            <td><label for="link">Seleccionar UF:</label></td>
-            <td>     
-            <select name = "uf">
-               <?php
-                  $pdo = Database::connect();
-                  $query = 'SELECT * FROM r_ufs';
-                  foreach ($pdo->query($query) as $row) {
-                     echo "<option value='" . $row['id_uf'] . "'>" . $row['nombre'] . "</option>";
-                  }
-                  Database::disconnect();
-               ?>
-            </select>
-            </td>
-            </tr>
 
-</body>
-<tr>
 
-<td><button class = "btn" name="submit">Guardaro</button></td>
+<td><button class = "btn" name="submit">Guardar</button></td>
 
 
 
-
-<td class = "tabla">
-                <td><button class = "btn">Guardar</button></td>
-    </td>
-
-    <td><button class = "btn" onclick="location='GanadoresPorCategoria.php'">Guardarss</button></td>
-    
 </html>
