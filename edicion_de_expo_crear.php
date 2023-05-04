@@ -83,15 +83,15 @@ if (!empty($_POST)) {
   <script>
     $(function () {
       $("#header").load(<?php
-      if ($_SESSION['matricula'] != null) {
+      if ($_SESSION['estudiante'] != null) {
         echo '"header_estudiante.php"';
       } else if ($_SESSION['admin'] != null) {
         echo '"header_admin.php"';
       } else if ($_SESSION['juez'] != null) {
         if ($_SESSION['docente'] != null)
-          echo '"header_docente_juez.php"';
-        else
           echo '"header_juez.php"';
+        else
+          echo '"header_docente_juez.php"';
       } else if ($_SESSION['docente'] != null) {
         echo '"header_docente.php"';
       }
