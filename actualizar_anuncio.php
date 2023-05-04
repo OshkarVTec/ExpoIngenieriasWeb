@@ -1,9 +1,7 @@
-
-
 <?php
    $id_anuncio = null;
 	if ( !empty($_GET['id_anuncio'])) {
-		$id_proyecto = $_REQUEST['id_anuncio'];
+		$id_anuncio = $_REQUEST['id_anuncio'];
 	}
 	require 'database.php';
 
@@ -13,7 +11,9 @@
 
 		$contenido = $_POST['contenido'];
 		$multimedia = $_POST['multimedia'];
-		$vigencia   = $_POST['vigencia'];
+		$vigente   = $_POST['vigente'];
+
+        
 		
 
 		// validate input
@@ -23,12 +23,11 @@
 			$Error = 'Escriba el contenido del anuncio';
 			$valid = false;
 		}
+
 		if (empty($multimedia)) {
 			$Error = 'Inserte Link de multimedia';
 			$valid = false;
-		}
-
-        
+		}        
 		
 
 		// insert data
@@ -37,7 +36,7 @@
 			$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$sql = "UPDATE r_anuncios 
                   SET contenido = ?,  multimedia = ?
-                  WHERE id_proyecto = ?";
+                  WHERE id_anuncio = ?";
 			$q = $pdo->prepare($sql);
 			$q->execute(array($contenido,$multimedia));
 			Database::disconnect();
@@ -51,6 +50,7 @@
       $q = $pdo->prepare($sql);
       $q->execute(array($id_anuncio));
       $row = $q->fetch(PDO::FETCH_ASSOC);
+      //$id_anuncio = $row['id_anuncio'];
       $contenido = $row['contenido'];
       $multimedia = $row['multimedia'];
       Database::disconnect();
@@ -61,20 +61,14 @@
 
 <p name = "anuncios">
                <?php
-                  $pdo = Database::connect();
-
-
-
+                  //$pdo = Database::connect();
    //if(isset($_GET['id_anuncio'])) {
-   //$id_anuncio = $_GET['id_anuncio'];
-               
-                  
-                 
-                    echo '<td class="email-column"><a class="link-edicion">'.$row['contenido'].'</a><br><br></td>';
+   //$id_anuncio = $_GET['id_anuncio'];     
+                    //echo '<td class="email-column"><a class="link-edicion">'.$row['contenido'].'</a><br><br></td>';
 
             
-                    echo '<td class="email-column"><a class="link-edicion">'.$row['multimedia'].'</a></td>';
-                  Database::disconnect();
+                    //echo '<td class="email-column"><a class="link-edicion">'.$row['multimedia'].'</a></td>';
+                  //Database::disconnect();
                   ?>
 
 
@@ -98,7 +92,7 @@
       <div class = "ventana">
          <h1 class="label"></h1>
          <div class="container">
-      <form class = "login" action="actualizar_anuncio.php?id_proyecto=<?php echo $id_anuncio?>" method=POST>
+      <form class = "login" action="actualizar_anuncio.php?id_anuncio=<?php echo $id_anuncio?>" method=POST>
       <table>
 
       <tr>
@@ -136,7 +130,7 @@
             $row = $q->fetch(PDO::FETCH_ASSOC);
             $status = $row['estatus'];
             if($status == 0){
-               echo '<input value="Actualizar Proyecto" type="submit" class = "btn" >';
+               echo '<input value="Actualizar Anuncio" type="submit" class = "btn" >';
             }
             
             ?>

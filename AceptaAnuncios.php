@@ -41,7 +41,7 @@
       ?>
       
       <form method="post">
-        <table>
+        
             <tr>
               <th>Contenido</th>
               
@@ -63,6 +63,9 @@
               </tr>
               <?php endforeach; ?>
         </table>
+        <div>
+               <a class = "link" href="SistemaAnuncios.php">Regresar</a>
+            </div>
 
         
       </form>

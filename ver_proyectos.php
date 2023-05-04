@@ -66,6 +66,8 @@ if (!($_SESSION['juez'] != null || $_SESSION['admin'] != null || $_SESSION['doce
    }
    Database::disconnect();
    ?>
+   <article></article>
+   <div id="footer"></div>
 </body>
 
 </html>

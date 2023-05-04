@@ -961,3 +961,21 @@ footer {
   /* background-color: #8b0000; */
   width: 225px;
 }
+
+#separador {
+  margin-top: 80px;
+  /* background-color: coral; */
+}
+
+#nombre-juez {
+  width: 300px;
+}
+
+#agregar-quitar-juez {
+  width: 100px;
+}
+
+#input-hidden {
+  /* display: none; */
+  margin-left: 100px;
+}
