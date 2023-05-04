@@ -185,7 +185,7 @@ Database::disconnect();
             $q = $pdo->prepare($sql);
             $q->execute(array($_SESSION['matricula']));
             $p_estudiantes = $q->fetchAll(PDO::FETCH_ASSOC);
-            echo '<p> Mi Proyecto</p>';
+            echo '<p> Mis Proyectos</p>';
             echo '<hr color="#1687A7" width="50%">';
             echo '<div class="cuentabig">';
             echo '<ul class="cuentalast">';

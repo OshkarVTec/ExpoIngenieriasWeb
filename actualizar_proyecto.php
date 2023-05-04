@@ -74,6 +74,7 @@ if (!empty($_POST)) {
                                 values (?, ?, ?)";
       $q = $pdo->prepare($sql);
       $q->execute(array(null, $_SESSION['matricula'], $id_proyecto));
+      echo "insert";
       $select = $_POST['pers'];
       foreach ($select as $value) {
          $query = "SELECT * FROM r_estudiantes WHERE matricula = '$value'";
