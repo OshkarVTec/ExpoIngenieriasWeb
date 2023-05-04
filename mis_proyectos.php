@@ -75,6 +75,8 @@ $Error = null;
             </tr>
         </table>
     </div>
+    <article></article>
+    <div id="footer"></div>
 </body>
 
 </html>

@@ -211,9 +211,9 @@ Database::disconnect();
         <br>
     </div>
 
-    <br>
-    <hr color="#1687A7">
     </div>
+    <article></article>
+    <div id="footer"></div>
 
 </body>
 
