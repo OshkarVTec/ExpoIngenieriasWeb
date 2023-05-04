@@ -53,7 +53,11 @@ else
 <body>
   <div id="header"></div>
   <?php
-  
+  $ids = array();
+  $posts = array();
+  $i = 0;
+  $combined = array();
+  echo '<form action="GanadoresPorCategoria.php" method="POST">';
   include 'database.php';
   $pdo = Database::connect();
   $sql = 'SELECT *  FROM r_ediciones WHERE activa = 1';
@@ -71,9 +75,7 @@ else
     $proyectos = $q->fetchAll(PDO::FETCH_ASSOC);
 
 
-    $postvalues = array();
-    $idps = array();
-    $i=0;
+
     foreach ($proyectos as $row) {
       echo '<tr>';
       echo '<td>';
@@ -91,49 +93,50 @@ else
           $promedios = ($promedios + $promedio) / $i;
           $i = $i + 1;
       }
-      echo '<form action="GanadoresPorCategoria.php" method="POST">';
+
+
       echo $promedios;
       echo '<select name="premio">
               <option value="1" >Primer lugar</option>
               <option value="2">Segundo lugar</option>
-              <option value="3" selected=true>Tercer lugar</option>
-              <option value="4" >No ganador</option>
+              <option value="3">Tercer lugar</option>
+              <option value="4" selected=true>No ganador</option>
               
             </select>';
 
       echo '</td>';
       echo '</td>';
       echo '</tr>';
-
-      array_push($postvalues, $_POST['premio']);
-      array_push($idps, $id_proyecto);      
+      foreach ($_POST['premio'] as $id_proyecto => $premio) {
+          $posts[$id_proyecto] = $premio;
+          $ids[$id_proyecto] = $id_proyecto;
+      }
     }
     echo '</table>';
     echo '</div>';
     
   }
+  echo '<div class="cornerbtn">';
+  echo '<div></div>';
+  echo '<input value="Guardar" type="submit" class="btnguardar">';
+  echo '</div>';
+  
 
-
-  if (isset($_POST['submit'])) {
-    foreach($idps as $row){
-    $sql = "UPDATE r_proyectos SET premio=? WHERE id_proyecto=?";
-    $q = $pdo->prepare($sql);
-    $q->execute(array($postvalues[$i], $row[$i]));
-    $i = $i+1;
-    }
-  Database::disconnect();
-  header("Location: informativa.php");
+  if (!empty($_POST)) {
+    foreach ($posts as $id_proyecto => $premio) {
+      $pdo = Database::connect();
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);  
+      $sql = "UPDATE r_proyectos SET premio=? WHERE id_proyecto=?";
+      $q = $pdo->prepare($sql);
+      $q->execute(array($premio, $id_proyecto));
+  }
+  
+    header("Location: informativa.php");
 }
-
-
-  Database::disconnect();
+Database::disconnect();
+echo '</form>';
   ?>
 
-
-  <div class='cornerbtn'>
-    <div></div>
-  <button class="btnguardar" name="submit">Guardar</button>
-</div>
   <br>
 
   <div id="footer"></div>
