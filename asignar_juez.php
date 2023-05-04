@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['asignar'])) {
         $judge_ids = $_POST['judge_id'];
 
-        $sql = "INSERT INTO r_calificaciones (puntos_rubro1, puntos_rubro2, puntos_rubro3, puntos_rubro4, comentarios, fecha, id_proyecto, id_juez) VALUES (0, 0, 0, 0, '', NULL, ?, ?)";
+        $sql = "INSERT INTO r_calificaciones (puntos_rubro1, puntos_rubro2, puntos_rubro3, puntos_rubro4, comentarios, fecha, id_proyecto, id_juez) VALUES (NULL, NULL, NULL, NULL, '', NULL, ?, ?)";
         $stmt = $pdo->prepare($sql);
 
         foreach ($judge_ids as $judge_id) {
