@@ -40,20 +40,23 @@ $stmt = $pdo->query($sql);
 $anuncios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 foreach ($anuncios as $anuncio) {
-  echo '<div class="mySlides fade">';
+  //echo '<div class="mySlides fade">';
+  echo '<tr>';
+  echo '<div>';
   echo '<p>' . $anuncio['contenido'] . '</p>';
   echo '</div>';
+  echo '<img src="' . $anuncio['multimedia'] . '">';
+  echo '</tr>';
 }
 ?>
 
 <?php
-$n = 4;
-for ($i = 1; $i <= $n; $i++) {
-  echo '<span class="dot" onclick="currentSlide(' . $i . ')"></span>';
-}
+//$n = 5;
+//for ($i = 1; $i <= $n; $i++) {
+  //echo '<span class="dot" onclick="currentSlide(' . $i . ')"></span>';
+//}
 ?>
   
-
       </div>
 
 
@@ -74,9 +77,9 @@ for ($i = 1; $i <= $n; $i++) {
 
         <!-- The dots/circles -->
         <!-- <div id="container-seccion-derecha-btnes" style="text-align: center"> -->
-        <span class="dot" onclick="currentSlide(10)"></span>
-        <span class="dot" onclick="currentSlide(11)"></span>
-        <span class="dot" onclick="currentSlide(12)"></span>
+        <span class="dot" onclick="currentSlide2(10)"></span>
+        <span class="dot" onclick="currentSlide2(11)"></span>
+        <span class="dot" onclick="currentSlide2(12)"></span>
         <!-- </div> -->
       </div>
     </section>
