@@ -41,6 +41,7 @@ else
 <body>
   <div id="header"></div>
   <?php
+  
   include 'database.php';
   $pdo = Database::connect();
   $sql = 'SELECT *  FROM r_ediciones WHERE activa = 1';
@@ -63,11 +64,22 @@ else
       echo '<tr>';
       echo '<td>';
       echo '<a class="link" href="proyecto.php?id_proyecto=' . $row['id_proyecto'] . '">' . $row['nombre'] . '</a>';
-      echo '<td class = "column"> 98
-            
+      echo '<td class = "column">';
+      $promedios = 0;
+      $i = 1;
 
-            <form method="post">
-            <select name="select">
+      $sql = 'SELECT * FROM r_calificaciones WHERE id_proyecto = ?';
+      $q = $pdo->prepare($sql);
+      $q->execute(array($row['id_proyecto']));
+      $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);
+      foreach ($calificaciones as $row) {
+          $promedio = ($row['puntos_rubro1'] + $row['puntos_rubro2'] + $row['puntos_rubro3'] + $row['puntos_rubro4']) / 4;
+          $promedios = ($promedios + $promedio) / $i;
+          $i = $i + 1;
+      }
+      echo '<form method="post">';
+      echo $promedios;
+      echo '<select name="select">
               <option value="1" >Primer lugar</option>
               <option value="2">Segundo lugar</option>
               <option value="3">Tercer lugar</option>
@@ -105,11 +117,14 @@ else
   ?>
 
 
+  <div class='cornerbtn'>
+    <div></div>
+  <button class="btnguardar" name="submit">Guardar</button>
+</div>
+  <br>
 
-  <button class="btn" name="submit">Guardar</button>
-  <article></article>
   <div id="footer"></div>
 
 
-
+</body>
 </html>
