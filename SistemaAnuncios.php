@@ -67,7 +67,7 @@
         //}
         ?>
          <tr>
-            <td><a class="btn" href="CrearAnuncio.php">Nuevo</a></td>
+            <td><a class="btn" href="crearAnuncio.php">Nuevo</a></td>
             
             
             <td class = "tabla">
