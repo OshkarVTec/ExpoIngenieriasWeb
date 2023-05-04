@@ -12,7 +12,7 @@ $proyecto = $p_estudiantes['id_proyecto'];
 
 <header class="header">
     <div class="logo">
-    <a href="informativa_estudiante.html">
+    <a href="informativa.php">
       <img src="IMG/logo-expo.png" alt="Logo de la pagina">
     </a>
     </div>
