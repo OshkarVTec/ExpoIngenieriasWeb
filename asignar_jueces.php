@@ -56,7 +56,7 @@ if (!$_SESSION['admin'])
     $proyectos = $q->fetchAll(PDO::FETCH_ASSOC);
     foreach ($proyectos as $row) {
       echo '<tr>';
-      echo '<td>';
+      echo '<td class="row-nombre-proyecto">';
       echo '<a class="link" href="proyecto.php?id_proyecto=' . $row['id_proyecto'] . '">' . $row['nombre'] . '</a>';
       echo '</td>';
       $sql = 'SELECT * FROM r_categorias WHERE id_categoria = ?';
