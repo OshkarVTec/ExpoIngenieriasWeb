@@ -145,17 +145,21 @@ Database::disconnect();
                         $promedios;
                         $i = 1;
                         $pdo = Database::connect();
-                        $sql = 'SELECT * FROM r_calificaciones WHERE id_proyecto = ?';
+                        $sql = 'SELECT * FROM r_calificaciones WHERE id_proyecto = ? and puntos_rubro1 != 0';
                         $q = $pdo->prepare($sql);
                         $q->execute(array($id_proyecto));
                         $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);
+                        if($calificaciones){
                         foreach ($calificaciones as $row) {
                             $promedio = ($row['puntos_rubro1'] + $row['puntos_rubro2'] + $row['puntos_rubro3'] + $row['puntos_rubro4']) / 4;
                             $promedios = ($promedios + $promedio) / $i;
                             $i = $i + 1;
                         }
 
-                        echo $promedios;
+                        echo $promedios;}
+                        else{
+                            echo '0';
+                        }
 
                         Database::disconnect();
                         ?>
