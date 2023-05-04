@@ -24,6 +24,7 @@ session_start();
       <a href="ver_usuarios.php">Editar usuarios</a>
       <?php echo '<a href="cuenta.php?id_usuario='.$_SESSION['id_usuario'].'">Mi Cuenta</a>';?>
       <a href="edicion_de_expo_vista.php">Edición de Expo</a>
+      <a href="informativa.php">Ver anuncios</a>
     </div>
   </nav>
 </header>

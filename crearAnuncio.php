@@ -90,8 +90,8 @@ if (!empty($_POST)) {
                </tr>
 
                <tr>
-                  <td><label for="poster">Link multimedia:</label></td>
-                  <td><input type="text" id="link" name="poster" value="<?php echo !empty($poster) ? $poster : ''; ?>">
+                  <td><label for="multimedia">Link multimedia:</label></td>
+                  <td><input type="text" id="linkp" name="multimedia" value="<?php echo !empty($poster) ? $poster : ''; ?>">
                   </td>
                </tr>
 
@@ -102,7 +102,7 @@ if (!empty($_POST)) {
 
 
             </table>
-            <td><input value="Agregar anuncio" type="submit" class="btn"></td>
+            <td><input value="Agregar anuncio" type="submit" class="btn" id="convert-btn"></td>
             <button class="cancel" onclick="history.go(-1);">Cancelar</button>
             <?php if (($Error != null)) ?>
             <div class="Error">
@@ -116,3 +116,21 @@ if (!empty($_POST)) {
 </body>
 
 </html>
+
+
+<script>
+  (function ($) {
+
+    var url = $('#linkp'),
+      btn = $('#convert-btn');
+
+    btn.on('click', function (event) {
+      found = url.val().match(/d\/([A-Za-z0-9_\-]+)/);
+      if (found[1].length) {
+        new_url = 'https://drive.google.com/uc?export=view&id=' + found[1];
+        url.val(new_url);
+      }
+    });
+
+  })(jQuery);
+</script>

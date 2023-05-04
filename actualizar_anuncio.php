@@ -101,39 +101,38 @@ if (!empty($_POST)) {
 
 
                <tr>
-                  <td><label for="poster">Link de multimedia: </label></td>
-                  <td><input type="text" id="link" name="multimedia"
+                  <td><label for="multimedia">Link de multimedia: </label></td>
+                  <td><input type="text" id="linkp" name="multimedia"
                         value="<?php echo !empty($multimedia) ? $multimedia : ''; ?>"></td>
                </tr>
                <tr>
-
-
 
 
             </table>
             <div>
                <button class="cancel" onclick="history.go(-1);">Cancelar</button>
                <?php
-               session_start();
-               $pdo = Database::connect();
-               $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-               $sql = 'SELECT * FROM r_anuncios WHERE id_anuncio = ?';
-               $q = $pdo->prepare($sql);
-               $q->execute(array($_SESSION['estudiante']));
-               $p_estudiantes = $q->fetch(PDO::FETCH_ASSOC);
-               $proyecto = $p_estudiantes['id_anuncio'];
-
-               $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-               $sql = 'SELECT * FROM r_anuncios WHERE id_anuncio = ?';
-               $q = $pdo->prepare($sql);
-               $q->execute(array($proyecto));
-               $row = $q->fetch(PDO::FETCH_ASSOC);
-               $status = $row['estatus'];
-               if ($status == 0) {
-                  echo '<input value="Actualizar" type="submit" class = "btn" >';
-               }
+//               session_start();
+//               $pdo = Database::connect();
+//               $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//               $sql = 'SELECT * FROM r_anuncios WHERE id_anuncio = ?';
+//               $q = $pdo->prepare($sql);
+//               $q->execute(array($_SESSION['estudiante']));
+//               $p_estudiantes = $q->fetch(PDO::FETCH_ASSOC);
+//               $proyecto = $p_estudiantes['id_anuncio'];
+//
+//               $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//               $sql = 'SELECT * FROM r_anuncios WHERE id_anuncio = ?';
+//               $q = $pdo->prepare($sql);
+//               $q->execute(array($proyecto));
+//               $row = $q->fetch(PDO::FETCH_ASSOC);
+//               $status = $row['estatus'];
+//               if ($status == 0) {
+//                  echo '<input value="Actualizar" type="submit" class = "btn" id="convert-btn">';
+//               }
 
                ?>
+               <input value="Actualizar" type="submit" class = "btn" id="convert-btn">
             </div>
             <?php if (($Error != null)) ?>
             <div class="Error">
@@ -147,3 +146,20 @@ if (!empty($_POST)) {
 </body>
 
 </html>
+
+<script>
+  (function ($) {
+
+    var url = $('#linkp'),
+      btn = $('#convert-btn');
+
+    btn.on('click', function (event) {
+      found = url.val().match(/d\/([A-Za-z0-9_\-]+)/);
+      if (found[1].length) {
+        new_url = 'https://drive.google.com/uc?export=view&id=' + found[1];
+        url.val(new_url);
+      }
+    });
+
+  })(jQuery);
+</script>
