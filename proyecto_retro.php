@@ -75,7 +75,7 @@ Database::disconnect();
     $promedios;
     $i = 0;
     $pdo = Database::connect();
-    $sql = 'SELECT * FROM r_calificaciones WHERE id_proyecto = ?';
+    $sql = 'SELECT * FROM r_calificaciones WHERE id_proyecto = ? and puntos_rubro1 != 0';
     $q = $pdo->prepare($sql);
     $q->execute(array($id_proyecto));
     $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);

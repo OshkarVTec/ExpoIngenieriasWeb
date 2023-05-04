@@ -14,7 +14,7 @@ if (!empty($_POST)) {
   $docente = $_POST['docente'];
   $categoria = $_POST['categoria'];
   $descripcion = $_POST['descripcion'];
-
+  $nivel = $_POST['nivel'];
 
   // validate input
   $valid = true;
@@ -52,11 +52,11 @@ if (!empty($_POST)) {
   if ($valid) {
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $sql = "INSERT INTO r_proyectos (id_proyecto, poster, description, estatus, nombre, video, 
-                                fecha_registro, id_uf,  id_docente, id_edicion, id_categoria) 
-                                values (NULL, ?, ?, false, ?,?, current_timestamp(), ?, ?, 1, ?)";
+                                fecha_registro, id_uf,  id_docente, id_edicion, id_categoria, id_nivel) 
+                                values (NULL, ?, ?, false, ?,?, current_timestamp(), ?, ?, 1, ?, ?)";
 
     $q = $pdo->prepare($sql);
-    $q->execute(array($poster, $descripcion, $name, $video, $uf, $docente, $categoria, ));
+    $q->execute(array($poster, $descripcion, $name, $video, $uf, $docente, $categoria, $nivel));
     Database::disconnect();
 
     $sql = 'SELECT * FROM r_proyectos WHERE nombre = ?';
@@ -80,6 +80,7 @@ if (!empty($_POST)) {
       header("Location: mis_proyectos.php");
     }
   }
+  header("Location: mis_proyectos.php");
 }
 ?>
 
