@@ -32,14 +32,6 @@ if (!empty($_POST)) {
       $Error = 'Por favor escribe un nombre';
       $valid = false;
    }
-   if (empty($poster)) {
-      $Error = 'Por favor proporcione un link al poster';
-      $valid = false;
-   }
-   if (empty($video)) {
-      $Error = 'Por favor proporcione un link al video';
-      $valid = false;
-   }
    if (empty($uf)) {
       $Error = 'Por favor seleccione una UF';
       $valid = false;
@@ -61,6 +53,23 @@ if (!empty($_POST)) {
    if ($valid) {
       $pdo = Database::connect();
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      if (empty($video)) {
+         echo "video";
+         $sql = "SELECT * FROM r_proyectos WHERE id_proyecto = ?";
+         $q = $pdo->prepare($sql);
+         $q->execute(array($id_proyecto));
+         $proyecto = $q->fetch();
+         $video = $proyecto['video'];
+      }
+      if (empty($poster)) {
+         echo "poster";
+         $sql = "SELECT * FROM r_proyectos WHERE id_proyecto = ?";
+         $q = $pdo->prepare($sql);
+         $q->execute(array($id_proyecto));
+         $proyecto = $q->fetch();
+         $poster = $proyecto['poster'];
+      }
+
       $sql = "UPDATE r_proyectos 
                   SET poster = ?,  description = ?, nombre = ?, video = ?, 
                   fecha_registro = current_timestamp(), id_uf = ?,  id_docente = ?, id_categoria = ?
@@ -174,12 +183,14 @@ if (!empty($_POST)) {
 
                <tr>
                   <td><label for="poster">Link al poster:</label></td>
-                  <td><input type="text" id="linkp" name="poster" value="<?php echo !empty($poster) ? $poster : ''; ?>">
+                  <td><input placeholder="<?php echo !empty($poster) ? $poster : ''; ?>" type="text" id="linkp"
+                        name="poster">
                   </td>
                </tr>
                <tr>
                   <td><label for="video">Link al video:</label></td>
-                  <td><input type="text" id="linkv" name="video" value="<?php echo !empty($video) ? $video : ''; ?>">
+                  <td><input placeholder="<?php echo !empty($video) ? $video : ''; ?>" type="text" id="linkv"
+                        name="video">
                   </td>
                </tr>
 
