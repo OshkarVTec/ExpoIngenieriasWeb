@@ -33,7 +33,7 @@ INSERT INTO r_carreras VALUES (NULL, 'ITC'),
 (NULL, 'IMT'),
 (NULL, 'IMC');
 
-INSERT INTO r_administradores VALUES (NULL, 'Rafael', 'Aguilar', 'Campos', 1);
+INSERT INTO r_administradores VALUES (NULL, 'Rafael', 'Aguilar', 'Mejía', 1);
 
 INSERT INTO r_docentes (nombre, apellidoP, apellidoM, id_usuario)
 VALUES
