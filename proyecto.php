@@ -183,7 +183,7 @@ Database::disconnect();
                 <h1>Video del Proyecto</h1>
                 <iframe src=<?php echo !empty($video) ? $video : ''; ?> width="560" height="315"></iframe>
             </div>
-            <img src=<?php echo !empty($poster) ? $poster : ''; ?> alt="testimage" class="img">
+            <img src=<?php echo !empty($poster) ? $poster : ''; ?> alt="Image" class="img">
         </div>
     </div>
 </body>
