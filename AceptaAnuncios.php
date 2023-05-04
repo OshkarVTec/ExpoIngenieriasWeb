@@ -46,7 +46,7 @@
               <th>Contenido</th>
               
               <th>Multimedia</th>
-              <th>Vigente</th>
+              <th>Activo</th>
               <td class = "tabla">
                 <td><button class = "btn" type="submit">Guardar</button></td>
          </tr>
@@ -74,5 +74,7 @@
          </tr>
       </table>
    </div>
+   <article></article>
+   <div id="footer"></div>
 </body>
 </html>

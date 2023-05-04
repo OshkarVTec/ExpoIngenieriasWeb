@@ -12,10 +12,9 @@ if (!empty($_POST)) {
 
    $anuncio = $_POST['anuncio'];
    $multimedia = $_POST['multimedia'];
-   if (isset($_POST['vigente'])){
+   if (isset($_POST['vigente'])) {
       $vigente = 1;
-   }
-   else{
+   } else {
       $vigente = 0;
    }
 
@@ -52,15 +51,32 @@ if (!empty($_POST)) {
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>Nuevos Anuncios</title>
    <link rel="stylesheet" href="CSS/style.css">
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+   <script>
+      $(function () {
+         $("#header").load(<?php
+         if ($_SESSION['matricula'] != null) {
+            echo '"header_estudiante.php"';
+         } else if ($_SESSION['admin'] != null) {
+            echo '"header_admin.php"';
+         } else if ($_SESSION['juez'] != null) {
+            if ($_SESSION['docente'] != null)
+               echo '"header_docente_juez.php"';
+            else
+               echo '"header_juez.php"';
+         } else if ($_SESSION['docente'] != null) {
+            echo '"header_docente.php"';
+         }
+         ?>);
+      });
+      $(function () {
+         $("#footer").load("footer.html");
+      })
+   </script>
 </head>
 
 <body>
-   <header class="header">
-      <div class="logo">
-         <a href="informativa_presentacion.html"><img src="IMG/logo-expo.png" alt="Logo de la pagina"></a>
-      </div>
-      <h1>Announcement Form</h1>
-   </header>
+   <div id="header"></div>
    <div class="ventana">
       <h1 class="label"></h1>
       <div class="container">
@@ -83,7 +99,7 @@ if (!empty($_POST)) {
                <tr>
                   <td><label for="link">Vigente:</label></td>
                   <td><input type="checkbox" name="vigente"></td>
-                     
+
 
             </table>
             <td><input value="Agregar anuncio" type="submit" class="btn"></td>
@@ -93,6 +109,10 @@ if (!empty($_POST)) {
                <?php echo $Error; ?>
             </div>
          </form>
+      </div>
+   </div>
+   <article></article>
+   <div id="footer"></div>
 </body>
 
 </html>
