@@ -358,14 +358,14 @@ if (!($_SESSION['admin'] != null))
         }
 
 
-        if ($rol != 'Administrador' && $rol != 'Estudiante' && $rol != 'Juez') {
+        if ($rol != 'Administrador' && $rol != 'Estudiante' && $rol != 'Juez' && $rol != 'Juez-Docente') {
           echo '<td class="row-editar">';
           echo '<a class="btn" href="editar_usuarios.php?id_usuario=' . $id_usuario . '&rol=' . $rol . '">Editar Rol</a>';
           echo '</td>';
 
         }
 
-        if ($rol == 'Administrador' || $rol == 'Estudiante' || $rol == 'Juez') {
+        if ($rol == 'Administrador' || $rol == 'Estudiante' || $rol == 'Juez' || $rol == 'Juez-Docente') {
           echo '<td class="row-editar">';
           // echo '<a   class="btn-vacio"></a>';
           echo '</td>';
@@ -396,4 +396,4 @@ if (!($_SESSION['admin'] != null))
 
 </body>
 
-</html>
+</html>s
