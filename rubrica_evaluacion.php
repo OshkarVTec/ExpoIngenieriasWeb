@@ -103,6 +103,8 @@ if ($q->rowCount() > 0) {
             </tbody>
         </table>
     </div>
+    <article></article>
+    <div id="footer"></div>
 </body>
 
 </html>
