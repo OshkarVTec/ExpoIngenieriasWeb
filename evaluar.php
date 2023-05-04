@@ -119,7 +119,7 @@ if (!empty($_GET['status'])) {
             echo '<p>Nivel de desarrollo: ' . $nivel['nombre'] . '</p>';
             echo '</td>';
             echo '<td>';
-            echo '<a class="btn" href="evaluacion.php?id_proyecto=' . $row['id_calificacion'] . '">Evaluar</a>';
+            echo '<a class="btn" href="evaluacion.php?id_calificacion=' . $row['id_calificacion'] . '">Evaluar</a>';
             echo '</td>';
             echo '</tr>';
          }

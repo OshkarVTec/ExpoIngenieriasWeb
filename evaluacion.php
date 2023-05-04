@@ -6,8 +6,8 @@ else
    header("Location:informativa.php");
 
 $id_calificacion = null;
-if (!empty($_GET['id'])) {
-   $id_calificacion = $_REQUEST['id'];
+if (!empty($_GET['id_calificacion'])) {
+   $id_calificacion = $_REQUEST['id_calificacion'];
 }
 require 'database.php';
 
@@ -100,7 +100,7 @@ if (!empty($_POST)) {
    Database::disconnect();
    ?>
 
-   <form method="post" action="evaluacion.php?id=<?php echo $id_calificacion ?>">
+   <form method="post" action="evaluacion.php?id_calificacion=<?php echo $id_calificacion ?>">
       <div class="container">
          <table class="general">
             <?php
