@@ -61,3 +61,5 @@ VALUES (8, 9, 7, 8, 'Buen trabajo, pero hay que mejorar en algunas áreas', '202
 
 INSERT INTO r_carreras VALUES (NULL, 'ITC'),
 (NULL, 'IRS');
+
+INSERT INTO r_administradores VALUES (NULL, 'Rafael', 'Aguilar', 'Campos', '5');
