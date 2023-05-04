@@ -69,7 +69,7 @@ if (!empty($_GET['status'])) {
             $nivel = $q->fetch(PDO::FETCH_ASSOC);
             echo '<tr>';
             echo '<td>';
-            echo '<a class="link" href="proyecto.php?id=' . $proyecto['id_proyecto'] . '">' . $proyecto['nombre'] . '</a>';
+            echo '<a class="link" href="proyecto.php?id_proyecto=' . $proyecto['id_proyecto'] . '">' . $proyecto['nombre'] . '</a>';
             echo '<p>Nivel de desarrollo: ' . $nivel['nombre'] . '</p>';
             echo '</td>';
             echo '<td class = "two_objects_column">';
@@ -111,7 +111,7 @@ if (!empty($_GET['status'])) {
             echo '<p>Nivel de desarrollo: ' . $nivel['nombre'] . '</p>';
             echo '</td>';
             echo '<td>';
-            echo '<a class="btn" href="evaluacion.php?id=' . $row['id_calificacion'] . '">Evaluar</a>';
+            echo '<a class="btn" href="evaluacion.php?id_proyecto=' . $row['id_calificacion'] . '">Evaluar</a>';
             echo '</td>';
             echo '</tr>';
          }
