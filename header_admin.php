@@ -10,7 +10,7 @@ session_start();
     <ul class="nav-links">
       <li><a href="GanadoresPorCategoria.php">Ganadores</a></li>
       <li><a href="ver_proyectos.php">Ver proyectos</a></li>
-      <li><a href="e.html">Editar anuncios</a></li>
+      <li><a href="SistemaAnuncios.php">Editar anuncios</a></li>
       <li><a href="asignar_jueces.php">Asignar jueces</a></li>
     </ul>
   </nav>
@@ -20,11 +20,10 @@ session_start();
         <i class="fa fa-caret-down"></i>
       </button>
     <div class="dropdown-content">
-      <a href="rubrica.php">Criterio de evaluación</a>
-      <a href="">Editar usuarios</a>
+      <a href="rubrica_evaluacion.php">Criterio de evaluación</a>
+      <a href="ver_usuarios.php">Editar usuarios</a>
       <?php echo '<a href="cuenta.php?id_usuario='.$_SESSION['id_usuario'].'">Mi Cuenta</a>';?>
       <a href="edicion_de_expo_vista.php">Edición de Expo</a>
-      <a href="">Reportes</a>
     </div>
   </nav>
 </header>
