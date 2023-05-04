@@ -45,19 +45,26 @@ if (!($_SESSION['juez'] != null || $_SESSION['admin'] != null || $_SESSION['doce
    $q = $pdo->prepare($sql);
    $q->execute();
    $id_edicion = $q->fetch(PDO::FETCH_ASSOC)['id_edicion'];
-   $sql = 'SELECT * FROM r_categorias ORDER BY id_categoria';
+   $sql = 'SELECT * FROM r_niveles_desarrollo ORDER BY id_nivel';
    foreach ($pdo->query($sql) as $row) {
-      echo '<h1 class="label">' . $row['nombre'] . '</h1>';
+      echo '<h1 class="label">Nivel de desarrollo: ' . $row['nombre'] . '</h1>';
       echo '<div class = "container">';
       echo '<table class="general">';
-      $sql = 'SELECT * FROM r_proyectos WHERE id_categoria = ? AND id_edicion = ?';
+      $sql = 'SELECT * FROM r_proyectos WHERE id_nivel = ? AND id_edicion = ?';
       $q = $pdo->prepare($sql);
-      $q->execute(array($row['id_categoria'], $id_edicion));
+      $q->execute(array($row['id_nivel'], $id_edicion));
       $proyectos = $q->fetchAll(PDO::FETCH_ASSOC);
       foreach ($proyectos as $row) {
          echo '<tr>';
          echo '<td>';
          echo '<a class="link" href="proyecto.php?id_proyecto=' . $row['id_proyecto'] . '">' . $row['nombre'] . '</a>';
+         echo '</td>';
+         $sql = 'SELECT * FROM r_categorias WHERE id_categoria = ?';
+         $q = $pdo->prepare($sql);
+         $q->execute(array($row['id_categoria']));
+         $categoria = $q->fetch(PDO::FETCH_ASSOC);
+         echo '<td>';
+         echo '<p>' .$categoria['nombre']. '</p>';
          echo '</td>';
          echo '</tr>';
       }
