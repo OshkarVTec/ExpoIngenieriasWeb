@@ -5,7 +5,7 @@ $pdo = Database::connect();
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $sql = 'SELECT * FROM r_proyecto_estudiantes WHERE matricula = ?';
 $q = $pdo->prepare($sql);
-$q->execute(array($_SESSION['estudiante']));
+$q->execute(array($_SESSION['matricula']));
 $p_estudiantes = $q->fetch(PDO::FETCH_ASSOC);
 $proyecto = $p_estudiantes['id_proyecto'];
 ?>
