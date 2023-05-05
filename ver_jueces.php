@@ -59,7 +59,7 @@ include 'database.php';
   echo '<h1 class="label">Nombre del proyecto: ' . $nombre . '</h1>';
 
   echo '<h5 id="texto-instruciones">';
-  echo 'Selecciona para asignar o deseleccionar a los jueces de este proyecto.';
+  echo 'Selecciona para asignar o deseleccionar a los jueces de este proyecto. Si se elimina un juez que ya había calificado el proyecto, se borrará la calificación';
   echo '</h5>';
   echo '</div>';
 
