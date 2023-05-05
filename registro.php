@@ -11,8 +11,8 @@ if (!empty($_POST)) {
 	$primer_apellido = $_POST['primer_apellido'];
 	$segundo_apellido = $_POST['segundo_apellido'];
 	$correo = strtolower($_POST['correo']);
-	$contrasenia = ($_POST['contrasenia']);
-	$confirmar_contrasenia = ($_POST['confirmar_contrasenia']);
+	$contrasenia = password_hash($_POST['contrasenia'], PASSWORD_DEFAULT);
+	$confirmar_contrasenia = $_POST['confirmar_contrasenia'];
 	$tipo_usuario = $_POST['tipo_usuario'];
 	$carrera = $_POST['id_carrera'];
 
@@ -47,7 +47,7 @@ if (!empty($_POST)) {
 		}
 		list($matricula, $dominio) = explode('@', $correo);
 	}
-	if (empty($contrasenia)) {
+	if (empty($_POST['contrasenia'])) {
 		$Error = 'Por favor escribe una contraseña';
 		$valid = false;
 	}
@@ -55,7 +55,7 @@ if (!empty($_POST)) {
 		$Error = 'Por favor confirma tu contraseña';
 		$valid = false;
 	}
-	if ($contrasenia != $confirmar_contrasenia) {
+	if (!password_verify($confirmar_contrasenia, $contrasenia)) {
 		$Error = 'Las contraseñas no coinciden';
 		$valid = false;
 	}
@@ -70,6 +70,7 @@ if (!empty($_POST)) {
 
 	// insert data
 	if ($valid) {
+		echo "valid";
 		$pdo = Database::connect();
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = "INSERT INTO r_usuarios values(null,?,?)";
@@ -189,13 +190,11 @@ if (!empty($_POST)) {
 					</tr>
 					<tr>
 						<td><label for="contrasenia">Contraseña</label></td>
-						<td><input type="password" name="contrasenia"
-								value="<?php echo !empty($contrasenia) ? $contrasenia : ''; ?>"></td>
+						<td><input type="password" name="contrasenia"></td>
 					</tr>
 					<tr>
 						<td><label for="confirmar_contrasenia">Confirmar contraseña</label></td>
-						<td><input type="password" name="confirmar_contrasenia"
-								value="<?php echo !empty($confirmar_contrasenia) ? $confirmar_contrasenia : ''; ?>"></td>
+						<td><input type="password" name="confirmar_contrasenia"></td>
 					</tr>
 					<script>
 						function reloadPage(value) {

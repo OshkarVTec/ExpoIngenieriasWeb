@@ -1,9 +1,9 @@
 <?php
 	class Database {
-		private static $dbName 					= 'reto' ;
+		private static $dbName 					= 'TC2005B_401_4' ;
 		private static $dbHost 					= 'localhost' ;
-		private static $dbUsername 			= 'root';
-		private static $dbUserPassword 	= '';
+		private static $dbUsername 			= 'TC2005B_401_4';
+		private static $dbUserPassword 	= 'pHAbr5=1Op+9yI$r';
 
 		private static $cont  = null;
 

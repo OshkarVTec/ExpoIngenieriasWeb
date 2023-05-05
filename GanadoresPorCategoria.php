@@ -70,7 +70,7 @@ if (isset($_POST['submit'])) {
       
       $sql = 'SELECT r_proyectos.*, ROUND(AVG((puntos_rubro1 + puntos_rubro2 + puntos_rubro3 + puntos_rubro4) / 4),1) AS mean_score
 FROM r_proyectos
-JOIN r_calificaciones ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto WHERE id_nivel = ? AND id_edicion = ?
+JOIN r_calificaciones ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto WHERE id_nivel = ? AND id_edicion = ? AND r_calificaciones.puntos_rubro1 is not null AND r_calificaciones.puntos_rubro2 is not null AND r_calificaciones.puntos_rubro3 is not null AND r_calificaciones.puntos_rubro4 is not null
 GROUP BY r_proyectos.id_proyecto
 ORDER BY mean_score DESC';
       $q = $pdo->prepare($sql);

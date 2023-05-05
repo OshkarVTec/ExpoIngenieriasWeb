@@ -33,21 +33,21 @@
          r_administradores.id_administrador,
          r_jueces.id_juez,
          r_docentes.id_docente,
-         r_estudiantes.matricula
+         r_estudiantes.matricula,
+         r_usuarios.contrasenia
          FROM r_usuarios 
          LEFT JOIN r_administradores ON r_usuarios.id_usuario = r_administradores.id_usuario
          LEFT JOIN r_jueces ON r_usuarios.id_usuario = r_jueces.id_usuario
          LEFT JOIN r_docentes ON r_usuarios.id_usuario = r_docentes.id_usuario
          LEFT JOIN r_estudiantes ON r_usuarios.id_usuario = r_estudiantes.id_usuario
-         WHERE correo=? AND contrasenia=?";
+         WHERE correo=?";
 
 			$query = $pdo->prepare($sql);
-			$query->execute(array($correo,$contrasenia));
-
-			$row = $query->rowCount();
+			$query->execute(array($correo));
+         $row = $query->rowCount();
 			$fetch = $query->fetch();
-
-         if($row > 0) {
+         if($row > 0 && password_verify($contrasenia, $fetch['contrasenia'])) {
+            print_r($fetch);
             //checa si es admin
             if ($fetch['id_administrador'] != null) {
                $_SESSION['admin'] = $fetch['id_administrador'];
@@ -100,7 +100,7 @@
                </tr>
                <tr>
                   <td><label for="contrasenia">Contraseña</label></td>
-                  <td><input type="password" name="contrasenia" value="<?php echo !empty($contrasenia)?$contrasenia:'';?>"></td>
+                  <td><input type="password" name="contrasenia"></td>
                </tr>
             </table>
             <div> 

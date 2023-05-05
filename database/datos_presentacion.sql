@@ -1,14 +1,13 @@
 INSERT INTO r_usuarios (correo, contrasenia) VALUES
-('user1@example.com', '1234'),
-('diegovilla@tec.mx', '1234'),
-('leovilla@tec.mx', '1234'),
-('juez1@gmail.com', '1234'),
-('juez2@gmail.com', '1234'),
-('a01275287@tec.mx', '1234'),
-('user7@example.com', '1234'),
-('user8@example.com', '1243'),
-('user9@example.com', '1234'),
-('user10@example.com', '1234');
+('user1@example.com', '$2y$10$hE5CX91wVSHqXUrE9BdPxudyY6miqEpUP3A6x70WuLacAGvtGKqrO'),
+('diegovilla@tec.mx', '$2y$10$hE5CX91wVSHqXUrE9BdPxudyY6miqEpUP3A6x70WuLacAGvtGKqrO'),
+('leovilla@tec.mx', '$2y$10$hE5CX91wVSHqXUrE9BdPxudyY6miqEpUP3A6x70WuLacAGvtGKqrO'),
+('juez1@gmail.com', '$2y$10$hE5CX91wVSHqXUrE9BdPxudyY6miqEpUP3A6x70WuLacAGvtGKqrO'),
+('juez2@gmail.com', '$2y$10$hE5CX91wVSHqXUrE9BdPxudyY6miqEpUP3A6x70WuLacAGvtGKqrO'),
+('a01275287@tec.mx', '$2y$10$hE5CX91wVSHqXUrE9BdPxudyY6miqEpUP3A6x70WuLacAGvtGKqrO'),
+('user7@example.com', '$2y$10$hE5CX91wVSHqXUrE9BdPxudyY6miqEpUP3A6x70WuLacAGvtGKqrO'),
+('user8@example.com', '$2y$10$hE5CX91wVSHqXUrE9BdPxudyY6miqEpUP3A6x70WuLacAGvtGKqrO'),
+('user9@example.com', '$2y$10$hE5CX91wVSHqXUrE9BdPxudyY6miqEpUP3A6x70WuLacAGvtGKqrO');
 
 INSERT INTO r_ufs (id_uf, nombre) 
 VALUES 
@@ -54,9 +53,17 @@ VALUES
    ('Juez', 'Gonzalez', 'González', 4, 1),
    ('Juez', 'Lopez', 'López', 5, 1);
 
-   INSERT INTO r_proyectos (poster, description, estatus, nombre, video, fecha_registro, id_uf, id_docente, id_edicion, id_categoria, id_nivel, premio)
-VALUES ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is a project about machine learning', true, 'Machine Learning Project', '//www.youtube.com/embed/nJIrvbkr4pk', NOW(), 'UF001', 2, 1, 1,1,0),
-       ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is another project about machine learning', true, 'Another Machine Learning Project', '//www.youtube.com/embed/nJIrvbkr4pk', NOW(), 'UF002', 1, 1, 1,1,0),
-       ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is a third project about machine learning', true, 'Creación de nanomateriales', '//www.youtube.com/embed/nJIrvbkr4pk', NOW(), 'UF001', 2, 1, 1,2,0),
-       ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is a fourth project about machine learning', true, 'Mezcal sin azúcar', '//www.youtube.com/embed/nJIrvbkr4pk', NOW(), 'UF002', 2, 1, 1,2,0),
-       ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is a fifth project about machine learning', false, 'Prueba de caída libre', '//www.youtube.com/embed/nJIrvbkr4pk', NOW(), 'UF002', 2, 1, 1,2,0);
+INSERT INTO r_proyectos (poster, description, estatus, nombre, video, fecha_registro, id_uf, id_docente, id_edicion, id_categoria, id_nivel, premio)
+VALUES ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is a project about machine learning', true, 'Machine Learning Project', '//www.youtube.com/embed/pF-3S-HTJSg', NOW(), 'UF001', 2, 1, 1,1,0),
+       ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is another project about machine learning', true, 'Another Machine Learning Project', '//www.youtube.com/embed/pF-3S-HTJSg', NOW(), 'UF002', 1, 1, 1,1,0),
+       ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is a third project about machine learning', true, 'Creación de nanomateriales', '//www.youtube.com/embed/pF-3S-HTJSg', NOW(), 'UF001', 2, 1, 1,2,0),
+       ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is a fourth project about machine learning', true, 'Mezcal sin azúcar', '//www.youtube.com/embed/pF-3S-HTJSg', NOW(), 'UF002', 2, 1, 1,2,0),
+       ('https://drive.google.com/uc?export=view&id=1-zdvbP7_yWGQJL67LA7Ctx7JnxVCQM5q', 'This is a fifth project about machine learning', false, 'Prueba de caída libre', '//www.youtube.com/embed/pF-3S-HTJSg', NOW(), 'UF002', 2, 1, 1,2,0);
+
+INSERT INTO r_proyecto_estudiantes (id_registro, matricula, id_proyecto)
+VALUES   (NULL, 'a01271234', 1),
+         (NULL, 'a01731235', 2),
+         (NULL, 'a01271234', 3),
+         (NULL, 'a01731235', 4),
+         (NULL, 'a01271234', 5);
+         
