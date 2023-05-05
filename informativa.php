@@ -41,7 +41,7 @@ session_start();
   <div id="header"></div>
   <h1 class="label">Anuncios</h1>
   <div class="container">
-
+    <table class="general">
     <?php
     require 'database.php';
     $pdo = Database::connect();
@@ -52,13 +52,16 @@ session_start();
     foreach ($anuncios as $anuncio) {
       //echo '<div class="mySlides fade">';
       echo '<tr>';
-      echo '<div>';
+      echo '<td>';
       echo '<p>' . $anuncio['contenido'] . '</p>';
-      echo '</div>';
-      echo '<img src="' . $anuncio['multimedia'] . '">';
+      echo '</td>';
+      echo '<td>';
+      echo '<img class="anuncioImg" src="' . $anuncio['multimedia'] . '">';
+      echo '</td>';
       echo '</tr>';
     }
     ?>
+    </table>
   </div>
   <article></article>
   <div id="footer"></div>

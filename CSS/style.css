@@ -974,3 +974,8 @@ footer {
 #agregar-quitar-juez {
   width: 100px;
 }
+
+.anuncioImg{
+  height: auto;
+  width: 40%;
+}
