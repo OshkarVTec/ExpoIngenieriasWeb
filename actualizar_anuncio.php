@@ -15,8 +15,10 @@ if (!empty($_POST)) {
 
    $contenido = $_POST['contenido'];
    $multimedia = $_POST['multimedia'];
-   $vigencia = $_POST['vigencia'];
-
+   if (isset($_POST['activo']))
+      $activo = 1;
+   else
+      $activo = 0;
 
    // validate input
    $valid = true;
@@ -32,10 +34,10 @@ if (!empty($_POST)) {
       $pdo = Database::connect();
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $sql = "UPDATE r_anuncios 
-                  SET contenido = ?,  multimedia = ?
+                  SET contenido = ?,  multimedia = ?, vigente = ?
                   WHERE id_anuncio = ?";
       $q = $pdo->prepare($sql);
-      $q->execute(array($contenido, $multimedia, $id_anuncio));
+      $q->execute(array($contenido, $multimedia, $activo, $id_anuncio));
       Database::disconnect();
       header("Location: SistemaAnuncios.php");
    }
@@ -48,6 +50,7 @@ if (!empty($_POST)) {
    $row = $q->fetch(PDO::FETCH_ASSOC);
    $contenido = $row['contenido'];
    $multimedia = $row['multimedia'];
+   $activo = $row['vigente'];
    Database::disconnect();
 }
 ?>
@@ -106,13 +109,17 @@ if (!empty($_POST)) {
                         value="<?php echo !empty($multimedia) ? $multimedia : ''; ?>"></td>
                </tr>
                <tr>
+                  <td><label for="activo">Activo</label></td>
+                  <td><input type="checkbox" name="activo" value="1" <?php if ($activo): ?> checked<?php endif; ?>></td>
+               </tr>
+               <tr>
 
 
             </table>
             <div>
                <button class="cancel" onclick="history.go(-1);">Cancelar</button>
                <?php
-//               session_start();
+               //               session_start();
 //               $pdo = Database::connect();
 //               $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //               $sql = 'SELECT * FROM r_anuncios WHERE id_anuncio = ?';
@@ -130,9 +137,9 @@ if (!empty($_POST)) {
 //               if ($status == 0) {
 //                  echo '<input value="Actualizar" type="submit" class = "btn" id="convert-btn">';
 //               }
-
+               
                ?>
-               <input value="Actualizar" type="submit" class = "btn" id="convert-btn">
+               <input value="Actualizar" type="submit" class="btn" id="convert-btn">
             </div>
             <?php if (($Error != null)) ?>
             <div class="Error">
@@ -148,18 +155,18 @@ if (!empty($_POST)) {
 </html>
 
 <script>
-  (function ($) {
+      (function ($) {
 
-    var url = $('#linkp'),
-      btn = $('#convert-btn');
+         var url = $('#linkp'),
+            btn = $('#convert-btn');
 
-    btn.on('click', function (event) {
-      found = url.val().match(/d\/([A-Za-z0-9_\-]+)/);
-      if (found[1].length) {
-        new_url = 'https://drive.google.com/uc?export=view&id=' + found[1];
-        url.val(new_url);
-      }
-    });
+         btn.on('click', function (event) {
+            found = url.val().match(/d\/([A-Za-z0-9_\-]+)/);
+            if (found[1].length) {
+               new_url = 'https://drive.google.com/uc?export=view&id=' + found[1];
+               url.val(new_url);
+            }
+         });
 
-  })(jQuery);
+      })(jQuery);
 </script>

@@ -50,20 +50,12 @@ require 'database.php';
          $pdo = Database::connect();
 
 
-
-
-         //if (isset($_POST['nuevo'])) {
-         //$sql[] = 'Anuncio ' . (count($sql) + 1);
-         //}    
-         
-
-
          foreach ($pdo->query($sql) as $row) {
             $rol = 'Administrador';
             $id_anuncio = $row['id_anuncio'];
             $contenido = $row['contenido'];
             echo '<tr>';
-            echo '<td><a class="link" href="MostrarAnuncio.php?id_anuncio=' . $id_anuncio . '&contenido=' . $contenido . '">' . 'Anuncio ' . $row['id_anuncio'] . '</a></td>';
+            echo '<td><p>' . 'Anuncio ' . $row['id_anuncio'] . '</p></td>';
             echo '<td class="tabla">';
             //echo '<td><input type="checkbox" id="Activar"> <label for="Activar">Activar</label>';
             echo '<a class="btn" href="actualizar_anuncio.php?id_anuncio=' . $id_anuncio . '&contenido=' . $contenido . '">Editar</a>';
@@ -76,23 +68,9 @@ require 'database.php';
 
 
 
-
-         //foreach () {   
-         //   echo '<tr>';
-         //   echo '<td><a class="link" href="Editar_Anuns.php">' . $ . '</a></td>';
-         //   echo '<td class="tabla">';
-         //   echo '<td><input type="checkbox" id="Activar"> <label for="Activar">Activar</label>';
-         //   echo '<a class="btn" href="NuevosAnuncios.html">Editar</a>';
-         //   echo '</td>';
-         //   echo '</tr>';
-         //}
          ?>
          <tr>
             <td><a class="btn" href="crearAnuncio.php">Nuevo</a></td>
-
-
-            <td class="tabla">
-            <td><a class="btn" href="AceptaAnuncios.php">Publicar anuncios</a></td>
          </tr>
       </table>
    </div>

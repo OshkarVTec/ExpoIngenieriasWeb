@@ -8,6 +8,7 @@
         $stmt = $pdo->prepare($sql);
         $stmt->execute([$id_anuncio]);
         Database::disconnect();
+        header('Location: sistema_anuncios.php');
     }
 
 
