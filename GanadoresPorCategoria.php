@@ -68,7 +68,7 @@ if (isset($_POST['submit'])) {
       echo '<div class = "container">';
       echo '<table class="general">';
       
-      $sql = 'SELECT r_proyectos.*, AVG((puntos_rubro1 + puntos_rubro2 + puntos_rubro3 + puntos_rubro4) / 4) AS mean_score
+      $sql = 'SELECT r_proyectos.*, ROUND(AVG((puntos_rubro1 + puntos_rubro2 + puntos_rubro3 + puntos_rubro4) / 4),1) AS mean_score
 FROM r_proyectos
 JOIN r_calificaciones ON r_proyectos.id_proyecto = r_calificaciones.id_proyecto WHERE id_nivel = ? AND id_edicion = ?
 GROUP BY r_proyectos.id_proyecto
@@ -91,17 +91,8 @@ ORDER BY mean_score DESC';
         $promedios = 0;
         $i = 1;
         $id_proyecto = $row['id_proyecto'];
-        $sql = 'SELECT * FROM r_calificaciones WHERE id_proyecto = ?';
-        $q = $pdo->prepare($sql);
-        $q->execute(array($row['id_proyecto']));
-        $calificaciones = $q->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($calificaciones as $row1) {
-          $promedio = ($row1['puntos_rubro1'] + $row1['puntos_rubro2'] + $row1['puntos_rubro3'] + $row1['puntos_rubro4']) / 4;
-          $promedios = ($promedios + $promedio) / $i;
-          $i = $i + 1;
-        }
         echo '<td class="columna">';
-        echo $promedios;
+        echo $row['mean_score'];
         echo '<select name="premio[]">';
         echo '<option value="1"' . (($row['premio'] == 1) ? 'selected' : '') . '>Primer lugar</option>';
         echo '<option value="2"' . (($row['premio'] == 2) ? 'selected' : '') . '>Segundo lugar</option>';
