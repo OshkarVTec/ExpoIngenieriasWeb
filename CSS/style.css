@@ -69,6 +69,7 @@
 
 .general td {
   padding: 10px;
+  max-width: 50%; 
 }
 
 .two_objects_column {
